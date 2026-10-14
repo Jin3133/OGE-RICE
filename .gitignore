@@ -1,0 +1,38 @@
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+
+# Node.js / frontend
+node_modules/
+dist/
+.vite/
+coverage/
+
+# IDE
+.idea/
+.vscode/
+
+# Logs and temporary files
+*.log
+tmp/
+temp/
+
+# Model weights and large generated data
+*.pt
+*.pth
+*.onnx
+*.h5
+data/raw/
+outputs/
+
