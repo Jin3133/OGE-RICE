@@ -33,3 +33,6 @@ uvicorn backend.app.main:app --reload --port 3000
 
 接口文档启动后位于 `http://127.0.0.1:3000/docs`。
 
+将 `.env.example` 复制为本地 `.env` 并填写 OGE 服务配置后，后台可以通过
+`POST /api/v1/oge/cultivated-land` 调用发布后的个人算法服务。真实 Token 和
+AppKey 不进入 Git 仓库。
