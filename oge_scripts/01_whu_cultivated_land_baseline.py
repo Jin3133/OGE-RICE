@@ -18,8 +18,8 @@ Args:
 end param definition """
 
 # 开发中心直接运行时使用的测试影像。发布服务后由调用方传入。
-coverageID = "LJ3II_MSS_E114.07_N30.36_20241221_L1A_010_GS"
-productID = "LJ3II_PAN_MSS"
+coverageID = "LJ3II_FUS_E114.13_N29.97_20240606_L1B_010"
+productID = "LJ3II_L1B_Fusion"
 
 image = service.getCoverage(
     coverageID=coverageID,
@@ -33,5 +33,4 @@ cultivated_land = service.getProcess("whu-cultivated_land").execute(image)
 cultivated_land.styles(["#000000", "#39A96B"]).getMap(
     "Cultivated_Land_Candidate"
 )
-oge.mapclient.centerMap(114.07, 30.36, 11)
-
+oge.mapclient.centerMap(114.1376, 29.9834, 12)
