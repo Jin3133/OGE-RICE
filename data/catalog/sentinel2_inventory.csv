@@ -2,5 +2,6 @@ scene_id,product_id,tile_id,acquisition_date,cloud_percent,season_stage,role,acc
 T50RKU_20250501T030529,S2_MSIL2A,T50RKU,2025-05-01,0.77,移栽前后,前期水分与裸地背景,true,read_verified,usable,OGE已完成读取和B04波段测试
 T50RKU_20250511T030529,S2_MSIL2A,T50RKU,2025-05-11,7.28,移栽前后,前期候选,false,pending,review,需检查有效覆盖和云影
 T50RKU_20250705T030601,S2_MSIL2A,T50RKU,2025-07-05,7.30,分蘖至拔节,中期时序候选,false,pending,review,同瓦片候选；需验证读取和分析区有效像元
-T50RKU_20250816T025529,S2_MSIL2A,T50RKU,2025-08-16,1.48,抽穗前后,中后期主候选,false,pending,usable_candidate,同瓦片低云量候选；优先验证
+T50RKU_20250724T030201,S2_MSIL2A,T50RKU,2025-07-24,10.81,拔节孕穗期,中期补充候选,false,pending,review,用于补足六景固定集合；需检查局地云影
+T50RKU_20250816T025529,S2_MSIL2A,T50RKU,2025-08-16,1.48,抽穗前后,中后期主候选,true,ndvi_verified,usable,OGE已完成读取、B08/B04归一化差值和地图发布
 T50RKU_20251005T025529,S2_MSIL2A,T50RKU,2025-10-05,0.99,灌浆成熟期,后期主候选,false,pending,usable_candidate,同瓦片低云量候选；优先验证
