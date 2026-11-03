@@ -1,0 +1,3 @@
+dataset_id,variable,unit,temporal_resolution,spatial_resolution,analysis_method,access_verified,quality_status,notes
+GPM,precipitation,mm,日/逐3小时,待平台确认,阶段累计与距平,false,pending,需在OGE核对正式产品编号和时间覆盖
+ERA5-Land,temperature_2m,K或degC,小时,约9km,阶段均值与背景解释,false,pending,首期可选增强项

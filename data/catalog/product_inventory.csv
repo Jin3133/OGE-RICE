@@ -1,0 +1,3 @@
+product_id,data_type,spatial_resolution_m,temporal_scope,platform_status,project_role,notes
+S2_MSIL2A,Sentinel-2 L2A地表反射率,10/20/60,2024-11-01至2025-12-31,verified,水稻时序识别主数据,武汉场景读取与波段选择已成功
+LJ3II_L1B_Fusion,武汉一号融合影像,0.5,2024-06至2026-06,permission_blocked,高分辨率边界细化,开发中心仍提示无使用权限

@@ -1,0 +1,9 @@
+field_name,required,data_type,description,example
+unit_id,true,string,统计单元唯一编号,WH_GRID_001
+unit_name,true,string,统计单元名称,示范区网格001
+unit_type,true,string,行政区/灌区/网格/自定义,grid
+valid_from,true,date,边界生效日期,2025-01-01
+valid_to,false,date,边界失效日期,
+source,true,string,边界来源,user_upload
+crs,true,string,原始坐标参考,EPSG:4326
+version,true,string,边界版本,v1.0
