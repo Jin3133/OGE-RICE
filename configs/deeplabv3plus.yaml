@@ -4,9 +4,11 @@ experiment:
 
 data:
   dataset_root: null
-  split_file: data/splits/oge_farm_v1.json
+  split_file: data/splits/oge_farm_v2.json
+  statistics_file: data/statistics/oge_farm_v2.json
   image_size: 512
   num_classes: 1
+  invalid_pixel_rule: all_bands_zero
 
 model:
   architecture: deeplabv3plus

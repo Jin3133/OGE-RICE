@@ -58,5 +58,14 @@ python tools/check_dataset.py
 python tools/make_split.py
 ```
 
-模型训练和ONNX导出将在数据统计与划分确认后启用。
+正式训练前生成质量约束后的数据划分和训练集归一化参数：
+
+```bash
+python tools/prepare_training_data.py
+```
+
+`FarmSegmentationDataset` 会同时返回 `valid_mask`。训练损失和评价指标必须忽略三个
+波段同时为零的像元；`oge_main.losses.masked_bce_dice_loss` 已实现这一规则。
+
+模型训练和ONNX导出将在基线训练入口完成后启用。
 

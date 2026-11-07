@@ -10,6 +10,8 @@ __pycache__/
 data/*
 !data/splits/
 !data/splits/*.json
+!data/statistics/
+!data/statistics/*.json
 outputs/
 checkpoints/
 *.pt

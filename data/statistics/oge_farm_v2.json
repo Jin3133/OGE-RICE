@@ -1,0 +1,14 @@
+{
+  "mean": [
+    1071.3793424386104,
+    1075.7456969896687,
+    809.1764398486538
+  ],
+  "std": [
+    176.5528628878147,
+    202.7606115609457,
+    229.0643033151793
+  ],
+  "valid_pixel_count": 181567017,
+  "calculation_scope": "training split; pixels where at least one band is non-zero"
+}
