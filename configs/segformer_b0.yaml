@@ -1,0 +1,27 @@
+experiment:
+  name: segformer_b0_oge_farm
+  seed: 42
+
+data:
+  dataset_root: null
+  split_file: data/splits/oge_farm_v1.json
+  image_size: 512
+  num_classes: 2
+  ignore_index: 255
+
+model:
+  architecture: segformer
+  checkpoint: nvidia/mit-b0
+  num_labels: 2
+
+training:
+  epochs: 60
+  batch_size: 4
+  learning_rate: 0.00006
+  weight_decay: 0.01
+  num_workers: 4
+  early_stopping_patience: 10
+
+output:
+  directory: outputs/segformer_b0_oge_farm
+

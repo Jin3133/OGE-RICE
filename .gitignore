@@ -1,0 +1,29 @@
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+
+# Training artifacts and local data
+data/*
+!data/splits/
+!data/splits/*.json
+outputs/
+checkpoints/
+*.pt
+*.pth
+*.onnx
+
+# Local open-source checkouts used only as references
+references/
+
+# Environment and editor
+.env
+.env.*
+!.env.example
+.DS_Store
+.idea/
+.vscode/
+
