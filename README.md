@@ -67,5 +67,22 @@ python tools/prepare_training_data.py
 `FarmSegmentationDataset` 会同时返回 `valid_mask`。训练损失和评价指标必须忽略三个
 波段同时为零的像元；`oge_main.losses.masked_bce_dice_loss` 已实现这一规则。
 
-模型训练和ONNX导出将在基线训练入口完成后启用。
+DeepLabV3+ 正式基线训练：
+
+```bash
+python tools/train_deeplabv3plus.py
+```
+
+快速验证训练链路时使用独立输出目录，避免覆盖正式实验：
+
+```bash
+python tools/train_deeplabv3plus.py \
+  --epochs 1 --batch-size 2 --num-workers 0 \
+  --encoder resnet18 --encoder-weights none \
+  --max-train-batches 2 --max-valid-batches 1 \
+  --output-directory outputs/smoke_deeplabv3plus
+```
+
+训练入口参考 SMP 官方二值分割示例的标准 PyTorch 循环，同时增加了 TIFF 数据读取、
+无效像元屏蔽、IoU/F1/Precision/Recall、最佳权重、断点恢复与预测预览。
 
