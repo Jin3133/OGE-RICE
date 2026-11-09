@@ -86,3 +86,15 @@ python tools/train_deeplabv3plus.py \
 训练入口参考 SMP 官方二值分割示例的标准 PyTorch 循环，同时增加了 TIFF 数据读取、
 无效像元屏蔽、IoU/F1/Precision/Recall、最佳权重、断点恢复与预测预览。
 
+正式推理与结果留档：
+
+```bash
+python tools/infer_deeplabv3plus.py \
+  --checkpoint outputs/deeplabv3plus_resnet50_trial5/best.pt \
+  --split test --threshold 0.70 \
+  --output-directory outputs/inference/deeplabv3plus_epoch3_test
+```
+
+推理目录会保存二值掩码、概率图、逐样本指标、代表性案例图，以及包含模型哈希、
+Git版本、阈值来源和全局指标的 `inference_summary.json`。
+

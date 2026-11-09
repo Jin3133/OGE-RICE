@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
+import numpy as np
 import torch
 
 
@@ -41,4 +42,34 @@ class BinarySegmentationMetrics:
             "recall": tp / (tp + fn + epsilon),
             "accuracy": (tp + tn) / (tp + tn + fp + fn + epsilon),
         }
+
+
+def binary_sample_metrics(
+    prediction: np.ndarray, target: np.ndarray, valid: np.ndarray
+) -> dict[str, float | int]:
+    """Compute per-sample metrics while excluding invalid source-image pixels."""
+    prediction = prediction.astype(bool)
+    target = target.astype(bool)
+    valid = valid.astype(bool)
+    true_positive = int(np.sum(prediction & target & valid))
+    false_positive = int(np.sum(prediction & ~target & valid))
+    false_negative = int(np.sum(~prediction & target & valid))
+    true_negative = int(np.sum(~prediction & ~target & valid))
+    epsilon = 1e-8
+    return {
+        "iou": true_positive / (true_positive + false_positive + false_negative + epsilon),
+        "f1": 2 * true_positive
+        / (2 * true_positive + false_positive + false_negative + epsilon),
+        "precision": true_positive / (true_positive + false_positive + epsilon),
+        "recall": true_positive / (true_positive + false_negative + epsilon),
+        "accuracy": (true_positive + true_negative)
+        / (true_positive + true_negative + false_positive + false_negative + epsilon),
+        "valid_fraction": float(valid.mean()),
+        "target_fraction": float(target[valid].mean()),
+        "prediction_fraction": float(prediction[valid].mean()),
+        "true_positive": true_positive,
+        "false_positive": false_positive,
+        "false_negative": false_negative,
+        "true_negative": true_negative,
+    }
 

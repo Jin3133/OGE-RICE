@@ -22,6 +22,7 @@ from oge_main.data.dataset import FarmSegmentationDataset
 from oge_main.data.transforms import TrainingTransform
 from oge_main.losses import masked_bce_dice_loss
 from oge_main.metrics import BinarySegmentationMetrics
+from oge_main.utils.device import select_device
 
 
 def parse_arguments() -> argparse.Namespace:
@@ -61,14 +62,6 @@ def seed_everything(seed: int) -> None:
     random.seed(seed)
     np.random.seed(seed)
     torch.manual_seed(seed)
-
-
-def select_device() -> torch.device:
-    if torch.cuda.is_available():
-        return torch.device("cuda")
-    if torch.backends.mps.is_available():
-        return torch.device("mps")
-    return torch.device("cpu")
 
 
 def make_loaders(configuration: dict[str, Any]) -> tuple[DataLoader, DataLoader]:
