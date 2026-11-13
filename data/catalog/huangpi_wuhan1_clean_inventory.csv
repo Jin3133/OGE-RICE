@@ -1,0 +1,14 @@
+scene_key,image_id,coverage_id,product_id,province,city,district,center_lon,center_lat,acquired_at,cloud_percent,terrain_zone,scene_role,decision,verification_status,selection_reason
+hp_early_south_01,2419718,LJ3II_MSS_E114.24_N30.80_20240614_L1A_000,LJ3II_MSS,湖北省,武汉市,黄陂区,114.24,30.80,2024-06-14,0,南部滨湖平原,early_season_auxiliary,keep_auxiliary,catalog_verified,补充插秧至早期生长阶段水田与水体光谱；覆盖南部平原农业区
+hp_early_south_02,2419695,LJ3II_MSS_E114.25_N30.80_20240614_L1A_000,LJ3II_MSS,湖北省,武汉市,黄陂区,114.25,30.80,2024-06-14,0,南部滨湖平原,early_season_auxiliary,keep_auxiliary,catalog_verified,与上一景构成相邻覆盖；用于检查重叠与镶嵌一致性
+hp_early_south_03,2419694,LJ3II_MSS_E114.21_N30.67_20240614_L1A_001,LJ3II_MSS,湖北省,武汉市,黄陂区,114.21,30.67,2024-06-14,0,南部滨湖平原,early_season_auxiliary,keep_auxiliary,catalog_verified,补充南缘湖田与城乡交错场景；用于水体和水稻混淆测试
+hp_west_north_hill,2406827,LJ3II_MSS_E114.25_N31.20_20251008_L1A_001,LJ3II_MSS,湖北省,武汉市,黄陂区,114.25,31.20,2025-10-08,0,西北低山及丘陵,terrain_core,keep_core,permission_unstable,曾生成地图图层但重复运行返回产品无使用权限；官方引用代码核对无误；下载入口可达但需接受免责声明
+hp_west_transition,2406826,LJ3II_MSS_E114.22_N31.06_20251008_L1A_002,LJ3II_MSS,湖北省,武汉市,黄陂区,114.22,31.06,2025-10-08,0,低山向岗地过渡区,terrain_core,keep_core,catalog_verified,连接北部低山与中部岗地；检验不规则和小尺度田块
+hp_west_central,2406825,LJ3II_MSS_E114.19_N30.93_20251008_L1A_003,LJ3II_MSS,湖北省,武汉市,黄陂区,114.19,30.93,2025-10-08,0,中部岗状平原,terrain_core,keep_core,catalog_verified,中部粮田与居民地交错；用于主体水稻识别与边界评价
+hp_west_lake_plain,2406824,LJ3II_MSS_E114.15_N30.79_20251008_L1A_004,LJ3II_MSS,湖北省,武汉市,黄陂区,114.15,30.79,2025-10-08,0,南部滨湖平原,terrain_core,keep_core,catalog_verified,西南湖群和平原田块；检验水体、沟渠和稻田混淆
+hp_central_lake_plain,2406808,LJ3II_MSS_E114.26_N30.78_20251008_L1A_004,LJ3II_MSS,湖北省,武汉市,黄陂区,114.26,30.78,2025-10-08,0,南部滨湖平原,terrain_core,keep_core,catalog_verified,南部核心农田与水网场景；与西南场景形成横向对照
+hp_east_north_hill,2409349,LJ3II_MSS_E114.58_N31.16_20251028_L1A_004,LJ3II_MSS,湖北省,武汉市,黄陂区,114.58,31.16,2025-10-28,0,东北丘陵,terrain_core,keep_core,permission_blocked,开发中心返回数据产品无使用权限；仍保留为目录候选
+hp_east_transition,2409348,LJ3II_MSS_E114.55_N31.02_20251028_L1A_005,LJ3II_MSS,湖北省,武汉市,黄陂区,114.55,31.02,2025-10-28,0,丘陵向岗地过渡区,terrain_core,keep_core,catalog_verified,东部丘陵与中部耕地过渡；检验地形与地块尺度变化
+hp_east_central,2409347,LJ3II_MSS_E114.51_N30.88_20251028_L1A_006,LJ3II_MSS,湖北省,武汉市,黄陂区,114.51,30.88,2025-10-28,0,中部岗状平原,terrain_core,keep_core,permission_blocked,开发中心单景验证返回数据产品无使用权限；仍保留为目录候选
+hp_east_lake_plain,2409346,LJ3II_MSS_E114.48_N30.74_20251028_L1A_007,LJ3II_MSS,湖北省,武汉市,黄陂区,114.48,30.74,2025-10-28,0,南部滨湖平原,terrain_core,keep_core,catalog_verified,东南部湖田水网场景；补足南部横向覆盖
+hp_south_urban_fringe,2409345,LJ3II_MSS_E114.45_N30.61_20251028_L1A_008,LJ3II_MSS,湖北省,武汉市,黄陂区,114.45,30.61,2025-10-28,0,南部平原及城乡交错区,hard_case,keep_core,catalog_verified,南缘建设用地与农田交错；作为硬负样本和边界干扰场景

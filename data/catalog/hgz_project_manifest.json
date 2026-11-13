@@ -1,0 +1,73 @@
+{
+  "project": {
+    "id": "hgz_rice",
+    "name": "禾灌智析",
+    "manifest_version": "0.1.0",
+    "status": "jiangxia_data_cleaned"
+  },
+  "storage": {
+    "platform_prefix": "myData/hgz_",
+    "platform_native_key": ["product_id", "coverage_id"],
+    "registry": "data/catalog/oge_asset_registry.csv"
+  },
+  "verified_assets": [
+    {
+      "key": "s2_wuhan_20250501",
+      "product_id": "S2_MSIL2A",
+      "coverage_id": "T50RKU_20250501T030529",
+      "role": "temporal_supplement"
+    },
+    {
+      "key": "s2_wuhan_20250816",
+      "product_id": "S2_MSIL2A",
+      "coverage_id": "T50RKU_20250816T025529",
+      "role": "temporal_core"
+    }
+  ],
+  "cleaned_assets": [
+    {
+      "product_id": "S2_MSIL2A",
+      "coverage_ids": [
+        "T50RKU_20250511T030529",
+        "T50RKU_20250705T030601",
+        "T50RKU_20250724T030201",
+        "T50RKU_20251005T025529"
+      ],
+      "role": "temporal_core_and_conditional",
+      "inventory": "data/catalog/sentinel2_inventory.csv",
+      "acceptance": "access and NDVI verified; 2025-07-24 remains conditional because catalog cloud value is missing"
+    },
+    {
+      "product_id": "LJ3II_MSS",
+      "search_product_id": 339,
+      "region": "Hubei/Wuhan/Huangpi",
+      "inventory": "data/catalog/huangpi_wuhan1_clean_inventory.csv",
+      "coverage_ids": [
+        "LJ3II_MSS_E114.25_N31.20_20251008_L1A_001",
+        "LJ3II_MSS_E114.22_N31.06_20251008_L1A_002",
+        "LJ3II_MSS_E114.19_N30.93_20251008_L1A_003",
+        "LJ3II_MSS_E114.15_N30.79_20251008_L1A_004",
+        "LJ3II_MSS_E114.58_N31.16_20251028_L1A_004",
+        "LJ3II_MSS_E114.55_N31.02_20251028_L1A_005",
+        "LJ3II_MSS_E114.51_N30.88_20251028_L1A_006",
+        "LJ3II_MSS_E114.48_N30.74_20251028_L1A_007",
+        "LJ3II_MSS_E114.45_N30.61_20251028_L1A_008"
+      ],
+      "role": "deferred_high_resolution_candidate",
+      "acceptance": "not part of the default pipeline until OGE compute permission is available"
+    }
+  ],
+  "required_user_assets": [
+    "myData/jiangxia_420115_utm50n.geojson",
+    "myData/hgz_rice_reference_samples.geojson"
+  ],
+  "planned_outputs": [
+    "myData/hgz_rice_prediction.tif",
+    "myData/hgz_area_statistics.csv"
+  ],
+  "local_catalogs": [
+    "data/grids/jiangxia_5km_grid_utm50n.geojson",
+    "data/catalog/jiangxia_5km_grid.csv",
+    "data/catalog/jiangxia_s2_processing_tasks.csv"
+  ]
+}

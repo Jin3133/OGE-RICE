@@ -1,0 +1,16 @@
+grid_id,date,scene_id,source_type,label_image,width,height,valid_fraction,brightness_mean,brightness_std,qc_status,recommended_role,label_status
+JX5K_R03C06,20250418,S2B_50RKU_20250418_0_L2A,tci,data/raw/labeling/tolabel/images_rgb/JX5K_R03C06_20250418_RGB.png,500,500,1.000000,77.637,41.921,accepted,mixed_landscape,unlabeled
+JX5K_R03C06,20250614,S2A_50RKU_20250614_0_L2A,tci,data/raw/labeling/tolabel/images_rgb/JX5K_R03C06_20250614_RGB.png,500,500,1.000000,56.125,36.452,accepted,mixed_landscape,unlabeled
+JX5K_R03C06,20250707,S2B_50RKU_20250707_0_L2A,tci,data/raw/labeling/tolabel/images_rgb/JX5K_R03C06_20250707_RGB.png,500,500,1.000000,60.377,36.637,accepted,mixed_landscape,unlabeled
+JX5K_R03C06,20250816,T50RKU_20250816T025529,ms4,data/raw/labeling/tolabel/images_rgb/JX5K_R03C06_20250816_RGB.png,500,500,1.000000,65.075,51.767,accepted,mixed_landscape,unlabeled
+JX5K_R03C06,20251005,T50RKU_20251005T025529,ms4,data/raw/labeling/tolabel/images_rgb/JX5K_R03C06_20251005_RGB.png,500,500,1.000000,58.006,51.150,accepted,mixed_landscape,unlabeled
+JX5K_R07C05,20250418,S2B_50RKU_20250418_0_L2A,tci,data/raw/labeling/tolabel/images_rgb/JX5K_R07C05_20250418_RGB.png,500,500,1.000000,80.099,26.007,accepted,water_hard_negative,unlabeled
+JX5K_R07C05,20250614,S2A_50RKU_20250614_0_L2A,tci,data/raw/labeling/tolabel/images_rgb/JX5K_R07C05_20250614_RGB.png,500,500,1.000000,52.336,21.424,accepted,water_hard_negative,unlabeled
+JX5K_R07C05,20250707,S2B_50RKU_20250707_0_L2A,tci,data/raw/labeling/tolabel/images_rgb/JX5K_R07C05_20250707_RGB.png,500,500,1.000000,52.345,22.705,accepted,water_hard_negative,unlabeled
+JX5K_R07C05,20250816,T50RKU_20250816T025529,ms4,data/raw/labeling/tolabel/images_rgb/JX5K_R07C05_20250816_RGB.png,500,500,1.000000,69.633,49.447,accepted,water_hard_negative,unlabeled
+JX5K_R07C05,20251005,T50RKU_20251005T025529,ms4,data/raw/labeling/tolabel/images_rgb/JX5K_R07C05_20251005_RGB.png,500,500,1.000000,95.661,47.307,accepted,water_hard_negative,unlabeled
+JX5K_R10C10,20250418,S2B_50RKU_20250418_0_L2A,tci,data/raw/labeling/tolabel/images_rgb/JX5K_R10C10_20250418_RGB.png,500,500,1.000000,91.895,34.727,accepted,fragmented_landscape,unlabeled
+JX5K_R10C10,20250614,S2A_50RKU_20250614_0_L2A,tci,data/raw/labeling/tolabel/images_rgb/JX5K_R10C10_20250614_RGB.png,500,500,1.000000,64.484,35.367,accepted,fragmented_landscape,unlabeled
+JX5K_R10C10,20250707,S2B_50RKU_20250707_0_L2A,tci,data/raw/labeling/tolabel/images_rgb/JX5K_R10C10_20250707_RGB.png,500,500,1.000000,68.128,34.320,accepted,fragmented_landscape,unlabeled
+JX5K_R10C10,20250816,T50RKU_20250816T025529,ms4,data/raw/labeling/tolabel/images_rgb/JX5K_R10C10_20250816_RGB.png,500,500,1.000000,55.810,49.654,accepted,fragmented_landscape,unlabeled
+JX5K_R10C10,20251005,T50RKU_20251005T025529,ms4,data/raw/labeling/tolabel/images_rgb/JX5K_R10C10_20251005_RGB.png,500,500,1.000000,77.240,58.581,accepted,fragmented_landscape,unlabeled

@@ -1,0 +1,4 @@
+grid_id,spatial_stratum,xmin,ymin,xmax,ymax,district_coverage_ratio,selection_status,notes
+JX5K_R03C06,southwest,235000,3325000,240000,3330000,1.0000,selected,江夏南部空间样区；用于检验与中北部不同的地块和植被背景
+JX5K_R07C05,central_west,230000,3345000,235000,3350000,1.0000,selected,已完成单时相预览与GeoTIFF持久化验证
+JX5K_R10C10,northeast,255000,3360000,260000,3365000,1.0000,selected,江夏东北部空间样区；用于检验城郊和破碎地物背景影响

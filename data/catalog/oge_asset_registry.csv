@@ -1,0 +1,17 @@
+asset_key,asset_role,platform_type,platform_path,product_id,coverage_id,region,acquired_at,status,verified,notes
+s2_wuhan_20250501,temporal_imagery,platform_coverage,,S2_MSIL2A,T50RKU_20250501T030529,Wuhan,2025-05-01,available,true,B04 and B08 access verified; NDVI map succeeded
+s2_wuhan_20250511,temporal_imagery,platform_coverage,,S2_MSIL2A,T50RKU_20250511T030529,Wuhan,2025-05-11,candidate,false,Fixed six-scene inventory
+s2_wuhan_20250705,temporal_imagery,platform_coverage,,S2_MSIL2A,T50RKU_20250705T030601,Wuhan,2025-07-05,candidate,false,Fixed six-scene inventory
+s2_wuhan_20250724,temporal_imagery,platform_coverage,,S2_MSIL2A,T50RKU_20250724T030201,Wuhan,2025-07-24,candidate,false,Fixed six-scene inventory
+s2_wuhan_20250816,temporal_imagery,platform_coverage,,S2_MSIL2A,T50RKU_20250816T025529,Wuhan,2025-08-16,available,true,NDVI using B08 and B04 succeeded
+s2_wuhan_20251005,temporal_imagery,platform_coverage,,S2_MSIL2A,T50RKU_20251005T025529,Wuhan,2025-10-05,candidate,false,Fixed six-scene inventory
+jiangxia_boundary,analysis_boundary,uploaded_vector,myData/jiangxia_420115_utm50n.geojson,,,Jiangxia/Wuhan,2026-11-04,available,true,Public district boundary reprojected to EPSG:32650; uploaded to OGE and verified in the vector resource list
+jiangxia_5km_grid,processing_grid,local_vector,data/grids/jiangxia_5km_grid_utm50n.geojson,,,Jiangxia/Wuhan,2026-11-04,available,true,107 grids generated locally; upload only when persistent platform vector access is required
+jiangxia_tiny01_ndvi,otf_result,session_layer,,S2_MSIL2A,T50RKU_20251005T025529,Jiangxia/Wuhan,2025-10-05,verified,true,5 km grid JX5K_R07C05 clip and NDVI displayed as HGZ_JIANGXIA_TINY01_NDVI_20251005
+jiangxia_r07c05_ndvi_20251005,persisted_raster,batch_result,myData/批处理结果/HGZ_JX5K_R07C05_NDVI_20251005.tif.tif,S2_MSIL2A,T50RKU_20251005T025529,Jiangxia/Wuhan,2025-10-05,available,true,OGE batch export completed on 2026-11-05; EPSG:32650; 10 m/px; raw B08-B04 normalized difference
+jiangxia_algorithm_ndvi_15,persisted_raster_collection,batch_result,myData/批处理结果/HGZ_JX5K_*_NDVI_*.tif,S2_MSIL2A,,Jiangxia/Wuhan,2025-05-01 to 2025-10-05,available,true,Three grids by five dates; 15 GeoTIFF assets completed on 2026-11-05; exact names in jiangxia_algorithm_dataset.csv
+rice_reference_samples,validation_samples,uploaded_vector,myData/hgz_rice_reference_samples.geojson,,,,,planned,false,Independent rice and non-rice validation samples
+rice_prediction,model_output,batch_result,myData/hgz_rice_prediction.tif,,,,,planned,false,Model prediction or post-processed raster
+area_statistics,statistics,uploaded_other,myData/hgz_area_statistics.csv,,,,,planned,false,Area statistics indexed by analysis unit
+project_manifest,configuration,uploaded_other,myData/hgz_project_manifest.json,,,,,planned,false,Machine-readable snapshot of project inputs and versions
+huangpi_wuhan1_inventory,primary_imagery_catalog,uploaded_other,myData/hgz_huangpi_wuhan1_inventory.csv,LJ3II_MSS,,Huangpi/Wuhan,2024-06-14 to 2025-10-28,available,true,Uploaded to OGE; 42 catalog hits reduced to 13 representative candidates; per-scene compute verification pending

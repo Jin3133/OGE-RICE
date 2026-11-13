@@ -1,0 +1,4505 @@
+{
+  "type": "FeatureCollection",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:EPSG::32650"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R01C10",
+        "xmin": "255000",
+        "ymin": "3315000",
+        "xmax": "260000",
+        "ymax": "3320000",
+        "center_x": "257500.0",
+        "center_y": "3317500.0",
+        "district_coverage_ratio": "0.0400",
+        "grid_role": "edge",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              255000,
+              3315000
+            ],
+            [
+              260000,
+              3315000
+            ],
+            [
+              260000,
+              3320000
+            ],
+            [
+              255000,
+              3320000
+            ],
+            [
+              255000,
+              3315000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R01C11",
+        "xmin": "260000",
+        "ymin": "3315000",
+        "xmax": "265000",
+        "ymax": "3320000",
+        "center_x": "262500.0",
+        "center_y": "3317500.0",
+        "district_coverage_ratio": "0.1575",
+        "grid_role": "edge",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              260000,
+              3315000
+            ],
+            [
+              265000,
+              3315000
+            ],
+            [
+              265000,
+              3320000
+            ],
+            [
+              260000,
+              3320000
+            ],
+            [
+              260000,
+              3315000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R02C05",
+        "xmin": "230000",
+        "ymin": "3320000",
+        "xmax": "235000",
+        "ymax": "3325000",
+        "center_x": "232500.0",
+        "center_y": "3322500.0",
+        "district_coverage_ratio": "0.4875",
+        "grid_role": "edge",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              230000,
+              3320000
+            ],
+            [
+              235000,
+              3320000
+            ],
+            [
+              235000,
+              3325000
+            ],
+            [
+              230000,
+              3325000
+            ],
+            [
+              230000,
+              3320000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R02C06",
+        "xmin": "235000",
+        "ymin": "3320000",
+        "xmax": "240000",
+        "ymax": "3325000",
+        "center_x": "237500.0",
+        "center_y": "3322500.0",
+        "district_coverage_ratio": "0.5600",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              235000,
+              3320000
+            ],
+            [
+              240000,
+              3320000
+            ],
+            [
+              240000,
+              3325000
+            ],
+            [
+              235000,
+              3325000
+            ],
+            [
+              235000,
+              3320000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R02C07",
+        "xmin": "240000",
+        "ymin": "3320000",
+        "xmax": "245000",
+        "ymax": "3325000",
+        "center_x": "242500.0",
+        "center_y": "3322500.0",
+        "district_coverage_ratio": "0.1725",
+        "grid_role": "edge",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              240000,
+              3320000
+            ],
+            [
+              245000,
+              3320000
+            ],
+            [
+              245000,
+              3325000
+            ],
+            [
+              240000,
+              3325000
+            ],
+            [
+              240000,
+              3320000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R02C08",
+        "xmin": "245000",
+        "ymin": "3320000",
+        "xmax": "250000",
+        "ymax": "3325000",
+        "center_x": "247500.0",
+        "center_y": "3322500.0",
+        "district_coverage_ratio": "0.0825",
+        "grid_role": "edge",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              245000,
+              3320000
+            ],
+            [
+              250000,
+              3320000
+            ],
+            [
+              250000,
+              3325000
+            ],
+            [
+              245000,
+              3325000
+            ],
+            [
+              245000,
+              3320000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R02C09",
+        "xmin": "250000",
+        "ymin": "3320000",
+        "xmax": "255000",
+        "ymax": "3325000",
+        "center_x": "252500.0",
+        "center_y": "3322500.0",
+        "district_coverage_ratio": "0.5025",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              250000,
+              3320000
+            ],
+            [
+              255000,
+              3320000
+            ],
+            [
+              255000,
+              3325000
+            ],
+            [
+              250000,
+              3325000
+            ],
+            [
+              250000,
+              3320000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R02C10",
+        "xmin": "255000",
+        "ymin": "3320000",
+        "xmax": "260000",
+        "ymax": "3325000",
+        "center_x": "257500.0",
+        "center_y": "3322500.0",
+        "district_coverage_ratio": "0.9050",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              255000,
+              3320000
+            ],
+            [
+              260000,
+              3320000
+            ],
+            [
+              260000,
+              3325000
+            ],
+            [
+              255000,
+              3325000
+            ],
+            [
+              255000,
+              3320000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R02C11",
+        "xmin": "260000",
+        "ymin": "3320000",
+        "xmax": "265000",
+        "ymax": "3325000",
+        "center_x": "262500.0",
+        "center_y": "3322500.0",
+        "district_coverage_ratio": "0.5925",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              260000,
+              3320000
+            ],
+            [
+              265000,
+              3320000
+            ],
+            [
+              265000,
+              3325000
+            ],
+            [
+              260000,
+              3325000
+            ],
+            [
+              260000,
+              3320000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R03C04",
+        "xmin": "225000",
+        "ymin": "3325000",
+        "xmax": "230000",
+        "ymax": "3330000",
+        "center_x": "227500.0",
+        "center_y": "3327500.0",
+        "district_coverage_ratio": "0.0375",
+        "grid_role": "edge",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              225000,
+              3325000
+            ],
+            [
+              230000,
+              3325000
+            ],
+            [
+              230000,
+              3330000
+            ],
+            [
+              225000,
+              3330000
+            ],
+            [
+              225000,
+              3325000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R03C05",
+        "xmin": "230000",
+        "ymin": "3325000",
+        "xmax": "235000",
+        "ymax": "3330000",
+        "center_x": "232500.0",
+        "center_y": "3327500.0",
+        "district_coverage_ratio": "0.9650",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              230000,
+              3325000
+            ],
+            [
+              235000,
+              3325000
+            ],
+            [
+              235000,
+              3330000
+            ],
+            [
+              230000,
+              3330000
+            ],
+            [
+              230000,
+              3325000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R03C06",
+        "xmin": "235000",
+        "ymin": "3325000",
+        "xmax": "240000",
+        "ymax": "3330000",
+        "center_x": "237500.0",
+        "center_y": "3327500.0",
+        "district_coverage_ratio": "1.0000",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              235000,
+              3325000
+            ],
+            [
+              240000,
+              3325000
+            ],
+            [
+              240000,
+              3330000
+            ],
+            [
+              235000,
+              3330000
+            ],
+            [
+              235000,
+              3325000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R03C07",
+        "xmin": "240000",
+        "ymin": "3325000",
+        "xmax": "245000",
+        "ymax": "3330000",
+        "center_x": "242500.0",
+        "center_y": "3327500.0",
+        "district_coverage_ratio": "1.0000",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              240000,
+              3325000
+            ],
+            [
+              245000,
+              3325000
+            ],
+            [
+              245000,
+              3330000
+            ],
+            [
+              240000,
+              3330000
+            ],
+            [
+              240000,
+              3325000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R03C08",
+        "xmin": "245000",
+        "ymin": "3325000",
+        "xmax": "250000",
+        "ymax": "3330000",
+        "center_x": "247500.0",
+        "center_y": "3327500.0",
+        "district_coverage_ratio": "0.9925",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              245000,
+              3325000
+            ],
+            [
+              250000,
+              3325000
+            ],
+            [
+              250000,
+              3330000
+            ],
+            [
+              245000,
+              3330000
+            ],
+            [
+              245000,
+              3325000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R03C09",
+        "xmin": "250000",
+        "ymin": "3325000",
+        "xmax": "255000",
+        "ymax": "3330000",
+        "center_x": "252500.0",
+        "center_y": "3327500.0",
+        "district_coverage_ratio": "1.0000",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              250000,
+              3325000
+            ],
+            [
+              255000,
+              3325000
+            ],
+            [
+              255000,
+              3330000
+            ],
+            [
+              250000,
+              3330000
+            ],
+            [
+              250000,
+              3325000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R03C10",
+        "xmin": "255000",
+        "ymin": "3325000",
+        "xmax": "260000",
+        "ymax": "3330000",
+        "center_x": "257500.0",
+        "center_y": "3327500.0",
+        "district_coverage_ratio": "1.0000",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              255000,
+              3325000
+            ],
+            [
+              260000,
+              3325000
+            ],
+            [
+              260000,
+              3330000
+            ],
+            [
+              255000,
+              3330000
+            ],
+            [
+              255000,
+              3325000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R03C11",
+        "xmin": "260000",
+        "ymin": "3325000",
+        "xmax": "265000",
+        "ymax": "3330000",
+        "center_x": "262500.0",
+        "center_y": "3327500.0",
+        "district_coverage_ratio": "0.7225",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              260000,
+              3325000
+            ],
+            [
+              265000,
+              3325000
+            ],
+            [
+              265000,
+              3330000
+            ],
+            [
+              260000,
+              3330000
+            ],
+            [
+              260000,
+              3325000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R04C04",
+        "xmin": "225000",
+        "ymin": "3330000",
+        "xmax": "230000",
+        "ymax": "3335000",
+        "center_x": "227500.0",
+        "center_y": "3332500.0",
+        "district_coverage_ratio": "0.4300",
+        "grid_role": "edge",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              225000,
+              3330000
+            ],
+            [
+              230000,
+              3330000
+            ],
+            [
+              230000,
+              3335000
+            ],
+            [
+              225000,
+              3335000
+            ],
+            [
+              225000,
+              3330000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R04C05",
+        "xmin": "230000",
+        "ymin": "3330000",
+        "xmax": "235000",
+        "ymax": "3335000",
+        "center_x": "232500.0",
+        "center_y": "3332500.0",
+        "district_coverage_ratio": "1.0000",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              230000,
+              3330000
+            ],
+            [
+              235000,
+              3330000
+            ],
+            [
+              235000,
+              3335000
+            ],
+            [
+              230000,
+              3335000
+            ],
+            [
+              230000,
+              3330000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R04C06",
+        "xmin": "235000",
+        "ymin": "3330000",
+        "xmax": "240000",
+        "ymax": "3335000",
+        "center_x": "237500.0",
+        "center_y": "3332500.0",
+        "district_coverage_ratio": "1.0000",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              235000,
+              3330000
+            ],
+            [
+              240000,
+              3330000
+            ],
+            [
+              240000,
+              3335000
+            ],
+            [
+              235000,
+              3335000
+            ],
+            [
+              235000,
+              3330000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R04C07",
+        "xmin": "240000",
+        "ymin": "3330000",
+        "xmax": "245000",
+        "ymax": "3335000",
+        "center_x": "242500.0",
+        "center_y": "3332500.0",
+        "district_coverage_ratio": "1.0000",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              240000,
+              3330000
+            ],
+            [
+              245000,
+              3330000
+            ],
+            [
+              245000,
+              3335000
+            ],
+            [
+              240000,
+              3335000
+            ],
+            [
+              240000,
+              3330000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R04C08",
+        "xmin": "245000",
+        "ymin": "3330000",
+        "xmax": "250000",
+        "ymax": "3335000",
+        "center_x": "247500.0",
+        "center_y": "3332500.0",
+        "district_coverage_ratio": "1.0000",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              245000,
+              3330000
+            ],
+            [
+              250000,
+              3330000
+            ],
+            [
+              250000,
+              3335000
+            ],
+            [
+              245000,
+              3335000
+            ],
+            [
+              245000,
+              3330000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R04C09",
+        "xmin": "250000",
+        "ymin": "3330000",
+        "xmax": "255000",
+        "ymax": "3335000",
+        "center_x": "252500.0",
+        "center_y": "3332500.0",
+        "district_coverage_ratio": "1.0000",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              250000,
+              3330000
+            ],
+            [
+              255000,
+              3330000
+            ],
+            [
+              255000,
+              3335000
+            ],
+            [
+              250000,
+              3335000
+            ],
+            [
+              250000,
+              3330000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R04C10",
+        "xmin": "255000",
+        "ymin": "3330000",
+        "xmax": "260000",
+        "ymax": "3335000",
+        "center_x": "257500.0",
+        "center_y": "3332500.0",
+        "district_coverage_ratio": "1.0000",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              255000,
+              3330000
+            ],
+            [
+              260000,
+              3330000
+            ],
+            [
+              260000,
+              3335000
+            ],
+            [
+              255000,
+              3335000
+            ],
+            [
+              255000,
+              3330000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R04C11",
+        "xmin": "260000",
+        "ymin": "3330000",
+        "xmax": "265000",
+        "ymax": "3335000",
+        "center_x": "262500.0",
+        "center_y": "3332500.0",
+        "district_coverage_ratio": "0.2950",
+        "grid_role": "edge",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              260000,
+              3330000
+            ],
+            [
+              265000,
+              3330000
+            ],
+            [
+              265000,
+              3335000
+            ],
+            [
+              260000,
+              3335000
+            ],
+            [
+              260000,
+              3330000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R05C03",
+        "xmin": "220000",
+        "ymin": "3335000",
+        "xmax": "225000",
+        "ymax": "3340000",
+        "center_x": "222500.0",
+        "center_y": "3337500.0",
+        "district_coverage_ratio": "0.0175",
+        "grid_role": "edge",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              220000,
+              3335000
+            ],
+            [
+              225000,
+              3335000
+            ],
+            [
+              225000,
+              3340000
+            ],
+            [
+              220000,
+              3340000
+            ],
+            [
+              220000,
+              3335000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R05C04",
+        "xmin": "225000",
+        "ymin": "3335000",
+        "xmax": "230000",
+        "ymax": "3340000",
+        "center_x": "227500.0",
+        "center_y": "3337500.0",
+        "district_coverage_ratio": "0.8950",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              225000,
+              3335000
+            ],
+            [
+              230000,
+              3335000
+            ],
+            [
+              230000,
+              3340000
+            ],
+            [
+              225000,
+              3340000
+            ],
+            [
+              225000,
+              3335000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R05C05",
+        "xmin": "230000",
+        "ymin": "3335000",
+        "xmax": "235000",
+        "ymax": "3340000",
+        "center_x": "232500.0",
+        "center_y": "3337500.0",
+        "district_coverage_ratio": "1.0000",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              230000,
+              3335000
+            ],
+            [
+              235000,
+              3335000
+            ],
+            [
+              235000,
+              3340000
+            ],
+            [
+              230000,
+              3340000
+            ],
+            [
+              230000,
+              3335000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R05C06",
+        "xmin": "235000",
+        "ymin": "3335000",
+        "xmax": "240000",
+        "ymax": "3340000",
+        "center_x": "237500.0",
+        "center_y": "3337500.0",
+        "district_coverage_ratio": "1.0000",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              235000,
+              3335000
+            ],
+            [
+              240000,
+              3335000
+            ],
+            [
+              240000,
+              3340000
+            ],
+            [
+              235000,
+              3340000
+            ],
+            [
+              235000,
+              3335000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R05C07",
+        "xmin": "240000",
+        "ymin": "3335000",
+        "xmax": "245000",
+        "ymax": "3340000",
+        "center_x": "242500.0",
+        "center_y": "3337500.0",
+        "district_coverage_ratio": "1.0000",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              240000,
+              3335000
+            ],
+            [
+              245000,
+              3335000
+            ],
+            [
+              245000,
+              3340000
+            ],
+            [
+              240000,
+              3340000
+            ],
+            [
+              240000,
+              3335000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R05C08",
+        "xmin": "245000",
+        "ymin": "3335000",
+        "xmax": "250000",
+        "ymax": "3340000",
+        "center_x": "247500.0",
+        "center_y": "3337500.0",
+        "district_coverage_ratio": "1.0000",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              245000,
+              3335000
+            ],
+            [
+              250000,
+              3335000
+            ],
+            [
+              250000,
+              3340000
+            ],
+            [
+              245000,
+              3340000
+            ],
+            [
+              245000,
+              3335000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R05C09",
+        "xmin": "250000",
+        "ymin": "3335000",
+        "xmax": "255000",
+        "ymax": "3340000",
+        "center_x": "252500.0",
+        "center_y": "3337500.0",
+        "district_coverage_ratio": "1.0000",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              250000,
+              3335000
+            ],
+            [
+              255000,
+              3335000
+            ],
+            [
+              255000,
+              3340000
+            ],
+            [
+              250000,
+              3340000
+            ],
+            [
+              250000,
+              3335000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R05C10",
+        "xmin": "255000",
+        "ymin": "3335000",
+        "xmax": "260000",
+        "ymax": "3340000",
+        "center_x": "257500.0",
+        "center_y": "3337500.0",
+        "district_coverage_ratio": "0.9725",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              255000,
+              3335000
+            ],
+            [
+              260000,
+              3335000
+            ],
+            [
+              260000,
+              3340000
+            ],
+            [
+              255000,
+              3340000
+            ],
+            [
+              255000,
+              3335000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R05C11",
+        "xmin": "260000",
+        "ymin": "3335000",
+        "xmax": "265000",
+        "ymax": "3340000",
+        "center_x": "262500.0",
+        "center_y": "3337500.0",
+        "district_coverage_ratio": "0.0400",
+        "grid_role": "edge",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              260000,
+              3335000
+            ],
+            [
+              265000,
+              3335000
+            ],
+            [
+              265000,
+              3340000
+            ],
+            [
+              260000,
+              3340000
+            ],
+            [
+              260000,
+              3335000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R06C02",
+        "xmin": "215000",
+        "ymin": "3340000",
+        "xmax": "220000",
+        "ymax": "3345000",
+        "center_x": "217500.0",
+        "center_y": "3342500.0",
+        "district_coverage_ratio": "0.0300",
+        "grid_role": "edge",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              215000,
+              3340000
+            ],
+            [
+              220000,
+              3340000
+            ],
+            [
+              220000,
+              3345000
+            ],
+            [
+              215000,
+              3345000
+            ],
+            [
+              215000,
+              3340000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R06C03",
+        "xmin": "220000",
+        "ymin": "3340000",
+        "xmax": "225000",
+        "ymax": "3345000",
+        "center_x": "222500.0",
+        "center_y": "3342500.0",
+        "district_coverage_ratio": "0.4525",
+        "grid_role": "edge",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              220000,
+              3340000
+            ],
+            [
+              225000,
+              3340000
+            ],
+            [
+              225000,
+              3345000
+            ],
+            [
+              220000,
+              3345000
+            ],
+            [
+              220000,
+              3340000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R06C04",
+        "xmin": "225000",
+        "ymin": "3340000",
+        "xmax": "230000",
+        "ymax": "3345000",
+        "center_x": "227500.0",
+        "center_y": "3342500.0",
+        "district_coverage_ratio": "1.0000",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              225000,
+              3340000
+            ],
+            [
+              230000,
+              3340000
+            ],
+            [
+              230000,
+              3345000
+            ],
+            [
+              225000,
+              3345000
+            ],
+            [
+              225000,
+              3340000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R06C05",
+        "xmin": "230000",
+        "ymin": "3340000",
+        "xmax": "235000",
+        "ymax": "3345000",
+        "center_x": "232500.0",
+        "center_y": "3342500.0",
+        "district_coverage_ratio": "1.0000",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              230000,
+              3340000
+            ],
+            [
+              235000,
+              3340000
+            ],
+            [
+              235000,
+              3345000
+            ],
+            [
+              230000,
+              3345000
+            ],
+            [
+              230000,
+              3340000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R06C06",
+        "xmin": "235000",
+        "ymin": "3340000",
+        "xmax": "240000",
+        "ymax": "3345000",
+        "center_x": "237500.0",
+        "center_y": "3342500.0",
+        "district_coverage_ratio": "1.0000",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              235000,
+              3340000
+            ],
+            [
+              240000,
+              3340000
+            ],
+            [
+              240000,
+              3345000
+            ],
+            [
+              235000,
+              3345000
+            ],
+            [
+              235000,
+              3340000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R06C07",
+        "xmin": "240000",
+        "ymin": "3340000",
+        "xmax": "245000",
+        "ymax": "3345000",
+        "center_x": "242500.0",
+        "center_y": "3342500.0",
+        "district_coverage_ratio": "1.0000",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              240000,
+              3340000
+            ],
+            [
+              245000,
+              3340000
+            ],
+            [
+              245000,
+              3345000
+            ],
+            [
+              240000,
+              3345000
+            ],
+            [
+              240000,
+              3340000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R06C08",
+        "xmin": "245000",
+        "ymin": "3340000",
+        "xmax": "250000",
+        "ymax": "3345000",
+        "center_x": "247500.0",
+        "center_y": "3342500.0",
+        "district_coverage_ratio": "1.0000",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              245000,
+              3340000
+            ],
+            [
+              250000,
+              3340000
+            ],
+            [
+              250000,
+              3345000
+            ],
+            [
+              245000,
+              3345000
+            ],
+            [
+              245000,
+              3340000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R06C09",
+        "xmin": "250000",
+        "ymin": "3340000",
+        "xmax": "255000",
+        "ymax": "3345000",
+        "center_x": "252500.0",
+        "center_y": "3342500.0",
+        "district_coverage_ratio": "1.0000",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              250000,
+              3340000
+            ],
+            [
+              255000,
+              3340000
+            ],
+            [
+              255000,
+              3345000
+            ],
+            [
+              250000,
+              3345000
+            ],
+            [
+              250000,
+              3340000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R06C10",
+        "xmin": "255000",
+        "ymin": "3340000",
+        "xmax": "260000",
+        "ymax": "3345000",
+        "center_x": "257500.0",
+        "center_y": "3342500.0",
+        "district_coverage_ratio": "1.0000",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              255000,
+              3340000
+            ],
+            [
+              260000,
+              3340000
+            ],
+            [
+              260000,
+              3345000
+            ],
+            [
+              255000,
+              3345000
+            ],
+            [
+              255000,
+              3340000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R06C11",
+        "xmin": "260000",
+        "ymin": "3340000",
+        "xmax": "265000",
+        "ymax": "3345000",
+        "center_x": "262500.0",
+        "center_y": "3342500.0",
+        "district_coverage_ratio": "0.3950",
+        "grid_role": "edge",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              260000,
+              3340000
+            ],
+            [
+              265000,
+              3340000
+            ],
+            [
+              265000,
+              3345000
+            ],
+            [
+              260000,
+              3345000
+            ],
+            [
+              260000,
+              3340000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R07C02",
+        "xmin": "215000",
+        "ymin": "3345000",
+        "xmax": "220000",
+        "ymax": "3350000",
+        "center_x": "217500.0",
+        "center_y": "3347500.0",
+        "district_coverage_ratio": "0.5225",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              215000,
+              3345000
+            ],
+            [
+              220000,
+              3345000
+            ],
+            [
+              220000,
+              3350000
+            ],
+            [
+              215000,
+              3350000
+            ],
+            [
+              215000,
+              3345000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R07C03",
+        "xmin": "220000",
+        "ymin": "3345000",
+        "xmax": "225000",
+        "ymax": "3350000",
+        "center_x": "222500.0",
+        "center_y": "3347500.0",
+        "district_coverage_ratio": "1.0000",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              220000,
+              3345000
+            ],
+            [
+              225000,
+              3345000
+            ],
+            [
+              225000,
+              3350000
+            ],
+            [
+              220000,
+              3350000
+            ],
+            [
+              220000,
+              3345000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R07C04",
+        "xmin": "225000",
+        "ymin": "3345000",
+        "xmax": "230000",
+        "ymax": "3350000",
+        "center_x": "227500.0",
+        "center_y": "3347500.0",
+        "district_coverage_ratio": "1.0000",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              225000,
+              3345000
+            ],
+            [
+              230000,
+              3345000
+            ],
+            [
+              230000,
+              3350000
+            ],
+            [
+              225000,
+              3350000
+            ],
+            [
+              225000,
+              3345000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R07C05",
+        "xmin": "230000",
+        "ymin": "3345000",
+        "xmax": "235000",
+        "ymax": "3350000",
+        "center_x": "232500.0",
+        "center_y": "3347500.0",
+        "district_coverage_ratio": "1.0000",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              230000,
+              3345000
+            ],
+            [
+              235000,
+              3345000
+            ],
+            [
+              235000,
+              3350000
+            ],
+            [
+              230000,
+              3350000
+            ],
+            [
+              230000,
+              3345000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R07C06",
+        "xmin": "235000",
+        "ymin": "3345000",
+        "xmax": "240000",
+        "ymax": "3350000",
+        "center_x": "237500.0",
+        "center_y": "3347500.0",
+        "district_coverage_ratio": "1.0000",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              235000,
+              3345000
+            ],
+            [
+              240000,
+              3345000
+            ],
+            [
+              240000,
+              3350000
+            ],
+            [
+              235000,
+              3350000
+            ],
+            [
+              235000,
+              3345000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R07C07",
+        "xmin": "240000",
+        "ymin": "3345000",
+        "xmax": "245000",
+        "ymax": "3350000",
+        "center_x": "242500.0",
+        "center_y": "3347500.0",
+        "district_coverage_ratio": "1.0000",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              240000,
+              3345000
+            ],
+            [
+              245000,
+              3345000
+            ],
+            [
+              245000,
+              3350000
+            ],
+            [
+              240000,
+              3350000
+            ],
+            [
+              240000,
+              3345000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R07C08",
+        "xmin": "245000",
+        "ymin": "3345000",
+        "xmax": "250000",
+        "ymax": "3350000",
+        "center_x": "247500.0",
+        "center_y": "3347500.0",
+        "district_coverage_ratio": "1.0000",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              245000,
+              3345000
+            ],
+            [
+              250000,
+              3345000
+            ],
+            [
+              250000,
+              3350000
+            ],
+            [
+              245000,
+              3350000
+            ],
+            [
+              245000,
+              3345000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R07C09",
+        "xmin": "250000",
+        "ymin": "3345000",
+        "xmax": "255000",
+        "ymax": "3350000",
+        "center_x": "252500.0",
+        "center_y": "3347500.0",
+        "district_coverage_ratio": "1.0000",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              250000,
+              3345000
+            ],
+            [
+              255000,
+              3345000
+            ],
+            [
+              255000,
+              3350000
+            ],
+            [
+              250000,
+              3350000
+            ],
+            [
+              250000,
+              3345000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R07C10",
+        "xmin": "255000",
+        "ymin": "3345000",
+        "xmax": "260000",
+        "ymax": "3350000",
+        "center_x": "257500.0",
+        "center_y": "3347500.0",
+        "district_coverage_ratio": "1.0000",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              255000,
+              3345000
+            ],
+            [
+              260000,
+              3345000
+            ],
+            [
+              260000,
+              3350000
+            ],
+            [
+              255000,
+              3350000
+            ],
+            [
+              255000,
+              3345000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R07C11",
+        "xmin": "260000",
+        "ymin": "3345000",
+        "xmax": "265000",
+        "ymax": "3350000",
+        "center_x": "262500.0",
+        "center_y": "3347500.0",
+        "district_coverage_ratio": "0.8375",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              260000,
+              3345000
+            ],
+            [
+              265000,
+              3345000
+            ],
+            [
+              265000,
+              3350000
+            ],
+            [
+              260000,
+              3350000
+            ],
+            [
+              260000,
+              3345000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R07C12",
+        "xmin": "265000",
+        "ymin": "3345000",
+        "xmax": "270000",
+        "ymax": "3350000",
+        "center_x": "267500.0",
+        "center_y": "3347500.0",
+        "district_coverage_ratio": "0.0450",
+        "grid_role": "edge",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              265000,
+              3345000
+            ],
+            [
+              270000,
+              3345000
+            ],
+            [
+              270000,
+              3350000
+            ],
+            [
+              265000,
+              3350000
+            ],
+            [
+              265000,
+              3345000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R08C02",
+        "xmin": "215000",
+        "ymin": "3350000",
+        "xmax": "220000",
+        "ymax": "3355000",
+        "center_x": "217500.0",
+        "center_y": "3352500.0",
+        "district_coverage_ratio": "0.0175",
+        "grid_role": "edge",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              215000,
+              3350000
+            ],
+            [
+              220000,
+              3350000
+            ],
+            [
+              220000,
+              3355000
+            ],
+            [
+              215000,
+              3355000
+            ],
+            [
+              215000,
+              3350000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R08C03",
+        "xmin": "220000",
+        "ymin": "3350000",
+        "xmax": "225000",
+        "ymax": "3355000",
+        "center_x": "222500.0",
+        "center_y": "3352500.0",
+        "district_coverage_ratio": "0.9600",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              220000,
+              3350000
+            ],
+            [
+              225000,
+              3350000
+            ],
+            [
+              225000,
+              3355000
+            ],
+            [
+              220000,
+              3355000
+            ],
+            [
+              220000,
+              3350000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R08C04",
+        "xmin": "225000",
+        "ymin": "3350000",
+        "xmax": "230000",
+        "ymax": "3355000",
+        "center_x": "227500.0",
+        "center_y": "3352500.0",
+        "district_coverage_ratio": "1.0000",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              225000,
+              3350000
+            ],
+            [
+              230000,
+              3350000
+            ],
+            [
+              230000,
+              3355000
+            ],
+            [
+              225000,
+              3355000
+            ],
+            [
+              225000,
+              3350000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R08C05",
+        "xmin": "230000",
+        "ymin": "3350000",
+        "xmax": "235000",
+        "ymax": "3355000",
+        "center_x": "232500.0",
+        "center_y": "3352500.0",
+        "district_coverage_ratio": "1.0000",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              230000,
+              3350000
+            ],
+            [
+              235000,
+              3350000
+            ],
+            [
+              235000,
+              3355000
+            ],
+            [
+              230000,
+              3355000
+            ],
+            [
+              230000,
+              3350000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R08C06",
+        "xmin": "235000",
+        "ymin": "3350000",
+        "xmax": "240000",
+        "ymax": "3355000",
+        "center_x": "237500.0",
+        "center_y": "3352500.0",
+        "district_coverage_ratio": "1.0000",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              235000,
+              3350000
+            ],
+            [
+              240000,
+              3350000
+            ],
+            [
+              240000,
+              3355000
+            ],
+            [
+              235000,
+              3355000
+            ],
+            [
+              235000,
+              3350000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R08C07",
+        "xmin": "240000",
+        "ymin": "3350000",
+        "xmax": "245000",
+        "ymax": "3355000",
+        "center_x": "242500.0",
+        "center_y": "3352500.0",
+        "district_coverage_ratio": "1.0000",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              240000,
+              3350000
+            ],
+            [
+              245000,
+              3350000
+            ],
+            [
+              245000,
+              3355000
+            ],
+            [
+              240000,
+              3355000
+            ],
+            [
+              240000,
+              3350000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R08C08",
+        "xmin": "245000",
+        "ymin": "3350000",
+        "xmax": "250000",
+        "ymax": "3355000",
+        "center_x": "247500.0",
+        "center_y": "3352500.0",
+        "district_coverage_ratio": "1.0000",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              245000,
+              3350000
+            ],
+            [
+              250000,
+              3350000
+            ],
+            [
+              250000,
+              3355000
+            ],
+            [
+              245000,
+              3355000
+            ],
+            [
+              245000,
+              3350000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R08C09",
+        "xmin": "250000",
+        "ymin": "3350000",
+        "xmax": "255000",
+        "ymax": "3355000",
+        "center_x": "252500.0",
+        "center_y": "3352500.0",
+        "district_coverage_ratio": "1.0000",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              250000,
+              3350000
+            ],
+            [
+              255000,
+              3350000
+            ],
+            [
+              255000,
+              3355000
+            ],
+            [
+              250000,
+              3355000
+            ],
+            [
+              250000,
+              3350000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R08C10",
+        "xmin": "255000",
+        "ymin": "3350000",
+        "xmax": "260000",
+        "ymax": "3355000",
+        "center_x": "257500.0",
+        "center_y": "3352500.0",
+        "district_coverage_ratio": "1.0000",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              255000,
+              3350000
+            ],
+            [
+              260000,
+              3350000
+            ],
+            [
+              260000,
+              3355000
+            ],
+            [
+              255000,
+              3355000
+            ],
+            [
+              255000,
+              3350000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R08C11",
+        "xmin": "260000",
+        "ymin": "3350000",
+        "xmax": "265000",
+        "ymax": "3355000",
+        "center_x": "262500.0",
+        "center_y": "3352500.0",
+        "district_coverage_ratio": "1.0000",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              260000,
+              3350000
+            ],
+            [
+              265000,
+              3350000
+            ],
+            [
+              265000,
+              3355000
+            ],
+            [
+              260000,
+              3355000
+            ],
+            [
+              260000,
+              3350000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R08C12",
+        "xmin": "265000",
+        "ymin": "3350000",
+        "xmax": "270000",
+        "ymax": "3355000",
+        "center_x": "267500.0",
+        "center_y": "3352500.0",
+        "district_coverage_ratio": "0.5000",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              265000,
+              3350000
+            ],
+            [
+              270000,
+              3350000
+            ],
+            [
+              270000,
+              3355000
+            ],
+            [
+              265000,
+              3355000
+            ],
+            [
+              265000,
+              3350000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R09C03",
+        "xmin": "220000",
+        "ymin": "3355000",
+        "xmax": "225000",
+        "ymax": "3360000",
+        "center_x": "222500.0",
+        "center_y": "3357500.0",
+        "district_coverage_ratio": "0.7325",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              220000,
+              3355000
+            ],
+            [
+              225000,
+              3355000
+            ],
+            [
+              225000,
+              3360000
+            ],
+            [
+              220000,
+              3360000
+            ],
+            [
+              220000,
+              3355000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R09C04",
+        "xmin": "225000",
+        "ymin": "3355000",
+        "xmax": "230000",
+        "ymax": "3360000",
+        "center_x": "227500.0",
+        "center_y": "3357500.0",
+        "district_coverage_ratio": "1.0000",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              225000,
+              3355000
+            ],
+            [
+              230000,
+              3355000
+            ],
+            [
+              230000,
+              3360000
+            ],
+            [
+              225000,
+              3360000
+            ],
+            [
+              225000,
+              3355000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R09C05",
+        "xmin": "230000",
+        "ymin": "3355000",
+        "xmax": "235000",
+        "ymax": "3360000",
+        "center_x": "232500.0",
+        "center_y": "3357500.0",
+        "district_coverage_ratio": "1.0000",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              230000,
+              3355000
+            ],
+            [
+              235000,
+              3355000
+            ],
+            [
+              235000,
+              3360000
+            ],
+            [
+              230000,
+              3360000
+            ],
+            [
+              230000,
+              3355000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R09C06",
+        "xmin": "235000",
+        "ymin": "3355000",
+        "xmax": "240000",
+        "ymax": "3360000",
+        "center_x": "237500.0",
+        "center_y": "3357500.0",
+        "district_coverage_ratio": "0.9200",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              235000,
+              3355000
+            ],
+            [
+              240000,
+              3355000
+            ],
+            [
+              240000,
+              3360000
+            ],
+            [
+              235000,
+              3360000
+            ],
+            [
+              235000,
+              3355000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R09C07",
+        "xmin": "240000",
+        "ymin": "3355000",
+        "xmax": "245000",
+        "ymax": "3360000",
+        "center_x": "242500.0",
+        "center_y": "3357500.0",
+        "district_coverage_ratio": "0.9850",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              240000,
+              3355000
+            ],
+            [
+              245000,
+              3355000
+            ],
+            [
+              245000,
+              3360000
+            ],
+            [
+              240000,
+              3360000
+            ],
+            [
+              240000,
+              3355000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R09C08",
+        "xmin": "245000",
+        "ymin": "3355000",
+        "xmax": "250000",
+        "ymax": "3360000",
+        "center_x": "247500.0",
+        "center_y": "3357500.0",
+        "district_coverage_ratio": "1.0000",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              245000,
+              3355000
+            ],
+            [
+              250000,
+              3355000
+            ],
+            [
+              250000,
+              3360000
+            ],
+            [
+              245000,
+              3360000
+            ],
+            [
+              245000,
+              3355000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R09C09",
+        "xmin": "250000",
+        "ymin": "3355000",
+        "xmax": "255000",
+        "ymax": "3360000",
+        "center_x": "252500.0",
+        "center_y": "3357500.0",
+        "district_coverage_ratio": "1.0000",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              250000,
+              3355000
+            ],
+            [
+              255000,
+              3355000
+            ],
+            [
+              255000,
+              3360000
+            ],
+            [
+              250000,
+              3360000
+            ],
+            [
+              250000,
+              3355000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R09C10",
+        "xmin": "255000",
+        "ymin": "3355000",
+        "xmax": "260000",
+        "ymax": "3360000",
+        "center_x": "257500.0",
+        "center_y": "3357500.0",
+        "district_coverage_ratio": "1.0000",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              255000,
+              3355000
+            ],
+            [
+              260000,
+              3355000
+            ],
+            [
+              260000,
+              3360000
+            ],
+            [
+              255000,
+              3360000
+            ],
+            [
+              255000,
+              3355000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R09C11",
+        "xmin": "260000",
+        "ymin": "3355000",
+        "xmax": "265000",
+        "ymax": "3360000",
+        "center_x": "262500.0",
+        "center_y": "3357500.0",
+        "district_coverage_ratio": "1.0000",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              260000,
+              3355000
+            ],
+            [
+              265000,
+              3355000
+            ],
+            [
+              265000,
+              3360000
+            ],
+            [
+              260000,
+              3360000
+            ],
+            [
+              260000,
+              3355000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R09C12",
+        "xmin": "265000",
+        "ymin": "3355000",
+        "xmax": "270000",
+        "ymax": "3360000",
+        "center_x": "267500.0",
+        "center_y": "3357500.0",
+        "district_coverage_ratio": "0.7675",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              265000,
+              3355000
+            ],
+            [
+              270000,
+              3355000
+            ],
+            [
+              270000,
+              3360000
+            ],
+            [
+              265000,
+              3360000
+            ],
+            [
+              265000,
+              3355000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R10C03",
+        "xmin": "220000",
+        "ymin": "3360000",
+        "xmax": "225000",
+        "ymax": "3365000",
+        "center_x": "222500.0",
+        "center_y": "3362500.0",
+        "district_coverage_ratio": "0.1300",
+        "grid_role": "edge",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              220000,
+              3360000
+            ],
+            [
+              225000,
+              3360000
+            ],
+            [
+              225000,
+              3365000
+            ],
+            [
+              220000,
+              3365000
+            ],
+            [
+              220000,
+              3360000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R10C04",
+        "xmin": "225000",
+        "ymin": "3360000",
+        "xmax": "230000",
+        "ymax": "3365000",
+        "center_x": "227500.0",
+        "center_y": "3362500.0",
+        "district_coverage_ratio": "0.8925",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              225000,
+              3360000
+            ],
+            [
+              230000,
+              3360000
+            ],
+            [
+              230000,
+              3365000
+            ],
+            [
+              225000,
+              3365000
+            ],
+            [
+              225000,
+              3360000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R10C05",
+        "xmin": "230000",
+        "ymin": "3360000",
+        "xmax": "235000",
+        "ymax": "3365000",
+        "center_x": "232500.0",
+        "center_y": "3362500.0",
+        "district_coverage_ratio": "0.9800",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              230000,
+              3360000
+            ],
+            [
+              235000,
+              3360000
+            ],
+            [
+              235000,
+              3365000
+            ],
+            [
+              230000,
+              3365000
+            ],
+            [
+              230000,
+              3360000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R10C06",
+        "xmin": "235000",
+        "ymin": "3360000",
+        "xmax": "240000",
+        "ymax": "3365000",
+        "center_x": "237500.0",
+        "center_y": "3362500.0",
+        "district_coverage_ratio": "0.9100",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              235000,
+              3360000
+            ],
+            [
+              240000,
+              3360000
+            ],
+            [
+              240000,
+              3365000
+            ],
+            [
+              235000,
+              3365000
+            ],
+            [
+              235000,
+              3360000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R10C07",
+        "xmin": "240000",
+        "ymin": "3360000",
+        "xmax": "245000",
+        "ymax": "3365000",
+        "center_x": "242500.0",
+        "center_y": "3362500.0",
+        "district_coverage_ratio": "0.9900",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              240000,
+              3360000
+            ],
+            [
+              245000,
+              3360000
+            ],
+            [
+              245000,
+              3365000
+            ],
+            [
+              240000,
+              3365000
+            ],
+            [
+              240000,
+              3360000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R10C08",
+        "xmin": "245000",
+        "ymin": "3360000",
+        "xmax": "250000",
+        "ymax": "3365000",
+        "center_x": "247500.0",
+        "center_y": "3362500.0",
+        "district_coverage_ratio": "1.0000",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              245000,
+              3360000
+            ],
+            [
+              250000,
+              3360000
+            ],
+            [
+              250000,
+              3365000
+            ],
+            [
+              245000,
+              3365000
+            ],
+            [
+              245000,
+              3360000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R10C09",
+        "xmin": "250000",
+        "ymin": "3360000",
+        "xmax": "255000",
+        "ymax": "3365000",
+        "center_x": "252500.0",
+        "center_y": "3362500.0",
+        "district_coverage_ratio": "1.0000",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              250000,
+              3360000
+            ],
+            [
+              255000,
+              3360000
+            ],
+            [
+              255000,
+              3365000
+            ],
+            [
+              250000,
+              3365000
+            ],
+            [
+              250000,
+              3360000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R10C10",
+        "xmin": "255000",
+        "ymin": "3360000",
+        "xmax": "260000",
+        "ymax": "3365000",
+        "center_x": "257500.0",
+        "center_y": "3362500.0",
+        "district_coverage_ratio": "1.0000",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              255000,
+              3360000
+            ],
+            [
+              260000,
+              3360000
+            ],
+            [
+              260000,
+              3365000
+            ],
+            [
+              255000,
+              3365000
+            ],
+            [
+              255000,
+              3360000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R10C11",
+        "xmin": "260000",
+        "ymin": "3360000",
+        "xmax": "265000",
+        "ymax": "3365000",
+        "center_x": "262500.0",
+        "center_y": "3362500.0",
+        "district_coverage_ratio": "1.0000",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              260000,
+              3360000
+            ],
+            [
+              265000,
+              3360000
+            ],
+            [
+              265000,
+              3365000
+            ],
+            [
+              260000,
+              3365000
+            ],
+            [
+              260000,
+              3360000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R10C12",
+        "xmin": "265000",
+        "ymin": "3360000",
+        "xmax": "270000",
+        "ymax": "3365000",
+        "center_x": "267500.0",
+        "center_y": "3362500.0",
+        "district_coverage_ratio": "0.6625",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              265000,
+              3360000
+            ],
+            [
+              270000,
+              3360000
+            ],
+            [
+              270000,
+              3365000
+            ],
+            [
+              265000,
+              3365000
+            ],
+            [
+              265000,
+              3360000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R11C04",
+        "xmin": "225000",
+        "ymin": "3365000",
+        "xmax": "230000",
+        "ymax": "3370000",
+        "center_x": "227500.0",
+        "center_y": "3367500.0",
+        "district_coverage_ratio": "0.1350",
+        "grid_role": "edge",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              225000,
+              3365000
+            ],
+            [
+              230000,
+              3365000
+            ],
+            [
+              230000,
+              3370000
+            ],
+            [
+              225000,
+              3370000
+            ],
+            [
+              225000,
+              3365000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R11C05",
+        "xmin": "230000",
+        "ymin": "3365000",
+        "xmax": "235000",
+        "ymax": "3370000",
+        "center_x": "232500.0",
+        "center_y": "3367500.0",
+        "district_coverage_ratio": "0.1950",
+        "grid_role": "edge",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              230000,
+              3365000
+            ],
+            [
+              235000,
+              3365000
+            ],
+            [
+              235000,
+              3370000
+            ],
+            [
+              230000,
+              3370000
+            ],
+            [
+              230000,
+              3365000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R11C06",
+        "xmin": "235000",
+        "ymin": "3365000",
+        "xmax": "240000",
+        "ymax": "3370000",
+        "center_x": "237500.0",
+        "center_y": "3367500.0",
+        "district_coverage_ratio": "0.7525",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              235000,
+              3365000
+            ],
+            [
+              240000,
+              3365000
+            ],
+            [
+              240000,
+              3370000
+            ],
+            [
+              235000,
+              3370000
+            ],
+            [
+              235000,
+              3365000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R11C07",
+        "xmin": "240000",
+        "ymin": "3365000",
+        "xmax": "245000",
+        "ymax": "3370000",
+        "center_x": "242500.0",
+        "center_y": "3367500.0",
+        "district_coverage_ratio": "0.9450",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              240000,
+              3365000
+            ],
+            [
+              245000,
+              3365000
+            ],
+            [
+              245000,
+              3370000
+            ],
+            [
+              240000,
+              3370000
+            ],
+            [
+              240000,
+              3365000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R11C08",
+        "xmin": "245000",
+        "ymin": "3365000",
+        "xmax": "250000",
+        "ymax": "3370000",
+        "center_x": "247500.0",
+        "center_y": "3367500.0",
+        "district_coverage_ratio": "1.0000",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              245000,
+              3365000
+            ],
+            [
+              250000,
+              3365000
+            ],
+            [
+              250000,
+              3370000
+            ],
+            [
+              245000,
+              3370000
+            ],
+            [
+              245000,
+              3365000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R11C09",
+        "xmin": "250000",
+        "ymin": "3365000",
+        "xmax": "255000",
+        "ymax": "3370000",
+        "center_x": "252500.0",
+        "center_y": "3367500.0",
+        "district_coverage_ratio": "1.0000",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              250000,
+              3365000
+            ],
+            [
+              255000,
+              3365000
+            ],
+            [
+              255000,
+              3370000
+            ],
+            [
+              250000,
+              3370000
+            ],
+            [
+              250000,
+              3365000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R11C10",
+        "xmin": "255000",
+        "ymin": "3365000",
+        "xmax": "260000",
+        "ymax": "3370000",
+        "center_x": "257500.0",
+        "center_y": "3367500.0",
+        "district_coverage_ratio": "1.0000",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              255000,
+              3365000
+            ],
+            [
+              260000,
+              3365000
+            ],
+            [
+              260000,
+              3370000
+            ],
+            [
+              255000,
+              3370000
+            ],
+            [
+              255000,
+              3365000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R11C11",
+        "xmin": "260000",
+        "ymin": "3365000",
+        "xmax": "265000",
+        "ymax": "3370000",
+        "center_x": "262500.0",
+        "center_y": "3367500.0",
+        "district_coverage_ratio": "1.0000",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              260000,
+              3365000
+            ],
+            [
+              265000,
+              3365000
+            ],
+            [
+              265000,
+              3370000
+            ],
+            [
+              260000,
+              3370000
+            ],
+            [
+              260000,
+              3365000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R11C12",
+        "xmin": "265000",
+        "ymin": "3365000",
+        "xmax": "270000",
+        "ymax": "3370000",
+        "center_x": "267500.0",
+        "center_y": "3367500.0",
+        "district_coverage_ratio": "0.6950",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              265000,
+              3365000
+            ],
+            [
+              270000,
+              3365000
+            ],
+            [
+              270000,
+              3370000
+            ],
+            [
+              265000,
+              3370000
+            ],
+            [
+              265000,
+              3365000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R12C06",
+        "xmin": "235000",
+        "ymin": "3370000",
+        "xmax": "240000",
+        "ymax": "3375000",
+        "center_x": "237500.0",
+        "center_y": "3372500.0",
+        "district_coverage_ratio": "0.0400",
+        "grid_role": "edge",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              235000,
+              3370000
+            ],
+            [
+              240000,
+              3370000
+            ],
+            [
+              240000,
+              3375000
+            ],
+            [
+              235000,
+              3375000
+            ],
+            [
+              235000,
+              3370000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R12C07",
+        "xmin": "240000",
+        "ymin": "3370000",
+        "xmax": "245000",
+        "ymax": "3375000",
+        "center_x": "242500.0",
+        "center_y": "3372500.0",
+        "district_coverage_ratio": "0.0900",
+        "grid_role": "edge",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              240000,
+              3370000
+            ],
+            [
+              245000,
+              3370000
+            ],
+            [
+              245000,
+              3375000
+            ],
+            [
+              240000,
+              3375000
+            ],
+            [
+              240000,
+              3370000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R12C08",
+        "xmin": "245000",
+        "ymin": "3370000",
+        "xmax": "250000",
+        "ymax": "3375000",
+        "center_x": "247500.0",
+        "center_y": "3372500.0",
+        "district_coverage_ratio": "0.5650",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              245000,
+              3370000
+            ],
+            [
+              250000,
+              3370000
+            ],
+            [
+              250000,
+              3375000
+            ],
+            [
+              245000,
+              3375000
+            ],
+            [
+              245000,
+              3370000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R12C09",
+        "xmin": "250000",
+        "ymin": "3370000",
+        "xmax": "255000",
+        "ymax": "3375000",
+        "center_x": "252500.0",
+        "center_y": "3372500.0",
+        "district_coverage_ratio": "0.8850",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              250000,
+              3370000
+            ],
+            [
+              255000,
+              3370000
+            ],
+            [
+              255000,
+              3375000
+            ],
+            [
+              250000,
+              3375000
+            ],
+            [
+              250000,
+              3370000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R12C10",
+        "xmin": "255000",
+        "ymin": "3370000",
+        "xmax": "260000",
+        "ymax": "3375000",
+        "center_x": "257500.0",
+        "center_y": "3372500.0",
+        "district_coverage_ratio": "0.7200",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              255000,
+              3370000
+            ],
+            [
+              260000,
+              3370000
+            ],
+            [
+              260000,
+              3375000
+            ],
+            [
+              255000,
+              3375000
+            ],
+            [
+              255000,
+              3370000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R12C11",
+        "xmin": "260000",
+        "ymin": "3370000",
+        "xmax": "265000",
+        "ymax": "3375000",
+        "center_x": "262500.0",
+        "center_y": "3372500.0",
+        "district_coverage_ratio": "0.8575",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              260000,
+              3370000
+            ],
+            [
+              265000,
+              3370000
+            ],
+            [
+              265000,
+              3375000
+            ],
+            [
+              260000,
+              3375000
+            ],
+            [
+              260000,
+              3370000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R12C12",
+        "xmin": "265000",
+        "ymin": "3370000",
+        "xmax": "270000",
+        "ymax": "3375000",
+        "center_x": "267500.0",
+        "center_y": "3372500.0",
+        "district_coverage_ratio": "0.6950",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              265000,
+              3370000
+            ],
+            [
+              270000,
+              3370000
+            ],
+            [
+              270000,
+              3375000
+            ],
+            [
+              265000,
+              3375000
+            ],
+            [
+              265000,
+              3370000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R13C09",
+        "xmin": "250000",
+        "ymin": "3375000",
+        "xmax": "255000",
+        "ymax": "3380000",
+        "center_x": "252500.0",
+        "center_y": "3377500.0",
+        "district_coverage_ratio": "0.1175",
+        "grid_role": "edge",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              250000,
+              3375000
+            ],
+            [
+              255000,
+              3375000
+            ],
+            [
+              255000,
+              3380000
+            ],
+            [
+              250000,
+              3380000
+            ],
+            [
+              250000,
+              3375000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R13C10",
+        "xmin": "255000",
+        "ymin": "3375000",
+        "xmax": "260000",
+        "ymax": "3380000",
+        "center_x": "257500.0",
+        "center_y": "3377500.0",
+        "district_coverage_ratio": "0.0725",
+        "grid_role": "edge",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              255000,
+              3375000
+            ],
+            [
+              260000,
+              3375000
+            ],
+            [
+              260000,
+              3380000
+            ],
+            [
+              255000,
+              3380000
+            ],
+            [
+              255000,
+              3375000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R13C11",
+        "xmin": "260000",
+        "ymin": "3375000",
+        "xmax": "265000",
+        "ymax": "3380000",
+        "center_x": "262500.0",
+        "center_y": "3377500.0",
+        "district_coverage_ratio": "0.4575",
+        "grid_role": "edge",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              260000,
+              3375000
+            ],
+            [
+              265000,
+              3375000
+            ],
+            [
+              265000,
+              3380000
+            ],
+            [
+              260000,
+              3380000
+            ],
+            [
+              260000,
+              3375000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R13C12",
+        "xmin": "265000",
+        "ymin": "3375000",
+        "xmax": "270000",
+        "ymax": "3380000",
+        "center_x": "267500.0",
+        "center_y": "3377500.0",
+        "district_coverage_ratio": "0.5975",
+        "grid_role": "core",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              265000,
+              3375000
+            ],
+            [
+              270000,
+              3375000
+            ],
+            [
+              270000,
+              3380000
+            ],
+            [
+              265000,
+              3380000
+            ],
+            [
+              265000,
+              3375000
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "grid_id": "JX5K_R14C12",
+        "xmin": "265000",
+        "ymin": "3380000",
+        "xmax": "270000",
+        "ymax": "3385000",
+        "center_x": "267500.0",
+        "center_y": "3382500.0",
+        "district_coverage_ratio": "0.0275",
+        "grid_role": "edge",
+        "crs": "EPSG:32650"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              265000,
+              3380000
+            ],
+            [
+              270000,
+              3380000
+            ],
+            [
+              270000,
+              3385000
+            ],
+            [
+              265000,
+              3385000
+            ],
+            [
+              265000,
+              3380000
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}
