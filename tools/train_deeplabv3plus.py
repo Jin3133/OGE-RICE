@@ -20,6 +20,7 @@ from tqdm import tqdm
 
 from oge_main.data.dataset import FarmSegmentationDataset
 from oge_main.data.transforms import TrainingTransform
+from oge_main.data.weak_cropland_dataset import WeakCroplandDataset
 from oge_main.losses import masked_bce_dice_loss
 from oge_main.metrics import BinarySegmentationMetrics
 from oge_main.utils.device import select_device
@@ -34,6 +35,7 @@ def parse_arguments() -> argparse.Namespace:
     parser.add_argument("--encoder")
     parser.add_argument("--encoder-weights")
     parser.add_argument("--resume", type=Path)
+    parser.add_argument("--initial-weights", type=Path)
     parser.add_argument("--output-directory", type=Path)
     parser.add_argument("--overwrite", action="store_true")
     parser.add_argument("--max-train-batches", type=int)
@@ -67,15 +69,25 @@ def seed_everything(seed: int) -> None:
 def make_loaders(configuration: dict[str, Any]) -> tuple[DataLoader, DataLoader]:
     data = configuration["data"]
     training = configuration["training"]
-    common = {
-        "split_file": data["split_file"],
-        "statistics_file": data["statistics_file"],
-        "root": data.get("dataset_root"),
-    }
-    train_dataset = FarmSegmentationDataset(
-        "train", transform=TrainingTransform(), **common
-    )
-    validation_dataset = FarmSegmentationDataset("validation", **common)
+    if data.get("dataset_type") == "weak_manifest":
+        common = {
+            "manifest_file": data["manifest_file"],
+            "statistics_file": data["statistics_file"],
+        }
+        train_dataset = WeakCroplandDataset(
+            "train", transform=TrainingTransform(), **common
+        )
+        validation_dataset = WeakCroplandDataset("validation", **common)
+    else:
+        common = {
+            "split_file": data["split_file"],
+            "statistics_file": data["statistics_file"],
+            "root": data.get("dataset_root"),
+        }
+        train_dataset = FarmSegmentationDataset(
+            "train", transform=TrainingTransform(), **common
+        )
+        validation_dataset = FarmSegmentationDataset("validation", **common)
     loader_common = {
         "batch_size": training["batch_size"],
         "num_workers": training["num_workers"],
@@ -200,6 +212,10 @@ def main() -> None:
         in_channels=3,
         classes=1,
     ).to(device)
+    if args.initial_weights:
+        initial = torch.load(args.initial_weights, map_location=device, weights_only=False)
+        model.load_state_dict(initial["model"])
+        print(f"initialized model weights from {args.initial_weights}")
     training = configuration["training"]
     optimizer = torch.optim.AdamW(
         model.parameters(),

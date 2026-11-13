@@ -1,0 +1,28 @@
+{
+  "quota_id": "quota.jx.rice.tillering.example",
+  "crop_code": "rice",
+  "stage_code": "tillering",
+  "value_m3_per_mu": 80.0,
+  "source": {
+    "title": "接口演示参数",
+    "publisher": "禾灌智析团队",
+    "url": null,
+    "publication_year": 2026,
+    "retrieved_at": "2026-11-12"
+  },
+  "quality": {
+    "status": "illustrative",
+    "statement": "该数值不是正式地方灌溉定额，不得用于业务决策。",
+    "reviewed_by": null,
+    "reviewed_at": null
+  },
+  "version": {
+    "revision": 1,
+    "previous": null,
+    "status": "active",
+    "change_reason": "建立接口示例",
+    "changed_by": "team.example",
+    "changed_at": "2026-11-12T08:30:00+08:00",
+    "feedback_id": null
+  }
+}

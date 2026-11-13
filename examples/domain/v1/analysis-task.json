@@ -1,0 +1,46 @@
+{
+  "name": "江夏示例管理单元分蘖期分析",
+  "business_scope": "已知水稻管理范围内的耕地候选区面积与阶段参考需水分析",
+  "crop_code": "rice",
+  "analysis_period": {
+    "start_date": "2025-06-01",
+    "end_date": "2025-06-30"
+  },
+  "growth_stage": {
+    "stage_code": "tillering",
+    "stage_name": "分蘖期",
+    "method": "automatic",
+    "crop_calendar_id": "calendar.jx.rice.example",
+    "effective_period": {
+      "start_date": "2025-06-01",
+      "end_date": "2025-06-30"
+    },
+    "confirmed_by": null,
+    "confirmed_at": null
+  },
+  "management_units": [
+    {
+      "record_id": "jx.zone.01",
+      "revision": 1
+    }
+  ],
+  "remote_sensing_result": {
+    "record_id": "rs.jx.2025.tillering.v1",
+    "revision": 1
+  },
+  "irrigation_quota_assignments": [
+    {
+      "record_id": "quota-assignment.jx.zone.01.tillering.example",
+      "revision": 1
+    }
+  ],
+  "created_by": "manager.example",
+  "task_id": "task.jx.2025.tillering.0001",
+  "revision": 1,
+  "previous": null,
+  "status": "ready",
+  "created_at": "2026-11-12T10:00:00+08:00",
+  "updated_at": "2026-11-12T10:00:00+08:00",
+  "updated_by": "manager.example",
+  "change_reason": "创建正式计算接口示例"
+}

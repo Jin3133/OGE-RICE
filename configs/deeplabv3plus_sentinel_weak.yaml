@@ -1,0 +1,28 @@
+experiment:
+  name: deeplabv3plus_sentinel_weak
+  seed: 42
+data:
+  dataset_type: weak_manifest
+  manifest_file: data/splits/sentinel_cropland_weak_v1.json
+  statistics_file: data/statistics/sentinel_cropland_weak_v1.json
+  image_size: 512
+  num_classes: 1
+model:
+  architecture: deeplabv3plus
+  encoder: resnet50
+  encoder_weights: null
+  classes: 1
+training:
+  epochs: 8
+  batch_size: 2
+  learning_rate: 0.00002
+  weight_decay: 0.0001
+  eta_min: 0.000001
+  threshold: 0.5
+  bce_weight: 0.5
+  gradient_clip_norm: 1.0
+  visualization_interval: 1
+  num_workers: 0
+  early_stopping_patience: 4
+output:
+  directory: outputs/deeplabv3plus_sentinel_weak_v1

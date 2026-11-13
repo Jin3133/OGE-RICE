@@ -1,0 +1,84 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "feedback_id": {
+      "maxLength": 100,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$",
+      "title": "Feedback Id",
+      "type": "string"
+    },
+    "task_id": {
+      "maxLength": 100,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$",
+      "title": "Task Id",
+      "type": "string"
+    },
+    "base_revision": {
+      "minimum": 1,
+      "title": "Base Revision",
+      "type": "integer"
+    },
+    "target_type": {
+      "enum": [
+        "management_unit_boundary",
+        "candidate_mask",
+        "growth_stage",
+        "irrigation_quota"
+      ],
+      "title": "Target Type",
+      "type": "string"
+    },
+    "target_id": {
+      "maxLength": 100,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$",
+      "title": "Target Id",
+      "type": "string"
+    },
+    "field_name": {
+      "maxLength": 100,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$",
+      "title": "Field Name",
+      "type": "string"
+    },
+    "previous_value": {
+      "title": "Previous Value"
+    },
+    "proposed_value": {
+      "title": "Proposed Value"
+    },
+    "reason": {
+      "minLength": 1,
+      "title": "Reason",
+      "type": "string"
+    },
+    "submitted_by": {
+      "minLength": 1,
+      "title": "Submitted By",
+      "type": "string"
+    },
+    "submitted_at": {
+      "format": "date-time",
+      "title": "Submitted At",
+      "type": "string"
+    }
+  },
+  "required": [
+    "feedback_id",
+    "task_id",
+    "base_revision",
+    "target_type",
+    "target_id",
+    "field_name",
+    "previous_value",
+    "proposed_value",
+    "reason",
+    "submitted_by",
+    "submitted_at"
+  ],
+  "title": "FeedbackRecord",
+  "type": "object"
+}

@@ -1,0 +1,183 @@
+{
+  "$defs": {
+    "DateRange": {
+      "additionalProperties": false,
+      "properties": {
+        "start_date": {
+          "format": "date",
+          "title": "Start Date",
+          "type": "string"
+        },
+        "end_date": {
+          "format": "date",
+          "title": "End Date",
+          "type": "string"
+        }
+      },
+      "required": [
+        "start_date",
+        "end_date"
+      ],
+      "title": "DateRange",
+      "type": "object"
+    },
+    "GrowthStageSelection": {
+      "additionalProperties": false,
+      "properties": {
+        "stage_code": {
+          "maxLength": 100,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$",
+          "title": "Stage Code",
+          "type": "string"
+        },
+        "stage_name": {
+          "minLength": 1,
+          "title": "Stage Name",
+          "type": "string"
+        },
+        "method": {
+          "$ref": "#/$defs/StageSelectionMethod"
+        },
+        "crop_calendar_id": {
+          "maxLength": 100,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$",
+          "title": "Crop Calendar Id",
+          "type": "string"
+        },
+        "effective_period": {
+          "$ref": "#/$defs/DateRange"
+        },
+        "confirmed_by": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Confirmed By"
+        },
+        "confirmed_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Confirmed At"
+        }
+      },
+      "required": [
+        "stage_code",
+        "stage_name",
+        "method",
+        "crop_calendar_id",
+        "effective_period"
+      ],
+      "title": "GrowthStageSelection",
+      "type": "object"
+    },
+    "StageSelectionMethod": {
+      "enum": [
+        "automatic",
+        "user_confirmed",
+        "user_modified"
+      ],
+      "title": "StageSelectionMethod",
+      "type": "string"
+    },
+    "VersionedReference": {
+      "additionalProperties": false,
+      "properties": {
+        "record_id": {
+          "maxLength": 100,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$",
+          "title": "Record Id",
+          "type": "string"
+        },
+        "revision": {
+          "minimum": 1,
+          "title": "Revision",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "record_id",
+        "revision"
+      ],
+      "title": "VersionedReference",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "minLength": 1,
+      "title": "Name",
+      "type": "string"
+    },
+    "business_scope": {
+      "minLength": 1,
+      "title": "Business Scope",
+      "type": "string"
+    },
+    "crop_code": {
+      "const": "rice",
+      "title": "Crop Code",
+      "type": "string"
+    },
+    "analysis_period": {
+      "$ref": "#/$defs/DateRange"
+    },
+    "growth_stage": {
+      "$ref": "#/$defs/GrowthStageSelection"
+    },
+    "management_units": {
+      "items": {
+        "$ref": "#/$defs/VersionedReference"
+      },
+      "minItems": 1,
+      "title": "Management Units",
+      "type": "array"
+    },
+    "remote_sensing_result": {
+      "$ref": "#/$defs/VersionedReference"
+    },
+    "irrigation_quota_assignments": {
+      "items": {
+        "$ref": "#/$defs/VersionedReference"
+      },
+      "minItems": 1,
+      "title": "Irrigation Quota Assignments",
+      "type": "array"
+    },
+    "created_by": {
+      "minLength": 1,
+      "title": "Created By",
+      "type": "string"
+    }
+  },
+  "required": [
+    "name",
+    "business_scope",
+    "crop_code",
+    "analysis_period",
+    "growth_stage",
+    "management_units",
+    "remote_sensing_result",
+    "irrigation_quota_assignments",
+    "created_by"
+  ],
+  "title": "AnalysisTaskCreate",
+  "type": "object"
+}

@@ -1,0 +1,40 @@
+{
+  "task_id": "jiangxia-demo-2025-tillering",
+  "result_version": 2,
+  "parent_result_version": 1,
+  "business_scope": "江夏区水稻种植管理演示范围",
+  "crop_type": "rice",
+  "growth_stage": "tillering",
+  "irrigation_quota_m3_per_mu": 80.0,
+  "quota_source": "演示参数，正式应用前须由灌区管理人员确认",
+  "quality_statement": "低可信度：候选区来自2023年公开耕地弱参考；R05C04面积经过演示性人工复核。",
+  "feedback": {
+    "type": "area_correction",
+    "unit_id": "JX5K_R05C04",
+    "reason": "演示人工核查后排除部分非目标耕地",
+    "operator": "demo_manager"
+  },
+  "management_units": [
+    {
+      "unit_id": "JX5K_R03C06",
+      "unit_name": "江夏演示单元 R03C06",
+      "candidate_mask_path": "../oge-rice/data/raw/cropland_reference_2023/JX5K_R03C06/JX5K_R03C06_crop_weak_reference_2023.tif"
+    },
+    {
+      "unit_id": "JX5K_R05C04",
+      "unit_name": "江夏演示单元 R05C04",
+      "candidate_mask_path": "../oge-rice/data/raw/cropland_reference_2023/JX5K_R05C04/JX5K_R05C04_crop_weak_reference_2023.tif",
+      "area_override_m2": 16500000.0
+    },
+    {
+      "unit_id": "JX5K_R07C05",
+      "unit_name": "江夏演示单元 R07C05",
+      "candidate_mask_path": "../oge-rice/data/raw/cropland_reference_2023/JX5K_R07C05/JX5K_R07C05_crop_weak_reference_2023.tif"
+    },
+    {
+      "unit_id": "JX5K_R10C10",
+      "unit_name": "江夏演示单元 R10C10",
+      "candidate_mask_path": "../oge-rice/data/raw/cropland_reference_2023/JX5K_R10C10/JX5K_R10C10_crop_weak_reference_2023.tif"
+    }
+  ]
+}

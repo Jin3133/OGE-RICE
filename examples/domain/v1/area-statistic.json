@@ -1,0 +1,30 @@
+{
+  "statistic_id": "area.jx.zone.01.rs.2025.tillering.v1",
+  "management_unit": {
+    "record_id": "jx.zone.01",
+    "revision": 1
+  },
+  "remote_sensing_result": {
+    "record_id": "rs.jx.2025.tillering.v1",
+    "revision": 1
+  },
+  "candidate_area_m2": 8175000.0,
+  "valid_observation_area_m2": 25000000.0,
+  "method": "raster_mask_within_boundary",
+  "calculated_at": "2026-11-12T09:30:00+08:00",
+  "quality": {
+    "status": "illustrative",
+    "statement": "使用公开弱参考候选区统计，仅用于正式接口联调。",
+    "reviewed_by": null,
+    "reviewed_at": null
+  },
+  "version": {
+    "revision": 1,
+    "previous": null,
+    "status": "active",
+    "change_reason": "建立面积统计接口示例",
+    "changed_by": "team.example",
+    "changed_at": "2026-11-12T09:30:00+08:00",
+    "feedback_id": null
+  }
+}

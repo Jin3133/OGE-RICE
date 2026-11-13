@@ -1,0 +1,18 @@
+{
+  "management_units": [
+    "examples/domain/v1/irrigation-district.json",
+    "examples/domain/v1/management-unit.json"
+  ],
+  "remote_sensing_results": [
+    "examples/domain/v1/remote-sensing-result.json"
+  ],
+  "quota_definitions": [
+    "examples/domain/v1/irrigation-quota-definition.json"
+  ],
+  "quota_assignments": [
+    "examples/domain/v1/irrigation-quota-assignment.json"
+  ],
+  "area_statistics": [
+    "examples/domain/v1/area-statistic.json"
+  ]
+}

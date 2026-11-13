@@ -1,0 +1,156 @@
+{
+  "$defs": {
+    "DateRange": {
+      "additionalProperties": false,
+      "properties": {
+        "start_date": {
+          "format": "date",
+          "title": "Start Date",
+          "type": "string"
+        },
+        "end_date": {
+          "format": "date",
+          "title": "End Date",
+          "type": "string"
+        }
+      },
+      "required": [
+        "start_date",
+        "end_date"
+      ],
+      "title": "DateRange",
+      "type": "object"
+    },
+    "RecordStatus": {
+      "enum": [
+        "draft",
+        "active",
+        "superseded",
+        "withdrawn"
+      ],
+      "title": "RecordStatus",
+      "type": "string"
+    },
+    "VersionInfo": {
+      "additionalProperties": false,
+      "properties": {
+        "revision": {
+          "minimum": 1,
+          "title": "Revision",
+          "type": "integer"
+        },
+        "previous": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/VersionedReference"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "status": {
+          "$ref": "#/$defs/RecordStatus"
+        },
+        "change_reason": {
+          "minLength": 1,
+          "title": "Change Reason",
+          "type": "string"
+        },
+        "changed_by": {
+          "minLength": 1,
+          "title": "Changed By",
+          "type": "string"
+        },
+        "changed_at": {
+          "format": "date-time",
+          "title": "Changed At",
+          "type": "string"
+        },
+        "feedback_id": {
+          "anyOf": [
+            {
+              "maxLength": 100,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Feedback Id"
+        }
+      },
+      "required": [
+        "revision",
+        "status",
+        "change_reason",
+        "changed_by",
+        "changed_at"
+      ],
+      "title": "VersionInfo",
+      "type": "object"
+    },
+    "VersionedReference": {
+      "additionalProperties": false,
+      "properties": {
+        "record_id": {
+          "maxLength": 100,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$",
+          "title": "Record Id",
+          "type": "string"
+        },
+        "revision": {
+          "minimum": 1,
+          "title": "Revision",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "record_id",
+        "revision"
+      ],
+      "title": "VersionedReference",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "assignment_id": {
+      "maxLength": 100,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$",
+      "title": "Assignment Id",
+      "type": "string"
+    },
+    "management_unit_id": {
+      "maxLength": 100,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$",
+      "title": "Management Unit Id",
+      "type": "string"
+    },
+    "quota": {
+      "$ref": "#/$defs/VersionedReference"
+    },
+    "valid_period": {
+      "$ref": "#/$defs/DateRange"
+    },
+    "version": {
+      "$ref": "#/$defs/VersionInfo"
+    }
+  },
+  "required": [
+    "assignment_id",
+    "management_unit_id",
+    "quota",
+    "valid_period",
+    "version"
+  ],
+  "title": "IrrigationQuotaAssignment",
+  "type": "object"
+}

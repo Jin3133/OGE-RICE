@@ -1,0 +1,45 @@
+{
+  "unit_id": "jx.district",
+  "name": "江夏示例灌区",
+  "unit_type": "irrigation_district",
+  "boundary": {
+    "asset_id": "asset.jx.district.boundary.v1",
+    "href": "data/management-units/jx-district.geojson",
+    "media_type": "application/geo+json",
+    "roles": ["boundary"],
+    "crs": "EPSG:4326",
+    "checksum_sha256": null,
+    "created_at": "2026-11-12T08:00:00+08:00",
+    "source": {
+      "title": "项目示例灌区边界",
+      "publisher": "禾灌智析团队",
+      "url": null,
+      "publication_year": 2026,
+      "retrieved_at": "2026-11-12"
+    }
+  },
+  "valid_period": {
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31"
+  },
+  "root_district": {
+    "record_id": "jx.district",
+    "revision": 1
+  },
+  "parent": null,
+  "quality": {
+    "status": "illustrative",
+    "statement": "仅用于接口校验，不代表正式灌区边界。",
+    "reviewed_by": null,
+    "reviewed_at": null
+  },
+  "version": {
+    "revision": 1,
+    "previous": null,
+    "status": "active",
+    "change_reason": "建立接口示例",
+    "changed_by": "team.example",
+    "changed_at": "2026-11-12T08:00:00+08:00",
+    "feedback_id": null
+  }
+}

@@ -1,0 +1,198 @@
+{
+  "version": "v1",
+  "label_semantics": "2023 annual crops weak reference",
+  "input_band_order": [
+    "B02",
+    "B03",
+    "B04"
+  ],
+  "split_strategy": "spatial separation by 5 km grid",
+  "splits": {
+    "train": [
+      {
+        "sample_id": "JX5K_R03C06_20250418",
+        "grid_id": "JX5K_R03C06",
+        "date": "20250418",
+        "image": "/Users/j/Documents/科研/oge/oge-rice/data/raw/sentinel2_demo_ms4/JX5K_R03C06/JX5K_R03C06_20250418_MS4.tif",
+        "mask": "/Users/j/Documents/科研/oge/oge-rice/data/raw/cropland_reference_2023/JX5K_R03C06/JX5K_R03C06_crop_weak_reference_2023.tif",
+        "valid_mask": "/Users/j/Documents/科研/oge/oge-rice/data/raw/sentinel2_demo_ms4/JX5K_R03C06/JX5K_R03C06_20250418_CLEAR10m.tif",
+        "label_quality": "weak_reference_2023"
+      },
+      {
+        "sample_id": "JX5K_R03C06_20250614",
+        "grid_id": "JX5K_R03C06",
+        "date": "20250614",
+        "image": "/Users/j/Documents/科研/oge/oge-rice/data/raw/sentinel2_demo_ms4/JX5K_R03C06/JX5K_R03C06_20250614_MS4.tif",
+        "mask": "/Users/j/Documents/科研/oge/oge-rice/data/raw/cropland_reference_2023/JX5K_R03C06/JX5K_R03C06_crop_weak_reference_2023.tif",
+        "valid_mask": "/Users/j/Documents/科研/oge/oge-rice/data/raw/sentinel2_demo_ms4/JX5K_R03C06/JX5K_R03C06_20250614_CLEAR10m.tif",
+        "label_quality": "weak_reference_2023"
+      },
+      {
+        "sample_id": "JX5K_R03C06_20250707",
+        "grid_id": "JX5K_R03C06",
+        "date": "20250707",
+        "image": "/Users/j/Documents/科研/oge/oge-rice/data/raw/sentinel2_demo_ms4/JX5K_R03C06/JX5K_R03C06_20250707_MS4.tif",
+        "mask": "/Users/j/Documents/科研/oge/oge-rice/data/raw/cropland_reference_2023/JX5K_R03C06/JX5K_R03C06_crop_weak_reference_2023.tif",
+        "valid_mask": "/Users/j/Documents/科研/oge/oge-rice/data/raw/sentinel2_demo_ms4/JX5K_R03C06/JX5K_R03C06_20250707_CLEAR10m.tif",
+        "label_quality": "weak_reference_2023"
+      },
+      {
+        "sample_id": "JX5K_R03C06_20250816",
+        "grid_id": "JX5K_R03C06",
+        "date": "20250816",
+        "image": "/Users/j/Documents/科研/oge/oge-rice/data/raw/sentinel2_demo_ms4/JX5K_R03C06/JX5K_R03C06_20250816_MS4.tif",
+        "mask": "/Users/j/Documents/科研/oge/oge-rice/data/raw/cropland_reference_2023/JX5K_R03C06/JX5K_R03C06_crop_weak_reference_2023.tif",
+        "valid_mask": "/Users/j/Documents/科研/oge/oge-rice/data/raw/sentinel2_demo_ms4/JX5K_R03C06/JX5K_R03C06_20250816_CLEAR10m.tif",
+        "label_quality": "weak_reference_2023"
+      },
+      {
+        "sample_id": "JX5K_R03C06_20251005",
+        "grid_id": "JX5K_R03C06",
+        "date": "20251005",
+        "image": "/Users/j/Documents/科研/oge/oge-rice/data/raw/sentinel2_demo_ms4/JX5K_R03C06/JX5K_R03C06_20251005_MS4.tif",
+        "mask": "/Users/j/Documents/科研/oge/oge-rice/data/raw/cropland_reference_2023/JX5K_R03C06/JX5K_R03C06_crop_weak_reference_2023.tif",
+        "valid_mask": "/Users/j/Documents/科研/oge/oge-rice/data/raw/sentinel2_demo_ms4/JX5K_R03C06/JX5K_R03C06_20251005_CLEAR10m.tif",
+        "label_quality": "weak_reference_2023"
+      },
+      {
+        "sample_id": "JX5K_R05C04_20250418",
+        "grid_id": "JX5K_R05C04",
+        "date": "20250418",
+        "image": "/Users/j/Documents/科研/oge/oge-rice/data/raw/sentinel2_demo_ms4/JX5K_R05C04/JX5K_R05C04_20250418_MS4.tif",
+        "mask": "/Users/j/Documents/科研/oge/oge-rice/data/raw/cropland_reference_2023/JX5K_R05C04/JX5K_R05C04_crop_weak_reference_2023.tif",
+        "valid_mask": "/Users/j/Documents/科研/oge/oge-rice/data/raw/sentinel2_demo_ms4/JX5K_R05C04/JX5K_R05C04_20250418_CLEAR10m.tif",
+        "label_quality": "weak_reference_2023"
+      },
+      {
+        "sample_id": "JX5K_R05C04_20250614",
+        "grid_id": "JX5K_R05C04",
+        "date": "20250614",
+        "image": "/Users/j/Documents/科研/oge/oge-rice/data/raw/sentinel2_demo_ms4/JX5K_R05C04/JX5K_R05C04_20250614_MS4.tif",
+        "mask": "/Users/j/Documents/科研/oge/oge-rice/data/raw/cropland_reference_2023/JX5K_R05C04/JX5K_R05C04_crop_weak_reference_2023.tif",
+        "valid_mask": "/Users/j/Documents/科研/oge/oge-rice/data/raw/sentinel2_demo_ms4/JX5K_R05C04/JX5K_R05C04_20250614_CLEAR10m.tif",
+        "label_quality": "weak_reference_2023"
+      },
+      {
+        "sample_id": "JX5K_R05C04_20250707",
+        "grid_id": "JX5K_R05C04",
+        "date": "20250707",
+        "image": "/Users/j/Documents/科研/oge/oge-rice/data/raw/sentinel2_demo_ms4/JX5K_R05C04/JX5K_R05C04_20250707_MS4.tif",
+        "mask": "/Users/j/Documents/科研/oge/oge-rice/data/raw/cropland_reference_2023/JX5K_R05C04/JX5K_R05C04_crop_weak_reference_2023.tif",
+        "valid_mask": "/Users/j/Documents/科研/oge/oge-rice/data/raw/sentinel2_demo_ms4/JX5K_R05C04/JX5K_R05C04_20250707_CLEAR10m.tif",
+        "label_quality": "weak_reference_2023"
+      },
+      {
+        "sample_id": "JX5K_R05C04_20250816",
+        "grid_id": "JX5K_R05C04",
+        "date": "20250816",
+        "image": "/Users/j/Documents/科研/oge/oge-rice/data/raw/sentinel2_demo_ms4/JX5K_R05C04/JX5K_R05C04_20250816_MS4.tif",
+        "mask": "/Users/j/Documents/科研/oge/oge-rice/data/raw/cropland_reference_2023/JX5K_R05C04/JX5K_R05C04_crop_weak_reference_2023.tif",
+        "valid_mask": "/Users/j/Documents/科研/oge/oge-rice/data/raw/sentinel2_demo_ms4/JX5K_R05C04/JX5K_R05C04_20250816_CLEAR10m.tif",
+        "label_quality": "weak_reference_2023"
+      },
+      {
+        "sample_id": "JX5K_R05C04_20251005",
+        "grid_id": "JX5K_R05C04",
+        "date": "20251005",
+        "image": "/Users/j/Documents/科研/oge/oge-rice/data/raw/sentinel2_demo_ms4/JX5K_R05C04/JX5K_R05C04_20251005_MS4.tif",
+        "mask": "/Users/j/Documents/科研/oge/oge-rice/data/raw/cropland_reference_2023/JX5K_R05C04/JX5K_R05C04_crop_weak_reference_2023.tif",
+        "valid_mask": "/Users/j/Documents/科研/oge/oge-rice/data/raw/sentinel2_demo_ms4/JX5K_R05C04/JX5K_R05C04_20251005_CLEAR10m.tif",
+        "label_quality": "weak_reference_2023"
+      }
+    ],
+    "validation": [
+      {
+        "sample_id": "JX5K_R10C10_20250418",
+        "grid_id": "JX5K_R10C10",
+        "date": "20250418",
+        "image": "/Users/j/Documents/科研/oge/oge-rice/data/raw/sentinel2_demo_ms4/JX5K_R10C10/JX5K_R10C10_20250418_MS4.tif",
+        "mask": "/Users/j/Documents/科研/oge/oge-rice/data/raw/cropland_reference_2023/JX5K_R10C10/JX5K_R10C10_crop_weak_reference_2023.tif",
+        "valid_mask": "/Users/j/Documents/科研/oge/oge-rice/data/raw/sentinel2_demo_ms4/JX5K_R10C10/JX5K_R10C10_20250418_CLEAR10m.tif",
+        "label_quality": "weak_reference_2023"
+      },
+      {
+        "sample_id": "JX5K_R10C10_20250614",
+        "grid_id": "JX5K_R10C10",
+        "date": "20250614",
+        "image": "/Users/j/Documents/科研/oge/oge-rice/data/raw/sentinel2_demo_ms4/JX5K_R10C10/JX5K_R10C10_20250614_MS4.tif",
+        "mask": "/Users/j/Documents/科研/oge/oge-rice/data/raw/cropland_reference_2023/JX5K_R10C10/JX5K_R10C10_crop_weak_reference_2023.tif",
+        "valid_mask": "/Users/j/Documents/科研/oge/oge-rice/data/raw/sentinel2_demo_ms4/JX5K_R10C10/JX5K_R10C10_20250614_CLEAR10m.tif",
+        "label_quality": "weak_reference_2023"
+      },
+      {
+        "sample_id": "JX5K_R10C10_20250707",
+        "grid_id": "JX5K_R10C10",
+        "date": "20250707",
+        "image": "/Users/j/Documents/科研/oge/oge-rice/data/raw/sentinel2_demo_ms4/JX5K_R10C10/JX5K_R10C10_20250707_MS4.tif",
+        "mask": "/Users/j/Documents/科研/oge/oge-rice/data/raw/cropland_reference_2023/JX5K_R10C10/JX5K_R10C10_crop_weak_reference_2023.tif",
+        "valid_mask": "/Users/j/Documents/科研/oge/oge-rice/data/raw/sentinel2_demo_ms4/JX5K_R10C10/JX5K_R10C10_20250707_CLEAR10m.tif",
+        "label_quality": "weak_reference_2023"
+      },
+      {
+        "sample_id": "JX5K_R10C10_20250816",
+        "grid_id": "JX5K_R10C10",
+        "date": "20250816",
+        "image": "/Users/j/Documents/科研/oge/oge-rice/data/raw/sentinel2_demo_ms4/JX5K_R10C10/JX5K_R10C10_20250816_MS4.tif",
+        "mask": "/Users/j/Documents/科研/oge/oge-rice/data/raw/cropland_reference_2023/JX5K_R10C10/JX5K_R10C10_crop_weak_reference_2023.tif",
+        "valid_mask": "/Users/j/Documents/科研/oge/oge-rice/data/raw/sentinel2_demo_ms4/JX5K_R10C10/JX5K_R10C10_20250816_CLEAR10m.tif",
+        "label_quality": "weak_reference_2023"
+      },
+      {
+        "sample_id": "JX5K_R10C10_20251005",
+        "grid_id": "JX5K_R10C10",
+        "date": "20251005",
+        "image": "/Users/j/Documents/科研/oge/oge-rice/data/raw/sentinel2_demo_ms4/JX5K_R10C10/JX5K_R10C10_20251005_MS4.tif",
+        "mask": "/Users/j/Documents/科研/oge/oge-rice/data/raw/cropland_reference_2023/JX5K_R10C10/JX5K_R10C10_crop_weak_reference_2023.tif",
+        "valid_mask": "/Users/j/Documents/科研/oge/oge-rice/data/raw/sentinel2_demo_ms4/JX5K_R10C10/JX5K_R10C10_20251005_CLEAR10m.tif",
+        "label_quality": "weak_reference_2023"
+      }
+    ],
+    "test": [
+      {
+        "sample_id": "JX5K_R07C05_20250418",
+        "grid_id": "JX5K_R07C05",
+        "date": "20250418",
+        "image": "/Users/j/Documents/科研/oge/oge-rice/data/raw/sentinel2_demo_ms4/JX5K_R07C05/JX5K_R07C05_20250418_MS4.tif",
+        "mask": "/Users/j/Documents/科研/oge/oge-rice/data/raw/cropland_reference_2023/JX5K_R07C05/JX5K_R07C05_crop_weak_reference_2023.tif",
+        "valid_mask": "/Users/j/Documents/科研/oge/oge-rice/data/raw/sentinel2_demo_ms4/JX5K_R07C05/JX5K_R07C05_20250418_CLEAR10m.tif",
+        "label_quality": "weak_reference_2023"
+      },
+      {
+        "sample_id": "JX5K_R07C05_20250614",
+        "grid_id": "JX5K_R07C05",
+        "date": "20250614",
+        "image": "/Users/j/Documents/科研/oge/oge-rice/data/raw/sentinel2_demo_ms4/JX5K_R07C05/JX5K_R07C05_20250614_MS4.tif",
+        "mask": "/Users/j/Documents/科研/oge/oge-rice/data/raw/cropland_reference_2023/JX5K_R07C05/JX5K_R07C05_crop_weak_reference_2023.tif",
+        "valid_mask": "/Users/j/Documents/科研/oge/oge-rice/data/raw/sentinel2_demo_ms4/JX5K_R07C05/JX5K_R07C05_20250614_CLEAR10m.tif",
+        "label_quality": "weak_reference_2023"
+      },
+      {
+        "sample_id": "JX5K_R07C05_20250707",
+        "grid_id": "JX5K_R07C05",
+        "date": "20250707",
+        "image": "/Users/j/Documents/科研/oge/oge-rice/data/raw/sentinel2_demo_ms4/JX5K_R07C05/JX5K_R07C05_20250707_MS4.tif",
+        "mask": "/Users/j/Documents/科研/oge/oge-rice/data/raw/cropland_reference_2023/JX5K_R07C05/JX5K_R07C05_crop_weak_reference_2023.tif",
+        "valid_mask": "/Users/j/Documents/科研/oge/oge-rice/data/raw/sentinel2_demo_ms4/JX5K_R07C05/JX5K_R07C05_20250707_CLEAR10m.tif",
+        "label_quality": "weak_reference_2023"
+      },
+      {
+        "sample_id": "JX5K_R07C05_20250816",
+        "grid_id": "JX5K_R07C05",
+        "date": "20250816",
+        "image": "/Users/j/Documents/科研/oge/oge-rice/data/raw/sentinel2_demo_ms4/JX5K_R07C05/JX5K_R07C05_20250816_MS4.tif",
+        "mask": "/Users/j/Documents/科研/oge/oge-rice/data/raw/cropland_reference_2023/JX5K_R07C05/JX5K_R07C05_crop_weak_reference_2023.tif",
+        "valid_mask": "/Users/j/Documents/科研/oge/oge-rice/data/raw/sentinel2_demo_ms4/JX5K_R07C05/JX5K_R07C05_20250816_CLEAR10m.tif",
+        "label_quality": "weak_reference_2023"
+      },
+      {
+        "sample_id": "JX5K_R07C05_20251005",
+        "grid_id": "JX5K_R07C05",
+        "date": "20251005",
+        "image": "/Users/j/Documents/科研/oge/oge-rice/data/raw/sentinel2_demo_ms4/JX5K_R07C05/JX5K_R07C05_20251005_MS4.tif",
+        "mask": "/Users/j/Documents/科研/oge/oge-rice/data/raw/cropland_reference_2023/JX5K_R07C05/JX5K_R07C05_crop_weak_reference_2023.tif",
+        "valid_mask": "/Users/j/Documents/科研/oge/oge-rice/data/raw/sentinel2_demo_ms4/JX5K_R07C05/JX5K_R07C05_20251005_CLEAR10m.tif",
+        "label_quality": "weak_reference_2023"
+      }
+    ]
+  }
+}

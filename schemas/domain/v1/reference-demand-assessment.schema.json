@@ -1,0 +1,177 @@
+{
+  "$defs": {
+    "DemandInputSnapshot": {
+      "additionalProperties": false,
+      "properties": {
+        "management_unit": {
+          "$ref": "#/$defs/VersionedReference"
+        },
+        "remote_sensing_result": {
+          "$ref": "#/$defs/VersionedReference"
+        },
+        "area_statistic": {
+          "$ref": "#/$defs/VersionedReference"
+        },
+        "quota_assignment": {
+          "$ref": "#/$defs/VersionedReference"
+        },
+        "quota_definition": {
+          "$ref": "#/$defs/VersionedReference"
+        },
+        "stage_code": {
+          "maxLength": 100,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$",
+          "title": "Stage Code",
+          "type": "string"
+        },
+        "candidate_area_m2": {
+          "minimum": 0,
+          "title": "Candidate Area M2",
+          "type": "number"
+        },
+        "candidate_area_mu": {
+          "minimum": 0,
+          "title": "Candidate Area Mu",
+          "type": "number"
+        },
+        "quota_m3_per_mu": {
+          "exclusiveMinimum": 0,
+          "title": "Quota M3 Per Mu",
+          "type": "number"
+        }
+      },
+      "required": [
+        "management_unit",
+        "remote_sensing_result",
+        "area_statistic",
+        "quota_assignment",
+        "quota_definition",
+        "stage_code",
+        "candidate_area_m2",
+        "candidate_area_mu",
+        "quota_m3_per_mu"
+      ],
+      "title": "DemandInputSnapshot",
+      "type": "object"
+    },
+    "UnitDemandResult": {
+      "additionalProperties": false,
+      "properties": {
+        "unit_id": {
+          "maxLength": 100,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$",
+          "title": "Unit Id",
+          "type": "string"
+        },
+        "input_snapshot": {
+          "$ref": "#/$defs/DemandInputSnapshot"
+        },
+        "reference_irrigation_demand_m3": {
+          "minimum": 0,
+          "title": "Reference Irrigation Demand M3",
+          "type": "number"
+        }
+      },
+      "required": [
+        "unit_id",
+        "input_snapshot",
+        "reference_irrigation_demand_m3"
+      ],
+      "title": "UnitDemandResult",
+      "type": "object"
+    },
+    "VersionedReference": {
+      "additionalProperties": false,
+      "properties": {
+        "record_id": {
+          "maxLength": 100,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$",
+          "title": "Record Id",
+          "type": "string"
+        },
+        "revision": {
+          "minimum": 1,
+          "title": "Revision",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "record_id",
+        "revision"
+      ],
+      "title": "VersionedReference",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "assessment_id": {
+      "maxLength": 100,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$",
+      "title": "Assessment Id",
+      "type": "string"
+    },
+    "task": {
+      "$ref": "#/$defs/VersionedReference"
+    },
+    "generated_at": {
+      "format": "date-time",
+      "title": "Generated At",
+      "type": "string"
+    },
+    "formula": {
+      "const": "W_m3 = A_mu * M_m3_per_mu",
+      "title": "Formula",
+      "type": "string"
+    },
+    "unit_results": {
+      "items": {
+        "$ref": "#/$defs/UnitDemandResult"
+      },
+      "minItems": 1,
+      "title": "Unit Results",
+      "type": "array"
+    },
+    "total_candidate_area_m2": {
+      "minimum": 0,
+      "title": "Total Candidate Area M2",
+      "type": "number"
+    },
+    "total_candidate_area_mu": {
+      "minimum": 0,
+      "title": "Total Candidate Area Mu",
+      "type": "number"
+    },
+    "total_reference_irrigation_demand_m3": {
+      "minimum": 0,
+      "title": "Total Reference Irrigation Demand M3",
+      "type": "number"
+    },
+    "limitations": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "assessment_id",
+    "task",
+    "generated_at",
+    "formula",
+    "unit_results",
+    "total_candidate_area_m2",
+    "total_candidate_area_mu",
+    "total_reference_irrigation_demand_m3",
+    "limitations"
+  ],
+  "title": "ReferenceDemandAssessment",
+  "type": "object"
+}

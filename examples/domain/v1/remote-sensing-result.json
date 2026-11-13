@@ -1,0 +1,43 @@
+{
+  "result_id": "rs.jx.2025.tillering.v1",
+  "target": "cultivated_land_candidate",
+  "management_unit_ids": ["jx.zone.01"],
+  "observation_period": {
+    "start_date": "2025-06-01",
+    "end_date": "2025-06-30"
+  },
+  "mask_asset": {
+    "asset_id": "asset.rs.jx.2025.tillering.mask.v1",
+    "href": "outputs/remote-sensing/jx-2025-tillering-mask.tif",
+    "media_type": "image/tiff; application=geotiff",
+    "roles": ["mask", "data"],
+    "crs": "EPSG:32650",
+    "checksum_sha256": null,
+    "created_at": "2026-11-12T09:00:00+08:00",
+    "source": {
+      "title": "Sentinel-2耕地候选区试验成果",
+      "publisher": "禾灌智析团队",
+      "url": null,
+      "publication_year": 2026,
+      "retrieved_at": "2026-11-12"
+    }
+  },
+  "model_name": "DeepLabV3Plus",
+  "model_version": "sentinel-weak-v1",
+  "produced_at": "2026-11-12T09:00:00+08:00",
+  "quality": {
+    "status": "illustrative",
+    "statement": "使用公开弱参考训练，仅用于接口和流程验证。",
+    "reviewed_by": null,
+    "reviewed_at": null
+  },
+  "version": {
+    "revision": 1,
+    "previous": null,
+    "status": "active",
+    "change_reason": "建立遥感试验成果",
+    "changed_by": "team.example",
+    "changed_at": "2026-11-12T09:00:00+08:00",
+    "feedback_id": null
+  }
+}

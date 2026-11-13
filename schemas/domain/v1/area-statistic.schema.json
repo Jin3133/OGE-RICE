@@ -1,0 +1,209 @@
+{
+  "$defs": {
+    "DataQuality": {
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "$ref": "#/$defs/DataQualityStatus"
+        },
+        "statement": {
+          "minLength": 1,
+          "title": "Statement",
+          "type": "string"
+        },
+        "reviewed_by": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reviewed By"
+        },
+        "reviewed_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reviewed At"
+        }
+      },
+      "required": [
+        "status",
+        "statement"
+      ],
+      "title": "DataQuality",
+      "type": "object"
+    },
+    "DataQualityStatus": {
+      "enum": [
+        "illustrative",
+        "unverified",
+        "verified"
+      ],
+      "title": "DataQualityStatus",
+      "type": "string"
+    },
+    "RecordStatus": {
+      "enum": [
+        "draft",
+        "active",
+        "superseded",
+        "withdrawn"
+      ],
+      "title": "RecordStatus",
+      "type": "string"
+    },
+    "VersionInfo": {
+      "additionalProperties": false,
+      "properties": {
+        "revision": {
+          "minimum": 1,
+          "title": "Revision",
+          "type": "integer"
+        },
+        "previous": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/VersionedReference"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "status": {
+          "$ref": "#/$defs/RecordStatus"
+        },
+        "change_reason": {
+          "minLength": 1,
+          "title": "Change Reason",
+          "type": "string"
+        },
+        "changed_by": {
+          "minLength": 1,
+          "title": "Changed By",
+          "type": "string"
+        },
+        "changed_at": {
+          "format": "date-time",
+          "title": "Changed At",
+          "type": "string"
+        },
+        "feedback_id": {
+          "anyOf": [
+            {
+              "maxLength": 100,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Feedback Id"
+        }
+      },
+      "required": [
+        "revision",
+        "status",
+        "change_reason",
+        "changed_by",
+        "changed_at"
+      ],
+      "title": "VersionInfo",
+      "type": "object"
+    },
+    "VersionedReference": {
+      "additionalProperties": false,
+      "properties": {
+        "record_id": {
+          "maxLength": 100,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$",
+          "title": "Record Id",
+          "type": "string"
+        },
+        "revision": {
+          "minimum": 1,
+          "title": "Revision",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "record_id",
+        "revision"
+      ],
+      "title": "VersionedReference",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "statistic_id": {
+      "maxLength": 100,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$",
+      "title": "Statistic Id",
+      "type": "string"
+    },
+    "management_unit": {
+      "$ref": "#/$defs/VersionedReference"
+    },
+    "remote_sensing_result": {
+      "$ref": "#/$defs/VersionedReference"
+    },
+    "candidate_area_m2": {
+      "minimum": 0,
+      "title": "Candidate Area M2",
+      "type": "number"
+    },
+    "valid_observation_area_m2": {
+      "exclusiveMinimum": 0,
+      "title": "Valid Observation Area M2",
+      "type": "number"
+    },
+    "method": {
+      "const": "raster_mask_within_boundary",
+      "title": "Method",
+      "type": "string"
+    },
+    "calculated_at": {
+      "format": "date-time",
+      "title": "Calculated At",
+      "type": "string"
+    },
+    "quality": {
+      "$ref": "#/$defs/DataQuality"
+    },
+    "version": {
+      "$ref": "#/$defs/VersionInfo"
+    }
+  },
+  "required": [
+    "statistic_id",
+    "management_unit",
+    "remote_sensing_result",
+    "candidate_area_m2",
+    "valid_observation_area_m2",
+    "method",
+    "calculated_at",
+    "quality",
+    "version"
+  ],
+  "title": "AreaStatistic",
+  "type": "object"
+}

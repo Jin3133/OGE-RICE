@@ -1,0 +1,21 @@
+{
+  "assignment_id": "quota-assignment.jx.zone.01.tillering.example",
+  "management_unit_id": "jx.zone.01",
+  "quota": {
+    "record_id": "quota.jx.rice.tillering.example",
+    "revision": 1
+  },
+  "valid_period": {
+    "start_date": "2025-06-01",
+    "end_date": "2025-06-30"
+  },
+  "version": {
+    "revision": 1,
+    "previous": null,
+    "status": "active",
+    "change_reason": "为示例管理单元关联定额",
+    "changed_by": "team.example",
+    "changed_at": "2026-11-12T08:40:00+08:00",
+    "feedback_id": null
+  }
+}

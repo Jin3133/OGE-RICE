@@ -1,0 +1,13 @@
+{
+  "feedback_id": "feedback.jx.0001",
+  "task_id": "task.jx.2025.tillering.0001",
+  "base_revision": 1,
+  "target_type": "irrigation_quota",
+  "target_id": "quota.jx.rice.tillering.example",
+  "field_name": "value_m3_per_mu",
+  "previous_value": 80.0,
+  "proposed_value": 75.0,
+  "reason": "管理人员依据正式定额资料提交修正，待复核。",
+  "submitted_by": "manager.example",
+  "submitted_at": "2026-11-12T10:00:00+08:00"
+}
