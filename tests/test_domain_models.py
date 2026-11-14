@@ -68,6 +68,7 @@ def test_task_rejects_duplicate_units_and_unknown_fields() -> None:
     values = {
         "name": "江夏分蘖期分析",
         "business_scope": "江夏水稻管理范围",
+        "result_mode": "illustrative",
         "crop_code": "rice",
         "analysis_period": period("2025-06-01", "2025-06-30"),
         "growth_stage": automatic_stage(),
@@ -76,6 +77,9 @@ def test_task_rejects_duplicate_units_and_unknown_fields() -> None:
             {"record_id": "jx.zone.01", "revision": 1},
         ],
         "remote_sensing_result": {"record_id": "rs.jx.2025.01", "revision": 1},
+        "area_statistics": [
+            {"record_id": "area.jx.zone.01.rs.2025.01", "revision": 1}
+        ],
         "irrigation_quota_assignments": [
             {"record_id": "assignment.jx.01", "revision": 1}
         ],
@@ -86,6 +90,24 @@ def test_task_rejects_duplicate_units_and_unknown_fields() -> None:
     values["management_units"] = [{"record_id": "jx.zone.01", "revision": 1}]
     values["unexpected"] = True
     with pytest.raises(ValidationError, match="Extra inputs are not permitted"):
+        AnalysisTaskCreate.model_validate(values)
+
+
+def test_task_requires_one_explicit_area_version_per_unit() -> None:
+    values = json.loads(
+        Path("examples/domain/v1/analysis-task-create.json").read_text(encoding="utf-8")
+    )
+    values["area_statistics"] = []
+    with pytest.raises(ValidationError, match="at least 1 item"):
+        AnalysisTaskCreate.model_validate(values)
+
+
+def test_v1_task_rejects_unimplemented_formal_mode() -> None:
+    values = json.loads(
+        Path("examples/domain/v1/analysis-task-create.json").read_text(encoding="utf-8")
+    )
+    values["result_mode"] = "formal"
+    with pytest.raises(ValidationError, match="illustrative"):
         AnalysisTaskCreate.model_validate(values)
 
 

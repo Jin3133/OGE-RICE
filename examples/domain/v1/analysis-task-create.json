@@ -1,6 +1,7 @@
 {
   "name": "江夏示例管理单元分蘖期分析",
   "business_scope": "已知水稻管理范围内的耕地候选区面积与阶段参考需水分析",
+  "result_mode": "illustrative",
   "crop_code": "rice",
   "analysis_period": {
     "start_date": "2025-06-01",
@@ -28,6 +29,12 @@
     "record_id": "rs.jx.2025.tillering.v1",
     "revision": 1
   },
+  "area_statistics": [
+    {
+      "record_id": "area.jx.zone.01.rs.2025.tillering.v1",
+      "revision": 1
+    }
+  ],
   "irrigation_quota_assignments": [
     {
       "record_id": "quota-assignment.jx.zone.01.tillering.example",

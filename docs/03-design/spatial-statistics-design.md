@@ -36,7 +36,7 @@ python tools/run_spatial_statistics.py \
   --output outputs/spatial-statistics/area-statistic.json
 ```
 
-任务格式见`examples/spatial-statistics/v1/job.example.json`。其中示例路径只描述契约，运行前必须替换为实际文件。生成的面积记录可以直接加入领域仓储的`area_statistics`集合，再由`AssessmentService`匹配并计算参考需水。
+任务格式见`examples/spatial-statistics/v1/job.example.json`，对应Schema为`schemas/application/v1/spatial-statistics-job.schema.json`。其中示例路径只描述契约，运行前必须替换为实际文件。生成的面积记录可以直接加入领域仓储的`area_statistics`集合，再由`AssessmentService`匹配并计算参考需水。
 
 ## 已知边界
 

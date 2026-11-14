@@ -106,14 +106,29 @@ class AssessmentService:
             for assignment, definition in zip(assignments, definitions, strict=True)
         }
 
+        area_statistics = [
+            self.repository.get_area_statistic(reference)
+            for reference in task.area_statistics
+        ]
+        area_by_unit = {}
+        for area in area_statistics:
+            if area.management_unit.record_id in area_by_unit:
+                raise ValueError("each task unit requires exactly one area statistic")
+            if area.remote_sensing_result != task.remote_sensing_result:
+                raise ValueError(
+                    "area statistic remote-sensing result must match the task"
+                )
+            area_by_unit[area.management_unit.record_id] = area
+        if set(area_by_unit) != unit_ids or len(area_statistics) != len(unit_ids):
+            raise ValueError("each task unit requires exactly one area statistic")
+
         unit_results = []
         for unit_reference, unit in zip(task.management_units, units, strict=True):
             assignment = assignment_by_unit[unit.unit_id]
             definition = definition_by_assignment[assignment.assignment_id]
-            area = self.repository.find_area_statistic(
-                unit_reference, task.remote_sensing_result
-            )
-            _require_active(area, "area statistic")
+            area = area_by_unit[unit.unit_id]
+            if area.management_unit != unit_reference:
+                raise ValueError("area statistic management-unit version must match the task")
             area_mu = area.candidate_area_m2 / SQUARE_METRES_PER_MU
             demand = area_mu * definition.value_m3_per_mu
             unit_results.append(

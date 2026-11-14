@@ -39,6 +39,8 @@ class DomainRepository(Protocol):
         self, reference: VersionedReference
     ) -> IrrigationQuotaAssignment: ...
 
+    def get_area_statistic(self, reference: VersionedReference) -> AreaStatistic: ...
+
     def find_area_statistic(
         self,
         management_unit: VersionedReference,
@@ -105,6 +107,9 @@ class InMemoryDomainRepository:
         self, reference: VersionedReference
     ) -> IrrigationQuotaAssignment:
         return self._get(self.quota_assignments, reference, "quota assignment")
+
+    def get_area_statistic(self, reference: VersionedReference) -> AreaStatistic:
+        return self._get(self.area_statistics, reference, "area statistic")
 
     def find_area_statistic(
         self,

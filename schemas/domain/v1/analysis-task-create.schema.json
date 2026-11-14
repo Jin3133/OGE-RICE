@@ -131,6 +131,11 @@
       "title": "Business Scope",
       "type": "string"
     },
+    "result_mode": {
+      "const": "illustrative",
+      "title": "Result Mode",
+      "type": "string"
+    },
     "crop_code": {
       "const": "rice",
       "title": "Crop Code",
@@ -153,6 +158,14 @@
     "remote_sensing_result": {
       "$ref": "#/$defs/VersionedReference"
     },
+    "area_statistics": {
+      "items": {
+        "$ref": "#/$defs/VersionedReference"
+      },
+      "minItems": 1,
+      "title": "Area Statistics",
+      "type": "array"
+    },
     "irrigation_quota_assignments": {
       "items": {
         "$ref": "#/$defs/VersionedReference"
@@ -170,11 +183,13 @@
   "required": [
     "name",
     "business_scope",
+    "result_mode",
     "crop_code",
     "analysis_period",
     "growth_stage",
     "management_units",
     "remote_sensing_result",
+    "area_statistics",
     "irrigation_quota_assignments",
     "created_by"
   ],

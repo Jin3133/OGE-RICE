@@ -83,3 +83,51 @@ def test_draft_quota_is_not_used_for_calculation() -> None:
             load("analysis-task.json", AnalysisTask),
             assessment_id="assessment.draft-quota",
         )
+
+
+def test_task_replay_uses_explicit_superseded_area_version() -> None:
+    repo = repository()
+    original = next(iter(repo.area_statistics.values()))
+    superseded = original.model_copy(
+        update={
+            "version": original.version.model_copy(update={"status": "superseded"})
+        }
+    )
+    newer = original.model_copy(
+        update={
+            "statistic_id": "area.jx.zone.01.rs.2025.tillering.v2",
+            "candidate_area_m2": 1_000_000,
+        }
+    )
+    repo.area_statistics = {
+        (superseded.statistic_id, superseded.version.revision): superseded,
+        (newer.statistic_id, newer.version.revision): newer,
+    }
+
+    result = AssessmentService(repo).calculate(
+        load("analysis-task.json", AnalysisTask),
+        assessment_id="assessment.historical-replay",
+    )
+
+    assert result.total_candidate_area_m2 == 8_175_000
+
+
+def test_task_rejects_area_from_another_remote_result() -> None:
+    repo = repository()
+    area = next(iter(repo.area_statistics.values()))
+    mismatched = area.model_copy(
+        update={
+            "remote_sensing_result": {
+                "record_id": "rs.other",
+                "revision": 1,
+            }
+        }
+    )
+    repo.area_statistics = {
+        (mismatched.statistic_id, mismatched.version.revision): mismatched
+    }
+    with pytest.raises(ValueError, match="must match the task"):
+        AssessmentService(repo).calculate(
+            load("analysis-task.json", AnalysisTask),
+            assessment_id="assessment.mismatched-area",
+        )

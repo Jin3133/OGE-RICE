@@ -181,7 +181,7 @@ def test_generated_area_statistic_feeds_formal_assessment(tmp_path: Path) -> Non
     write_boundary(tmp_path / "boundary.geojson")
     spatial_command = command(tmp_path)
     spatial_command = SpatialStatisticsCommand(
-        statistic_id=spatial_command.statistic_id,
+        statistic_id="area.jx.zone.01.rs.2025.tillering.v1",
         management_unit=VersionedReference(record_id="jx.zone.01", revision=1),
         remote_sensing_result=VersionedReference(
             record_id="rs.jx.2025.tillering.v1", revision=1

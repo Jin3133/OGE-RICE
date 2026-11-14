@@ -262,11 +262,13 @@ class RemoteSensingResult(StrictModel):
 class AnalysisTaskCreate(StrictModel):
     name: NonEmptyText
     business_scope: NonEmptyText
+    result_mode: Literal["illustrative"]
     crop_code: Literal["rice"]
     analysis_period: DateRange
     growth_stage: GrowthStageSelection
     management_units: list[VersionedReference] = Field(min_length=1)
     remote_sensing_result: VersionedReference
+    area_statistics: list[VersionedReference] = Field(min_length=1)
     irrigation_quota_assignments: list[VersionedReference] = Field(min_length=1)
     created_by: NonEmptyText
 
@@ -275,6 +277,11 @@ class AnalysisTaskCreate(StrictModel):
         unit_keys = {(item.record_id, item.revision) for item in self.management_units}
         if len(self.management_units) != len(unit_keys):
             raise ValueError("management unit references must not contain duplicates")
+        area_keys = {(item.record_id, item.revision) for item in self.area_statistics}
+        if len(self.area_statistics) != len(area_keys):
+            raise ValueError("area statistic references must not contain duplicates")
+        if len(self.area_statistics) != len(self.management_units):
+            raise ValueError("each management unit requires exactly one area statistic")
         assignment_keys = {
             (item.record_id, item.revision)
             for item in self.irrigation_quota_assignments
