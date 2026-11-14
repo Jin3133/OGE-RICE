@@ -1,0 +1,30 @@
+{
+  "statistic_id": "area.jx.zone.01.rs.2025.tillering.v1",
+  "management_unit": {
+    "record_id": "jx.zone.01",
+    "revision": 1
+  },
+  "remote_sensing_result": {
+    "record_id": "rs.jx.2025.tillering.v1",
+    "revision": 1
+  },
+  "candidate_mask_path": "data/candidate-mask.tif",
+  "valid_observation_mask_path": "data/valid-observation-mask.tif",
+  "boundary_path": "data/management-unit.geojson",
+  "calculated_at": "2026-11-14T10:00:00+08:00",
+  "quality": {
+    "status": "illustrative",
+    "statement": "示例任务仅用于空间统计接口联调。",
+    "reviewed_by": null,
+    "reviewed_at": null
+  },
+  "version": {
+    "revision": 1,
+    "previous": null,
+    "status": "active",
+    "change_reason": "建立空间统计任务示例",
+    "changed_by": "team.example",
+    "changed_at": "2026-11-14T10:00:00+08:00",
+    "feedback_id": null
+  }
+}
