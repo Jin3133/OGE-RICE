@@ -115,3 +115,13 @@
 ### 兼容性说明
 
 本次任务结构变更属于v1正式冻结前的必要修正。早期未携带`result_mode`和`area_statistics`的任务JSON不再符合正式Schema，需要迁移后使用。
+
+## 2026-11-15 FastAPI基础层与开源实现调研
+
+### 已完成
+
+- 对照FastAPI官方全栈模板、stac-fastapi、Zalando及Microsoft API Guidelines整理实现取舍。
+- 建立FastAPI应用工厂、`/api/v1`版本前缀和模块化路由聚合。
+- 建立统一HTTP错误模型、契约校验错误转换和请求ID中间件。
+- 建立liveness、readiness、API元数据和稳定OpenAPI operation ID。
+- 明确耗时遥感任务不使用进程内后台任务，待持久化任务机制完成后接入。
