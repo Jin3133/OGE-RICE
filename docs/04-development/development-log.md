@@ -125,3 +125,17 @@
 - 建立统一HTTP错误模型、契约校验错误转换和请求ID中间件。
 - 建立liveness、readiness、API元数据和稳定OpenAPI operation ID。
 - 明确耗时遥感任务不使用进程内后台任务，待持久化任务机制完成后接入。
+
+## 2026-11-15 PostgreSQL/PostGIS持久化调研
+
+### 已完成
+
+- 调研SQLAlchemy 2.0事务与版本化行、Alembic约束命名和迁移审查方式。
+- 调研PostgreSQL部分唯一索引、事务隔离、范围排除约束及PostGIS空间有效性与GiST索引。
+- 对照GeoAlchemy2、FastAPI官方模板、stac-fastapi-sqlalchemy和OpenAgri灌溉服务的实现。
+- 形成版本表、组合外键、空间资产、任务引用、结果快照、幂等、审计和长任务运行表的建议设计。
+- 明确采用同步Session和显式事务，仓储不得自行commit；不使用通用CRUD吞异常或原地覆盖版本。
+
+### 下一步
+
+团队确认持久化设计后，引入SQLAlchemy、psycopg、GeoAlchemy2和Alembic，建立数据库基础、PostGIS测试环境及第一份迁移。此阶段先实现只读仓储，不立即开放写API。
