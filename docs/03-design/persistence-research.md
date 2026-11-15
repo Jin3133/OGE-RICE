@@ -112,7 +112,7 @@ UNIQUE (unit_id, revision)
 
 #### `spatial_assets`
 
-- `asset_id`、`revision`；
+- `asset_id`作为不可变资产的唯一主键；文件内容变化时创建新`asset_id`，不覆盖原记录；
 - `href`、`media_type`、`roles`；
 - `crs`、`checksum_sha256`；
 - 来源、创建时间和质量元数据。

@@ -19,12 +19,23 @@ config.set_main_option("sqlalchemy.url", settings.url.replace("%", "%%"))
 target_metadata = Base.metadata
 
 
+def include_application_object(obj, name, type_, reflected, compare_to) -> bool:
+    """Exclude extension-owned relations from application migration diffs."""
+    if reflected and compare_to is None:
+        schema = getattr(obj, "schema", None)
+        if schema not in (None, "public"):
+            return False
+        if name in {"layer", "spatial_ref_sys", "topology"}:
+            return False
+    return alembic_helpers.include_object(obj, name, type_, reflected, compare_to)
+
+
 def configure(connection=None) -> None:
     options = {
         "target_metadata": target_metadata,
         "compare_type": True,
         "include_schemas": True,
-        "include_object": alembic_helpers.include_object,
+        "include_object": include_application_object,
         "process_revision_directives": alembic_helpers.writer,
         "render_item": alembic_helpers.render_item,
     }

@@ -30,9 +30,7 @@ def upgrade() -> None:
         sa.CheckConstraint(
             "current_revision >= 1", name="ck_resource_heads_current_revision_positive"
         ),
-        sa.PrimaryKeyConstraint(
-            "resource_type", "resource_id", name="pk_resource_heads"
-        ),
+        sa.PrimaryKeyConstraint("resource_type", "resource_id", name="pk_resource_heads"),
     )
     op.create_table(
         "operations",
@@ -84,9 +82,7 @@ def upgrade() -> None:
             name="fk_operation_attempts_operation_id_operations",
             ondelete="RESTRICT",
         ),
-        sa.PrimaryKeyConstraint(
-            "operation_id", "attempt_number", name="pk_operation_attempts"
-        ),
+        sa.PrimaryKeyConstraint("operation_id", "attempt_number", name="pk_operation_attempts"),
     )
     op.create_table(
         "audit_events",
@@ -98,9 +94,7 @@ def upgrade() -> None:
         sa.Column("resource_type", sa.String(length=50), nullable=False),
         sa.Column("resource_id", sa.String(length=100), nullable=False),
         sa.Column("resource_revision", sa.Integer(), nullable=True),
-        sa.Column(
-            "summary", postgresql.JSONB(astext_type=sa.Text()), nullable=False
-        ),
+        sa.Column("summary", postgresql.JSONB(astext_type=sa.Text()), nullable=False),
         sa.CheckConstraint(
             "resource_revision IS NULL OR resource_revision >= 1",
             name="ck_audit_events_resource_revision_positive",
@@ -119,9 +113,7 @@ def upgrade() -> None:
         sa.Column("resource_type", sa.String(length=50), nullable=True),
         sa.Column("resource_id", sa.String(length=100), nullable=True),
         sa.Column("resource_revision", sa.Integer(), nullable=True),
-        sa.Column(
-            "response_body", postgresql.JSONB(astext_type=sa.Text()), nullable=True
-        ),
+        sa.Column("response_body", postgresql.JSONB(astext_type=sa.Text()), nullable=True),
         sa.Column("created_at", sa.DateTime(timezone=True), nullable=False),
         sa.Column("expires_at", sa.DateTime(timezone=True), nullable=False),
         sa.CheckConstraint(
@@ -140,13 +132,9 @@ def upgrade() -> None:
             "expires_at > created_at",
             name="ck_idempotency_records_expires_after_creation",
         ),
-        sa.PrimaryKeyConstraint(
-            "actor_id", "idempotency_key", name="pk_idempotency_records"
-        ),
+        sa.PrimaryKeyConstraint("actor_id", "idempotency_key", name="pk_idempotency_records"),
     )
-    op.create_index(
-        "ix_idempotency_records_expires_at", "idempotency_records", ["expires_at"]
-    )
+    op.create_index("ix_idempotency_records_expires_at", "idempotency_records", ["expires_at"])
 
 
 def downgrade() -> None:
