@@ -139,3 +139,26 @@
 ### 下一步
 
 团队确认持久化设计后，引入SQLAlchemy、psycopg、GeoAlchemy2和Alembic，建立数据库基础、PostGIS测试环境及第一份迁移。此阶段先实现只读仓储，不立即开放写API。
+
+## 2026-11-15 持久化阶段一：数据库基础
+
+### 已确认
+
+- revision通过资源头行锁、预期父版本和组合唯一约束分配；不使用全局revision序列。
+- Worker以单管理单元空间统计为事务边界，重计算在事务外，结果通过短事务写入。
+
+### 已完成
+
+- 增加SQLAlchemy 2.0、psycopg 3、GeoAlchemy2和Alembic依赖。
+- 建立确定性约束命名、同步Engine/Session工厂和数据库环境配置。
+- 建立官方PostGIS镜像的本地Compose配置。
+- 建立Alembic环境及首份基础迁移，安装PostGIS、btree_gist并创建资源头、operation、attempt、幂等和审计表。
+- 为基础表增加主键、外键、状态、哈希、时间和正数检查约束。
+
+### 环境与验证结果
+
+- 已安装并启动Apple芯片版Docker Desktop 4.99.0，Docker Engine与Compose运行正常。
+- 由于官方`postgis/postgis` 3.7镜像当前仅提供amd64架构，Compose显式锁定`linux/amd64`，由Docker Desktop兼容层执行。
+- 已启动PostgreSQL 16 / PostGIS 3.7实例，并在真实数据库中成功执行`20261115_01`迁移。
+- `PostGIS_Full_Version()`已返回PostGIS 3.7.0、GEOS 3.15.0和PROJ 9.9.0，证明空间扩展已正确加载。
+- Ruff静态检查通过，项目自动化测试增至41项并全部通过。
