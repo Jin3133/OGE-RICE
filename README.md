@@ -1,6 +1,6 @@
 # OGE Main
 
-禾灌智析项目的模型训练、推理、导出与部署适配工程。
+禾灌智析项目的遥感模型、灌溉需水业务服务、PostGIS数据库与Web应用工程。
 
 ## 当前目标
 
@@ -17,8 +17,13 @@ oge-main/
 ├── configs/                 # 实验配置
 ├── src/oge_main/            # 正式源码
 │   ├── data/                # 数据集读取、划分与预处理
-│   ├── models/              # SegFormer、DeepLabV3+ 模型封装
+│   ├── domain/              # 版本化业务领域模型
+│   ├── application/         # 面积统计与参考需水服务
+│   ├── infrastructure/      # PostgreSQL/PostGIS 持久化
+│   ├── api/                 # FastAPI 业务接口
 │   └── utils/               # 指标、随机种子与配置工具
+├── web/                     # Vue 3 + TypeScript Web 端
+├── migrations/              # Alembic 数据库迁移
 ├── tools/                   # 数据检查、训练、评估、导出入口
 ├── tests/                   # 单元测试
 ├── deployment/              # OGE 与 Web 后台部署适配

@@ -181,3 +181,19 @@
 - 真实数据库已验证“管理单元—面积统计—阶段定额—参考需水计算”链路，结果与内存仓储基准一致。
 - 重叠有效定额分配的集成测试正确触发数据库约束。
 - 项目测试增至43项并全部通过。
+
+## 2026-11-16 Web阶段一：工程基础与首页
+
+### 已完成
+
+- 建立Vue 3、TypeScript、Vite、Pinia和Vue Router前端工程，保留Element Plus、OpenLayers和ECharts作为后续业务界面能力。
+- 建立系统总览、分析任务、业务数据和成果研判四个稳定路由，未实现页明确显示建设状态，不接入临时假接口。
+- 建立统一API请求层、错误类型和系统状态仓储，首页已通过Vite代理调用真实FastAPI readiness接口。
+- 建立独立Web Docker Compose配置，本机无Node.js时仍可完成依赖安装、开发预览和生产构建。
+- Element Plus采用按需加载，首次生产构建的JavaScript体积由约1 MB降至约105 KB。
+
+### 验证结果
+
+- `vue-tsc` 类型检查和Vite生产构建通过，npm依赖审计未发现已知漏洞。
+- Docker中的Web开发服务已通过`/api/v1/health/ready`访问本机FastAPI。
+- 已在可视浏览器中检查首页排版、菜单路由和API在线状态。

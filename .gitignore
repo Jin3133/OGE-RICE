@@ -6,6 +6,11 @@ __pycache__/
 .pytest_cache/
 .ruff_cache/
 
+# Web build and dependencies
+web/node_modules/
+web/dist/
+web/*.tsbuildinfo
+
 # Training artifacts and local data
 data/*
 !data/splits/

@@ -1,0 +1,13 @@
+name: oge-rice-web
+
+services:
+  web:
+    image: node:22-alpine
+    working_dir: /app
+    command: npm run dev
+    environment:
+      HOME: /tmp
+    ports:
+      - "127.0.0.1:5173:5173"
+    volumes:
+      - ./web:/app
