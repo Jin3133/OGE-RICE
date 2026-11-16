@@ -6,7 +6,8 @@ import json
 from typing import Annotated
 
 from fastapi import APIRouter, Depends
-from sqlalchemy import func, select
+from geoalchemy2 import Geography
+from sqlalchemy import cast, func, select
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import Session
 
@@ -33,6 +34,7 @@ def list_reference_areas(session: DatabaseSession) -> ReferenceAreaFeatureCollec
             ReferenceAreaVersionRow,
             SpatialAssetRow.source,
             func.ST_AsGeoJSON(ReferenceAreaVersionRow.geom).label("geometry_json"),
+            func.ST_Area(cast(ReferenceAreaVersionRow.geom, Geography)).label("area_square_metres"),
         )
         .join(
             SpatialAssetRow,
@@ -51,7 +53,7 @@ def list_reference_areas(session: DatabaseSession) -> ReferenceAreaFeatureCollec
         ) from error
 
     features = []
-    for area, source, geometry_json in rows:
+    for area, source, geometry_json, area_square_metres in rows:
         quality = area.quality
         features.append(
             ReferenceAreaFeature(
@@ -63,6 +65,7 @@ def list_reference_areas(session: DatabaseSession) -> ReferenceAreaFeatureCollec
                     name=area.name,
                     area_type=area.area_type,
                     administrative_code=area.administrative_code,
+                    area_square_metres=area_square_metres,
                     quality_status=quality["status"],
                     quality_statement=quality["statement"],
                     source_title=source["title"],

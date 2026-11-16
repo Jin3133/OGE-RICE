@@ -21,6 +21,7 @@ export interface ReferenceAreaProperties {
   name: string
   area_type: 'administrative_district' | 'technical_study_area'
   administrative_code: string | null
+  area_square_metres: number
   quality_status: 'illustrative' | 'unverified' | 'verified'
   quality_statement: string
   source_title: string

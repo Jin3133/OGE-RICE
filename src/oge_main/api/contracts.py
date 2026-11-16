@@ -41,6 +41,7 @@ class ReferenceAreaProperties(ApiModel):
     name: str
     area_type: Literal["administrative_district", "technical_study_area"]
     administrative_code: str | None
+    area_square_metres: float
     quality_status: Literal["illustrative", "unverified", "verified"]
     quality_statement: str
     source_title: str
