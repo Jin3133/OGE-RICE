@@ -20,6 +20,7 @@ interface StoredTaskDraft {
   configuration: TaskConfiguration
   submissionKey: string
   registered: { draftId: string; revision: number } | null
+  base: { draftId: string; revision: number } | null
 }
 
 const storageKey = 'oge-rice.analysis-task-draft.v1'
@@ -42,9 +43,9 @@ function loadDraft(): StoredTaskDraft {
     const value = localStorage.getItem(storageKey) ?? sessionStorage.getItem(storageKey)
     return value
       ? (JSON.parse(value) as StoredTaskDraft)
-      : { area: null, configuration: defaultConfiguration(), submissionKey: crypto.randomUUID(), registered: null }
+      : { area: null, configuration: defaultConfiguration(), submissionKey: crypto.randomUUID(), registered: null, base: null }
   } catch {
-    return { area: null, configuration: defaultConfiguration(), submissionKey: crypto.randomUUID(), registered: null }
+    return { area: null, configuration: defaultConfiguration(), submissionKey: crypto.randomUUID(), registered: null, base: null }
   }
 }
 
@@ -55,6 +56,7 @@ export const useTaskDraftStore = defineStore('taskDraft', () => {
   const savedAt = ref<Date | null>(null)
   const submissionKey = ref(stored.submissionKey || crypto.randomUUID())
   const registered = ref(stored.registered ?? null)
+  const base = ref(stored.base ?? stored.registered ?? null)
 
   const areaMu = computed(() => (area.value ? area.value.area_square_metres * 0.0015 : null))
   const estimatedDemandM3 = computed(() => {
@@ -68,13 +70,15 @@ export const useTaskDraftStore = defineStore('taskDraft', () => {
       configuration: configuration.value,
       submissionKey: submissionKey.value,
       registered: registered.value,
+      base: base.value,
     }))
     savedAt.value = new Date()
   }
 
-  function setArea(value: AnalysisAreaSelection | null) {
+  function setArea(value: AnalysisAreaSelection | null, preserveLineage = false) {
     area.value = value
     registered.value = null
+    if (!preserveLineage) base.value = null
     submissionKey.value = crypto.randomUUID()
     persist()
   }
@@ -88,6 +92,7 @@ export const useTaskDraftStore = defineStore('taskDraft', () => {
 
   function markRegistered(draftId: string, revision: number) {
     registered.value = { draftId, revision }
+    base.value = { draftId, revision }
     persist()
   }
 
@@ -116,12 +121,13 @@ export const useTaskDraftStore = defineStore('taskDraft', () => {
       quotaSource: value.quota_source,
     }
     registered.value = { draftId: value.draft_id, revision: value.revision }
+    base.value = { draftId: value.draft_id, revision: value.revision }
     submissionKey.value = crypto.randomUUID()
     persist()
   }
 
   return {
-    area, areaMu, configuration, estimatedDemandM3, savedAt, submissionKey, registered,
+    area, areaMu, configuration, estimatedDemandM3, savedAt, submissionKey, registered, base,
     setArea, saveConfiguration, markRegistered, invalidateRegistration, restoreFromBackend,
   }
 })

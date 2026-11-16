@@ -103,6 +103,11 @@ class AnalysisTaskDraftCreate(ApiModel):
         return self
 
 
+class AnalysisTaskDraftRevisionCreate(AnalysisTaskDraftCreate):
+    expected_revision: int = Field(ge=1)
+    change_reason: str = Field(min_length=2, max_length=500)
+
+
 class AnalysisTaskDraftResponse(ApiModel):
     draft_id: str
     revision: int

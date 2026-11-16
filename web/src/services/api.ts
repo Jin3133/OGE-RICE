@@ -3,6 +3,7 @@ import type {
   AnalysisTaskDraftCreate,
   AnalysisTaskDraftCollection,
   AnalysisTaskDraftResponse,
+  AnalysisTaskDraftRevisionCreate,
   HealthResponse,
   ReferenceAreaFeatureCollection,
 } from '@/types/api'
@@ -55,4 +56,16 @@ export const api = {
       body: JSON.stringify(payload),
     }),
   taskDrafts: () => request<AnalysisTaskDraftCollection>('/api/v1/analysis-task-drafts'),
+  createTaskDraftRevision: (
+    draftId: string,
+    payload: AnalysisTaskDraftRevisionCreate,
+    idempotencyKey: string,
+  ) => request<AnalysisTaskDraftResponse>(`/api/v1/analysis-task-drafts/${draftId}/versions`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Idempotency-Key': idempotencyKey,
+    },
+    body: JSON.stringify(payload),
+  }),
 }

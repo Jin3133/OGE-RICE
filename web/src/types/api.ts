@@ -77,6 +77,11 @@ export interface AnalysisTaskDraftResponse extends AnalysisTaskDraftCreate {
   change_reason: string
 }
 
+export interface AnalysisTaskDraftRevisionCreate extends AnalysisTaskDraftCreate {
+  expected_revision: number
+  change_reason: string
+}
+
 export interface AnalysisTaskDraftCollection {
   items: AnalysisTaskDraftResponse[]
   total: number

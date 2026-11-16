@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, reactive, ref, watch } from 'vue'
+import { computed, nextTick, onMounted, reactive, ref, watch } from 'vue'
 
 import ReferenceAreaMap from '@/components/ReferenceAreaMap.vue'
 import { ApiRequestError, api } from '@/services/api'
@@ -16,6 +16,8 @@ const backendDrafts = ref<AnalysisTaskDraftResponse[]>([])
 const savedMessage = ref('')
 const submitError = ref('')
 const submitting = ref(false)
+const changeReason = ref('')
+const restoring = ref(false)
 const form = reactive<TaskConfiguration>({ ...taskDraft.configuration })
 
 const stages = [
@@ -35,6 +37,12 @@ const validation = computed(() => ({
   source: form.quotaSource.trim().length >= 2,
 }))
 const valid = computed(() => Object.values(validation.value).every(Boolean))
+const validForRegistration = computed(() => valid.value && (!taskDraft.base || changeReason.value.trim().length >= 2))
+const newerBackendRevision = computed(() => {
+  if (!taskDraft.registered) return null
+  const latest = backendDrafts.value.find((draft) => draft.draft_id === taskDraft.registered?.draftId)
+  return latest && latest.revision > taskDraft.registered.revision ? latest.revision : null
+})
 const areaLabel = computed(() => taskDraft.area ? `${(taskDraft.area.area_square_metres / 1_000_000).toFixed(2)} km²` : '未选择')
 const demandLabel = computed(() => {
   if (!taskDraft.area || form.quotaM3PerMu === null || form.quotaM3PerMu <= 0) return '待填写定额'
@@ -43,7 +51,7 @@ const demandLabel = computed(() => {
 })
 
 function updateArea(value: AnalysisAreaSelection | null) {
-  taskDraft.setArea(value)
+  taskDraft.setArea(value, true)
 }
 
 function saveDraft() {
@@ -52,14 +60,18 @@ function saveDraft() {
   savedMessage.value = '任务草稿已保存在当前浏览器会话中，尚未提交运行。'
 }
 
-function restoreDraft(value: AnalysisTaskDraftResponse) {
+async function restoreDraft(value: AnalysisTaskDraftResponse) {
+  restoring.value = true
   taskDraft.restoreFromBackend(value)
   Object.assign(form, taskDraft.configuration)
+  await nextTick()
+  restoring.value = false
   savedMessage.value = `已恢复后台草稿 ${value.draft_id}`
+  changeReason.value = ''
 }
 
 async function registerDraft() {
-  if (!valid.value || !taskDraft.area || form.quotaM3PerMu === null) return
+  if (!validForRegistration.value || !taskDraft.area || form.quotaM3PerMu === null) return
   submitting.value = true
   submitError.value = ''
   if (JSON.stringify(form) !== JSON.stringify(taskDraft.configuration)) {
@@ -67,7 +79,7 @@ async function registerDraft() {
   }
   const stageName = stages.find((stage) => stage[0] === form.growthStage)?.[1] ?? form.growthStage
   try {
-    const result = await api.createTaskDraft({
+    const payload = {
       name: form.name,
       result_mode: 'illustrative',
       crop_code: 'rice',
@@ -85,8 +97,18 @@ async function registerDraft() {
         geometry: taskDraft.area.geometry,
       },
       created_by: 'local.operator',
-    }, taskDraft.submissionKey)
+    } as const
+    const result = taskDraft.base
+      ? await api.createTaskDraftRevision(taskDraft.base.draftId, {
+          ...payload,
+          expected_revision: taskDraft.base.revision,
+          change_reason: changeReason.value,
+        }, taskDraft.submissionKey)
+      : await api.createTaskDraft(payload, taskDraft.submissionKey)
     taskDraft.markRegistered(result.draft_id, result.revision)
+    const drafts = await api.taskDrafts()
+    backendDrafts.value = drafts.items
+    changeReason.value = ''
   } catch (reason) {
     submitError.value = reason instanceof Error ? reason.message : '草稿登记失败'
   } finally {
@@ -94,7 +116,9 @@ async function registerDraft() {
   }
 }
 
-watch(form, () => taskDraft.invalidateRegistration(), { deep: true })
+watch(form, () => {
+  if (!restoring.value) taskDraft.invalidateRegistration()
+}, { deep: true })
 
 onMounted(async () => {
   try {
@@ -127,7 +151,7 @@ onMounted(async () => {
       </div>
       <p v-if="historyError" class="submit-error">{{ historyError }}</p>
       <div v-else-if="backendDrafts.length" class="history-list">
-        <article v-for="draft in backendDrafts" :key="`${draft.draft_id}@${draft.revision}`" :class="{ active: taskDraft.registered?.draftId === draft.draft_id }">
+        <article v-for="draft in backendDrafts" :key="`${draft.draft_id}@${draft.revision}`" :class="{ active: taskDraft.registered?.draftId === draft.draft_id && taskDraft.registered?.revision === draft.revision }">
           <div><strong>{{ draft.name }}</strong><span>{{ draft.growth_stage_name }} · {{ draft.analysis_start }} 至 {{ draft.analysis_end }}</span></div>
           <div class="history-meta"><span>{{ (draft.area_square_metres / 1_000_000).toFixed(2) }} km²</span><code>{{ draft.draft_id.slice(0, 18) }}…</code></div>
           <button type="button" @click="restoreDraft(draft)">恢复编辑</button>
@@ -170,10 +194,18 @@ onMounted(async () => {
           <div><span>参考需水</span><strong>{{ demandLabel }}</strong></div>
           <p>计算采用 W = A × M；面积按 1亩 = 2000/3平方米换算。保存草稿不会创建正式任务或触发遥感计算。</p>
         </div>
+        <label v-if="taskDraft.base && !taskDraft.registered" class="field-row revision-reason">
+          <span>版本变更原因</span>
+          <input v-model.trim="changeReason" maxlength="500" placeholder="说明为什么修改已登记草稿" />
+          <small v-if="changeReason && changeReason.length < 2">至少输入2个字符</small>
+        </label>
+        <div v-if="taskDraft.base && !taskDraft.registered" class="revision-hint">
+          基于第 {{ taskDraft.base.revision }} 版修改，登记后将创建第 {{ taskDraft.base.revision + 1 }} 版；旧版本不会被覆盖。
+        </div>
         <div class="task-actions">
           <button class="save-local" type="submit" :disabled="!valid">保存本机草稿</button>
-          <button class="save-draft" type="button" :disabled="!valid || submitting || Boolean(taskDraft.registered)" @click="registerDraft">
-            {{ submitting ? '正在登记…' : taskDraft.registered ? '已登记后台' : '登记业务后台' }}
+          <button class="save-draft" type="button" :disabled="!validForRegistration || submitting || Boolean(taskDraft.registered)" @click="registerDraft">
+            {{ submitting ? '正在登记…' : taskDraft.registered ? '已登记后台' : taskDraft.base ? `创建第 ${taskDraft.base.revision + 1} 版` : '登记业务后台' }}
           </button>
         </div>
         <p v-if="savedMessage" class="saved-message">{{ savedMessage }}</p>
@@ -182,6 +214,7 @@ onMounted(async () => {
           <span>{{ taskDraft.registered.draftId }} · 第 {{ taskDraft.registered.revision }} 版</span>
           <p>已持久化并写入审计记录；尚未提升为正式分析任务，也未触发OGE计算。</p>
         </div>
+        <p v-if="newerBackendRevision" class="version-warning">后台已有第 {{ newerBackendRevision }} 版，请从上方记录恢复最新版本后再修改。</p>
         <p v-if="submitError" class="submit-error">{{ submitError }}</p>
       </form>
     </div>
