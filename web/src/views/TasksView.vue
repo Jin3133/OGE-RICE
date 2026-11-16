@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, reactive, ref } from 'vue'
+import { computed, onMounted, reactive, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 
 import ReferenceAreaMap from '@/components/ReferenceAreaMap.vue'
@@ -13,6 +13,8 @@ const taskDraft = useTaskDraftStore()
 const collection = ref<ReferenceAreaFeatureCollection | null>(null)
 const loadError = ref('')
 const savedMessage = ref('')
+const submitError = ref('')
+const submitting = ref(false)
 const form = reactive<TaskConfiguration>({ ...taskDraft.configuration })
 
 const stages = [
@@ -48,6 +50,44 @@ function saveDraft() {
   taskDraft.saveConfiguration({ ...form })
   savedMessage.value = '任务草稿已保存在当前浏览器会话中，尚未提交运行。'
 }
+
+async function registerDraft() {
+  if (!valid.value || !taskDraft.area || form.quotaM3PerMu === null) return
+  submitting.value = true
+  submitError.value = ''
+  if (JSON.stringify(form) !== JSON.stringify(taskDraft.configuration)) {
+    taskDraft.saveConfiguration({ ...form })
+  }
+  const stageName = stages.find((stage) => stage[0] === form.growthStage)?.[1] ?? form.growthStage
+  try {
+    const result = await api.createTaskDraft({
+      name: form.name,
+      result_mode: 'illustrative',
+      crop_code: 'rice',
+      analysis_year: form.analysisYear,
+      season: form.season,
+      growth_stage_code: form.growthStage,
+      growth_stage_name: stageName,
+      analysis_start: form.periodStart,
+      analysis_end: form.periodEnd,
+      quota_value_m3_per_mu: form.quotaM3PerMu,
+      quota_source: form.quotaSource,
+      area: {
+        method: taskDraft.area.method,
+        source_area_id: taskDraft.area.source_area_id,
+        geometry: taskDraft.area.geometry,
+      },
+      created_by: 'local.operator',
+    }, taskDraft.submissionKey)
+    taskDraft.markRegistered(result.draft_id, result.revision)
+  } catch (reason) {
+    submitError.value = reason instanceof Error ? reason.message : '草稿登记失败'
+  } finally {
+    submitting.value = false
+  }
+}
+
+watch(form, () => taskDraft.invalidateRegistration(), { deep: true })
 
 onMounted(async () => {
   if (!taskDraft.area) {
@@ -107,8 +147,19 @@ onMounted(async () => {
           <div><span>参考需水</span><strong>{{ demandLabel }}</strong></div>
           <p>计算采用 W = A × M；面积按 1亩 = 2000/3平方米换算。保存草稿不会创建正式任务或触发遥感计算。</p>
         </div>
-        <button class="save-draft" type="submit" :disabled="!valid">保存任务草稿</button>
+        <div class="task-actions">
+          <button class="save-local" type="submit" :disabled="!valid">保存本机草稿</button>
+          <button class="save-draft" type="button" :disabled="!valid || submitting || Boolean(taskDraft.registered)" @click="registerDraft">
+            {{ submitting ? '正在登记…' : taskDraft.registered ? '已登记后台' : '登记业务后台' }}
+          </button>
+        </div>
         <p v-if="savedMessage" class="saved-message">{{ savedMessage }}</p>
+        <div v-if="taskDraft.registered" class="registered-draft">
+          <strong>后台草稿登记成功</strong>
+          <span>{{ taskDraft.registered.draftId }} · 第 {{ taskDraft.registered.revision }} 版</span>
+          <p>已持久化并写入审计记录；尚未提升为正式分析任务，也未触发OGE计算。</p>
+        </div>
+        <p v-if="submitError" class="submit-error">{{ submitError }}</p>
       </form>
     </div>
   </section>

@@ -123,7 +123,15 @@ function selectReferenceArea() {
   const selected = reference.clone()
   selectionSource.clear()
   selectionSource.addFeature(selected)
-  publishSelection('reference_area', selected)
+  const referencePayload = props.collection?.features[0]
+  if (referencePayload) {
+    emit('selection', {
+      method: 'reference_area',
+      geometry: referencePayload.geometry,
+      area_square_metres: referencePayload.properties.area_square_metres,
+      source_area_id: referencePayload.properties.area_id,
+    })
+  }
   fitReferenceArea()
 }
 

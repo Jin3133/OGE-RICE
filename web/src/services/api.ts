@@ -1,5 +1,7 @@
 import type {
   ApiErrorResponse,
+  AnalysisTaskDraftCreate,
+  AnalysisTaskDraftResponse,
   HealthResponse,
   ReferenceAreaFeatureCollection,
 } from '@/types/api'
@@ -42,4 +44,13 @@ export const api = {
   health: () => request<HealthResponse>('/api/v1/health/ready'),
   referenceAreas: () =>
     request<ReferenceAreaFeatureCollection>('/api/v1/reference-areas'),
+  createTaskDraft: (payload: AnalysisTaskDraftCreate, idempotencyKey: string) =>
+    request<AnalysisTaskDraftResponse>('/api/v1/analysis-task-drafts', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Idempotency-Key': idempotencyKey,
+      },
+      body: JSON.stringify(payload),
+    }),
 }

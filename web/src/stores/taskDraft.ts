@@ -17,6 +17,8 @@ export interface TaskConfiguration {
 interface StoredTaskDraft {
   area: AnalysisAreaSelection | null
   configuration: TaskConfiguration
+  submissionKey: string
+  registered: { draftId: string; revision: number } | null
 }
 
 const storageKey = 'oge-rice.analysis-task-draft.v1'
@@ -37,9 +39,11 @@ function defaultConfiguration(): TaskConfiguration {
 function loadDraft(): StoredTaskDraft {
   try {
     const value = sessionStorage.getItem(storageKey)
-    return value ? (JSON.parse(value) as StoredTaskDraft) : { area: null, configuration: defaultConfiguration() }
+    return value
+      ? (JSON.parse(value) as StoredTaskDraft)
+      : { area: null, configuration: defaultConfiguration(), submissionKey: crypto.randomUUID(), registered: null }
   } catch {
-    return { area: null, configuration: defaultConfiguration() }
+    return { area: null, configuration: defaultConfiguration(), submissionKey: crypto.randomUUID(), registered: null }
   }
 }
 
@@ -48,6 +52,8 @@ export const useTaskDraftStore = defineStore('taskDraft', () => {
   const area = ref<AnalysisAreaSelection | null>(stored.area)
   const configuration = ref<TaskConfiguration>(stored.configuration)
   const savedAt = ref<Date | null>(null)
+  const submissionKey = ref(stored.submissionKey || crypto.randomUUID())
+  const registered = ref(stored.registered ?? null)
 
   const areaMu = computed(() => (area.value ? area.value.area_square_metres * 0.0015 : null))
   const estimatedDemandM3 = computed(() => {
@@ -56,19 +62,43 @@ export const useTaskDraftStore = defineStore('taskDraft', () => {
   })
 
   function persist() {
-    sessionStorage.setItem(storageKey, JSON.stringify({ area: area.value, configuration: configuration.value }))
+    sessionStorage.setItem(storageKey, JSON.stringify({
+      area: area.value,
+      configuration: configuration.value,
+      submissionKey: submissionKey.value,
+      registered: registered.value,
+    }))
     savedAt.value = new Date()
   }
 
   function setArea(value: AnalysisAreaSelection | null) {
     area.value = value
+    registered.value = null
+    submissionKey.value = crypto.randomUUID()
     persist()
   }
 
   function saveConfiguration(value: TaskConfiguration) {
     configuration.value = { ...value }
+    registered.value = null
+    submissionKey.value = crypto.randomUUID()
     persist()
   }
 
-  return { area, areaMu, configuration, estimatedDemandM3, savedAt, setArea, saveConfiguration }
+  function markRegistered(draftId: string, revision: number) {
+    registered.value = { draftId, revision }
+    persist()
+  }
+
+  function invalidateRegistration() {
+    if (!registered.value) return
+    registered.value = null
+    submissionKey.value = crypto.randomUUID()
+    persist()
+  }
+
+  return {
+    area, areaMu, configuration, estimatedDemandM3, savedAt, submissionKey, registered,
+    setArea, saveConfiguration, markRegistered, invalidateRegistration,
+  }
 })

@@ -214,6 +214,75 @@ class ReferenceAreaVersionRow(Base):
     )
 
 
+class AnalysisTaskDraftVersionRow(Base):
+    __tablename__ = "analysis_task_draft_versions"
+
+    draft_id: Mapped[str] = mapped_column(String(100), primary_key=True)
+    revision: Mapped[int] = mapped_column(Integer, primary_key=True)
+    name: Mapped[str] = mapped_column(Text, nullable=False)
+    result_mode: Mapped[str] = mapped_column(String(30), nullable=False)
+    crop_code: Mapped[str] = mapped_column(String(30), nullable=False)
+    analysis_year: Mapped[int] = mapped_column(Integer, nullable=False)
+    season: Mapped[str] = mapped_column(String(30), nullable=False)
+    growth_stage_code: Mapped[str] = mapped_column(String(50), nullable=False)
+    growth_stage_name: Mapped[str] = mapped_column(Text, nullable=False)
+    analysis_start: Mapped[date] = mapped_column(nullable=False)
+    analysis_end: Mapped[date] = mapped_column(nullable=False)
+    quota_value_m3_per_mu: Mapped[float] = mapped_column(Float, nullable=False)
+    quota_source: Mapped[str] = mapped_column(Text, nullable=False)
+    area_method: Mapped[str] = mapped_column(String(30), nullable=False)
+    source_area_id: Mapped[str | None] = mapped_column(String(100))
+    geom: Mapped[object] = mapped_column(
+        Geometry("MULTIPOLYGON", srid=4326, spatial_index=False), nullable=False
+    )
+    area_square_metres: Mapped[float] = mapped_column(Float, nullable=False)
+    status: Mapped[str] = mapped_column(String(20), nullable=False)
+    previous_draft_id: Mapped[str | None] = mapped_column(String(100))
+    previous_revision: Mapped[int | None] = mapped_column(Integer)
+    created_by: Mapped[str] = mapped_column(String(100), nullable=False)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
+    changed_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
+    change_reason: Mapped[str] = mapped_column(Text, nullable=False)
+
+    __table_args__ = (
+        ForeignKeyConstraint(
+            ["previous_draft_id", "previous_revision"],
+            ["analysis_task_draft_versions.draft_id", "analysis_task_draft_versions.revision"],
+            ondelete="RESTRICT",
+        ),
+        CheckConstraint("revision >= 1", name="revision_positive"),
+        CheckConstraint("result_mode = 'illustrative'", name="result_mode_supported"),
+        CheckConstraint("crop_code = 'rice'", name="crop_code_supported"),
+        CheckConstraint("analysis_year BETWEEN 2020 AND 2100", name="analysis_year_valid"),
+        CheckConstraint(
+            "season IN ('single_season_rice', 'early_rice', 'late_rice')",
+            name="season_allowed",
+        ),
+        CheckConstraint("analysis_start <= analysis_end", name="analysis_period_ordered"),
+        CheckConstraint("quota_value_m3_per_mu > 0", name="quota_positive"),
+        CheckConstraint(
+            "area_method IN ('reference_area', 'rectangle', 'polygon')",
+            name="area_method_allowed",
+        ),
+        CheckConstraint(
+            "(area_method = 'reference_area' AND source_area_id IS NOT NULL) OR "
+            "(area_method <> 'reference_area' AND source_area_id IS NULL)",
+            name="source_area_consistent",
+        ),
+        CheckConstraint("ST_SRID(geom) = 4326", name="geom_srid_4326"),
+        CheckConstraint("NOT ST_IsEmpty(geom)", name="geom_not_empty"),
+        CheckConstraint("ST_IsValid(geom)", name="geom_valid"),
+        CheckConstraint("area_square_metres > 0", name="area_positive"),
+        CheckConstraint("status IN ('draft', 'promoted', 'withdrawn')", name="status_allowed"),
+        CheckConstraint(
+            "(revision = 1 AND previous_draft_id IS NULL AND previous_revision IS NULL) OR "
+            "(revision > 1 AND previous_draft_id = draft_id AND previous_revision < revision)",
+            name="previous_version_consistent",
+        ),
+        Index("ix_analysis_task_draft_versions_geom", "geom", postgresql_using="gist"),
+    )
+
+
 class ManagementUnitVersionRow(Base):
     __tablename__ = "management_unit_versions"
 
