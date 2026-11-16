@@ -165,6 +165,55 @@ class SpatialAssetRow(Base):
     )
 
 
+class ReferenceAreaVersionRow(Base):
+    __tablename__ = "reference_area_versions"
+
+    area_id: Mapped[str] = mapped_column(String(100), primary_key=True)
+    revision: Mapped[int] = mapped_column(Integer, primary_key=True)
+    name: Mapped[str] = mapped_column(Text, nullable=False)
+    area_type: Mapped[str] = mapped_column(String(40), nullable=False)
+    administrative_code: Mapped[str | None] = mapped_column(String(20))
+    boundary_asset_id: Mapped[str] = mapped_column(
+        ForeignKey("spatial_assets.asset_id", ondelete="RESTRICT"), nullable=False
+    )
+    geom: Mapped[object] = mapped_column(
+        Geometry("MULTIPOLYGON", srid=4326, spatial_index=False), nullable=False
+    )
+    quality: Mapped[dict] = mapped_column(JSONB, nullable=False)
+    previous_area_id: Mapped[str | None] = mapped_column(String(100))
+    previous_revision: Mapped[int | None] = mapped_column(Integer)
+    status: Mapped[str] = mapped_column(String(20), nullable=False)
+    change_reason: Mapped[str] = mapped_column(Text, nullable=False)
+    changed_by: Mapped[str] = mapped_column(String(100), nullable=False)
+    changed_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
+
+    __table_args__ = (
+        ForeignKeyConstraint(
+            ["previous_area_id", "previous_revision"],
+            ["reference_area_versions.area_id", "reference_area_versions.revision"],
+            ondelete="RESTRICT",
+        ),
+        CheckConstraint("revision >= 1", name="revision_positive"),
+        CheckConstraint(
+            "area_type IN ('administrative_district', 'technical_study_area')",
+            name="area_type_allowed",
+        ),
+        CheckConstraint("ST_SRID(geom) = 4326", name="geom_srid_4326"),
+        CheckConstraint("NOT ST_IsEmpty(geom)", name="geom_not_empty"),
+        CheckConstraint("ST_IsValid(geom)", name="geom_valid"),
+        CheckConstraint(
+            "status IN ('draft', 'active', 'superseded', 'withdrawn')",
+            name="status_allowed",
+        ),
+        CheckConstraint(
+            "(revision = 1 AND previous_area_id IS NULL AND previous_revision IS NULL) OR "
+            "(revision > 1 AND previous_area_id = area_id AND previous_revision < revision)",
+            name="previous_version_consistent",
+        ),
+        Index("ix_reference_area_versions_geom", "geom", postgresql_using="gist"),
+    )
+
+
 class ManagementUnitVersionRow(Base):
     __tablename__ = "management_unit_versions"
 

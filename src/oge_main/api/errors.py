@@ -45,9 +45,7 @@ def install_exception_handlers(app: FastAPI) -> None:
         return _response(request, error)
 
     @app.exception_handler(RequestValidationError)
-    async def handle_validation(
-        request: Request, error: RequestValidationError
-    ) -> JSONResponse:
+    async def handle_validation(request: Request, error: RequestValidationError) -> JSONResponse:
         first = error.errors()[0] if error.errors() else {}
         location = first.get("loc", ())
         field_name = ".".join(str(part) for part in location) or None

@@ -1,4 +1,8 @@
-import type { ApiErrorResponse, HealthResponse } from '@/types/api'
+import type {
+  ApiErrorResponse,
+  HealthResponse,
+  ReferenceAreaFeatureCollection,
+} from '@/types/api'
 
 export class ApiRequestError extends Error {
   constructor(
@@ -36,4 +40,6 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
 
 export const api = {
   health: () => request<HealthResponse>('/api/v1/health/ready'),
+  referenceAreas: () =>
+    request<ReferenceAreaFeatureCollection>('/api/v1/reference-areas'),
 }

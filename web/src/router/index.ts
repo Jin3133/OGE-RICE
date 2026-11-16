@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import OverviewView from '@/views/OverviewView.vue'
 import PlaceholderView from '@/views/PlaceholderView.vue'
+import ReferenceAreasView from '@/views/ReferenceAreasView.vue'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -21,8 +22,8 @@ const router = createRouter({
     {
       path: '/resources',
       name: 'resources',
-      component: PlaceholderView,
-      meta: { title: '业务数据', section: '资源管理建立中' },
+      component: ReferenceAreasView,
+      meta: { title: '空间数据' },
     },
     {
       path: '/results',
