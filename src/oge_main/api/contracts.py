@@ -124,3 +124,8 @@ class AnalysisTaskDraftResponse(ApiModel):
     created_at: datetime
     changed_at: datetime
     change_reason: str
+
+
+class AnalysisTaskDraftCollection(ApiModel):
+    items: list[AnalysisTaskDraftResponse]
+    total: int

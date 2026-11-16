@@ -1,6 +1,7 @@
 import type {
   ApiErrorResponse,
   AnalysisTaskDraftCreate,
+  AnalysisTaskDraftCollection,
   AnalysisTaskDraftResponse,
   HealthResponse,
   ReferenceAreaFeatureCollection,
@@ -53,4 +54,5 @@ export const api = {
       },
       body: JSON.stringify(payload),
     }),
+  taskDrafts: () => request<AnalysisTaskDraftCollection>('/api/v1/analysis-task-drafts'),
 }

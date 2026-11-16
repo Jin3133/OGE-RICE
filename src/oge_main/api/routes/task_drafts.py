@@ -15,6 +15,7 @@ from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from sqlalchemy.orm import Session
 
 from oge_main.api.contracts import (
+    AnalysisTaskDraftCollection,
     AnalysisTaskDraftCreate,
     AnalysisTaskDraftResponse,
     TaskDraftAreaSelection,
@@ -61,6 +62,30 @@ def _response(row: AnalysisTaskDraftVersionRow, geometry: dict) -> AnalysisTaskD
         changed_at=row.changed_at,
         change_reason=row.change_reason,
     )
+
+
+@router.get("", response_model=AnalysisTaskDraftCollection)
+def list_task_drafts(session: DatabaseSession) -> AnalysisTaskDraftCollection:
+    statement = (
+        select(
+            AnalysisTaskDraftVersionRow,
+            func.ST_AsGeoJSON(AnalysisTaskDraftVersionRow.geom).label("geometry_json"),
+        )
+        .join(
+            ResourceHeadRow,
+            (ResourceHeadRow.resource_type == "analysis_task_draft")
+            & (ResourceHeadRow.resource_id == AnalysisTaskDraftVersionRow.draft_id)
+            & (ResourceHeadRow.current_revision == AnalysisTaskDraftVersionRow.revision),
+        )
+        .order_by(AnalysisTaskDraftVersionRow.changed_at.desc())
+        .limit(50)
+    )
+    try:
+        rows = session.execute(statement).all()
+    except SQLAlchemyError as error:
+        raise ApiProblem(503, "DATABASE_UNAVAILABLE", "task drafts could not be loaded") from error
+    items = [_response(row, json.loads(geometry_json)) for row, geometry_json in rows]
+    return AnalysisTaskDraftCollection(items=items, total=len(items))
 
 
 @router.post("", response_model=AnalysisTaskDraftResponse, status_code=status.HTTP_201_CREATED)

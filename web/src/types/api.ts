@@ -76,3 +76,8 @@ export interface AnalysisTaskDraftResponse extends AnalysisTaskDraftCreate {
   changed_at: string
   change_reason: string
 }
+
+export interface AnalysisTaskDraftCollection {
+  items: AnalysisTaskDraftResponse[]
+  total: number
+}

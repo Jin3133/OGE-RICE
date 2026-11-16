@@ -2,6 +2,7 @@ import { computed, ref } from 'vue'
 import { defineStore } from 'pinia'
 
 import type { AnalysisAreaSelection } from '@/types/map'
+import type { AnalysisTaskDraftResponse } from '@/types/api'
 
 export interface TaskConfiguration {
   name: string
@@ -38,7 +39,7 @@ function defaultConfiguration(): TaskConfiguration {
 
 function loadDraft(): StoredTaskDraft {
   try {
-    const value = sessionStorage.getItem(storageKey)
+    const value = localStorage.getItem(storageKey) ?? sessionStorage.getItem(storageKey)
     return value
       ? (JSON.parse(value) as StoredTaskDraft)
       : { area: null, configuration: defaultConfiguration(), submissionKey: crypto.randomUUID(), registered: null }
@@ -62,7 +63,7 @@ export const useTaskDraftStore = defineStore('taskDraft', () => {
   })
 
   function persist() {
-    sessionStorage.setItem(storageKey, JSON.stringify({
+    localStorage.setItem(storageKey, JSON.stringify({
       area: area.value,
       configuration: configuration.value,
       submissionKey: submissionKey.value,
@@ -97,8 +98,30 @@ export const useTaskDraftStore = defineStore('taskDraft', () => {
     persist()
   }
 
+  function restoreFromBackend(value: AnalysisTaskDraftResponse) {
+    area.value = {
+      method: value.area.method,
+      geometry: value.area.geometry,
+      area_square_metres: value.area_square_metres,
+      source_area_id: value.area.source_area_id,
+    }
+    configuration.value = {
+      name: value.name,
+      analysisYear: value.analysis_year,
+      season: value.season,
+      growthStage: value.growth_stage_code,
+      periodStart: value.analysis_start,
+      periodEnd: value.analysis_end,
+      quotaM3PerMu: value.quota_value_m3_per_mu,
+      quotaSource: value.quota_source,
+    }
+    registered.value = { draftId: value.draft_id, revision: value.revision }
+    submissionKey.value = crypto.randomUUID()
+    persist()
+  }
+
   return {
     area, areaMu, configuration, estimatedDemandM3, savedAt, submissionKey, registered,
-    setArea, saveConfiguration, markRegistered, invalidateRegistration,
+    setArea, saveConfiguration, markRegistered, invalidateRegistration, restoreFromBackend,
   }
 })

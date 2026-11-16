@@ -1,17 +1,18 @@
 <script setup lang="ts">
 import { computed, onMounted, reactive, ref, watch } from 'vue'
-import { useRouter } from 'vue-router'
 
 import ReferenceAreaMap from '@/components/ReferenceAreaMap.vue'
 import { ApiRequestError, api } from '@/services/api'
 import { useTaskDraftStore, type TaskConfiguration } from '@/stores/taskDraft'
 import type { ReferenceAreaFeatureCollection } from '@/types/api'
+import type { AnalysisTaskDraftResponse } from '@/types/api'
 import type { AnalysisAreaSelection } from '@/types/map'
 
-const router = useRouter()
 const taskDraft = useTaskDraftStore()
 const collection = ref<ReferenceAreaFeatureCollection | null>(null)
 const loadError = ref('')
+const historyError = ref('')
+const backendDrafts = ref<AnalysisTaskDraftResponse[]>([])
 const savedMessage = ref('')
 const submitError = ref('')
 const submitting = ref(false)
@@ -49,6 +50,12 @@ function saveDraft() {
   if (!valid.value) return
   taskDraft.saveConfiguration({ ...form })
   savedMessage.value = '任务草稿已保存在当前浏览器会话中，尚未提交运行。'
+}
+
+function restoreDraft(value: AnalysisTaskDraftResponse) {
+  taskDraft.restoreFromBackend(value)
+  Object.assign(form, taskDraft.configuration)
+  savedMessage.value = `已恢复后台草稿 ${value.draft_id}`
 }
 
 async function registerDraft() {
@@ -90,14 +97,14 @@ async function registerDraft() {
 watch(form, () => taskDraft.invalidateRegistration(), { deep: true })
 
 onMounted(async () => {
-  if (!taskDraft.area) {
-    router.replace('/resources')
-    return
-  }
   try {
-    collection.value = await api.referenceAreas()
+    const [areas, drafts] = await Promise.all([api.referenceAreas(), api.taskDrafts()])
+    collection.value = areas
+    backendDrafts.value = drafts.items
   } catch (reason) {
-    loadError.value = reason instanceof ApiRequestError ? reason.message : '地图数据加载失败'
+    const message = reason instanceof ApiRequestError ? reason.message : '任务数据加载失败'
+    loadError.value = message
+    historyError.value = message
   }
 })
 </script>
@@ -111,6 +118,22 @@ onMounted(async () => {
         <p>先冻结任务范围和阶段参数。当前结果模式固定为演示性耕地候选区情景，不代表已独立识别水稻。</p>
       </div>
       <span class="draft-badge">草稿 · 尚未提交</span>
+    </div>
+
+    <div class="draft-history">
+      <div class="history-heading">
+        <div><strong>后台任务草稿</strong><span>进入页面自动读取数据库中的最新版本</span></div>
+        <em>{{ backendDrafts.length }} 条记录</em>
+      </div>
+      <p v-if="historyError" class="submit-error">{{ historyError }}</p>
+      <div v-else-if="backendDrafts.length" class="history-list">
+        <article v-for="draft in backendDrafts" :key="`${draft.draft_id}@${draft.revision}`" :class="{ active: taskDraft.registered?.draftId === draft.draft_id }">
+          <div><strong>{{ draft.name }}</strong><span>{{ draft.growth_stage_name }} · {{ draft.analysis_start }} 至 {{ draft.analysis_end }}</span></div>
+          <div class="history-meta"><span>{{ (draft.area_square_metres / 1_000_000).toFixed(2) }} km²</span><code>{{ draft.draft_id.slice(0, 18) }}…</code></div>
+          <button type="button" @click="restoreDraft(draft)">恢复编辑</button>
+        </article>
+      </div>
+      <p v-else class="history-empty">暂无后台草稿。地图选区和本机草稿仍会自动恢复。</p>
     </div>
 
     <div class="task-workbench">
