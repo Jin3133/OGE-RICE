@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import OverviewView from '@/views/OverviewView.vue'
 import PlaceholderView from '@/views/PlaceholderView.vue'
 import ReferenceAreasView from '@/views/ReferenceAreasView.vue'
+import TasksView from '@/views/TasksView.vue'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -16,8 +17,8 @@ const router = createRouter({
     {
       path: '/tasks',
       name: 'tasks',
-      component: PlaceholderView,
-      meta: { title: '分析任务', section: '任务建立中' },
+      component: TasksView,
+      meta: { title: '分析任务' },
     },
     {
       path: '/resources',

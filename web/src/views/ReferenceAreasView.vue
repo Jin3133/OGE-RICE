@@ -1,12 +1,16 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 import ReferenceAreaMap from '@/components/ReferenceAreaMap.vue'
 import { ApiRequestError, api } from '@/services/api'
+import { useTaskDraftStore } from '@/stores/taskDraft'
 import type { ReferenceAreaFeatureCollection } from '@/types/api'
 import type { AnalysisAreaSelection } from '@/types/map'
 
 const collection = ref<ReferenceAreaFeatureCollection | null>(null)
+const router = useRouter()
+const taskDraft = useTaskDraftStore()
 const loading = ref(true)
 const error = ref('')
 const selection = ref<AnalysisAreaSelection | null>(null)
@@ -23,6 +27,12 @@ const selectionArea = computed(() => {
     ? `${prefix}${squareKilometres.toFixed(2)} km²`
     : `${prefix}${(selection.value.area_square_metres / 10_000).toFixed(2)} 公顷`
 })
+
+function configureTask() {
+  if (!selection.value) return
+  taskDraft.setArea(selection.value)
+  router.push('/tasks')
+}
 
 onMounted(async () => {
   try {
@@ -74,6 +84,7 @@ onMounted(async () => {
           </div>
           <p v-if="selection">已生成标准 WGS 84 GeoJSON，确认任务参数后方可提交保存。</p>
           <p v-else>请在地图工具中采用江夏区，或绘制一个自定义分析范围。</p>
+          <button type="button" :disabled="!selection" @click="configureTask">配置分析任务</button>
         </div>
         <div class="scope-warning">
           <strong>使用边界</strong>

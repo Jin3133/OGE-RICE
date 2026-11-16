@@ -3,6 +3,7 @@ import 'ol/ol.css'
 
 import { defaults as defaultControls, FullScreen, MousePosition, ScaleLine, ZoomSlider } from 'ol/control'
 import { createStringXY } from 'ol/coordinate'
+import Feature from 'ol/Feature'
 import GeoJSON from 'ol/format/GeoJSON'
 import Draw, { createBox } from 'ol/interaction/Draw'
 import Map from 'ol/Map'
@@ -18,7 +19,10 @@ import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import type { ReferenceAreaFeatureCollection } from '@/types/api'
 import type { AnalysisAreaMethod, AnalysisAreaSelection } from '@/types/map'
 
-const props = defineProps<{ collection: ReferenceAreaFeatureCollection | null }>()
+const props = defineProps<{
+  collection: ReferenceAreaFeatureCollection | null
+  initialSelection?: AnalysisAreaSelection | null
+}>()
 const emit = defineEmits<{ selection: [value: AnalysisAreaSelection | null] }>()
 
 const mapElement = ref<HTMLDivElement | null>(null)
@@ -46,7 +50,7 @@ const selectionLayer = new VectorLayer({
   }),
 })
 
-function publishSelection(method: AnalysisAreaMethod, feature: import('ol/Feature').default) {
+function publishSelection(method: AnalysisAreaMethod, feature: Feature) {
   const geometry = feature.getGeometry()
   if (!geometry) return
   const wgs84Geometry = geometry.clone().transform('EPSG:3857', 'EPSG:4326')
@@ -60,6 +64,16 @@ function publishSelection(method: AnalysisAreaMethod, feature: import('ol/Featur
         : Math.round(getArea(geometry, { projection: 'EPSG:3857' })),
     source_area_id: method === 'reference_area' ? (props.collection?.features[0]?.properties.area_id ?? null) : null,
   })
+}
+
+function renderInitialSelection(selection: AnalysisAreaSelection | null | undefined) {
+  selectionSource.clear()
+  if (!selection) return
+  const feature = new GeoJSON().readFeature(
+    { type: 'Feature', geometry: selection.geometry, properties: {} },
+    { dataProjection: 'EPSG:4326', featureProjection: 'EPSG:3857' },
+  ) as Feature
+  selectionSource.addFeature(feature)
 }
 
 function renderAreas(collection: ReferenceAreaFeatureCollection | null) {
@@ -155,9 +169,11 @@ onMounted(() => {
     ]),
   })
   renderAreas(props.collection)
+  renderInitialSelection(props.initialSelection)
 })
 
 watch(() => props.collection, renderAreas, { deep: true })
+watch(() => props.initialSelection, renderInitialSelection, { deep: true })
 onBeforeUnmount(() => map?.setTarget(undefined))
 </script>
 
