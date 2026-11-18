@@ -86,3 +86,54 @@ export interface AnalysisTaskDraftCollection {
   items: AnalysisTaskDraftResponse[]
   total: number
 }
+
+export type ManagementUnitType = 'irrigation_district' | 'management_zone' | 'custom'
+
+export interface ManagementUnitFeature {
+  type: 'Feature'
+  id: string
+  geometry: {
+    type: 'Polygon' | 'MultiPolygon'
+    coordinates: number[][][] | number[][][][]
+  }
+  properties: {
+    unit_id: string
+    revision: number
+    name: string
+    unit_type: ManagementUnitType
+    valid_start: string
+    valid_end: string
+    root_unit_id: string
+    root_revision: number
+    parent_unit_id: string | null
+    parent_revision: number | null
+    area_square_metres: number
+    source_title: string
+    source_url: string | null
+    quality_status: 'illustrative' | 'unverified' | 'verified'
+    quality_statement: string
+    status: 'draft' | 'active' | 'superseded' | 'withdrawn'
+    changed_by: string
+    changed_at: string
+  }
+}
+
+export interface ManagementUnitFeatureCollection {
+  type: 'FeatureCollection'
+  features: ManagementUnitFeature[]
+}
+
+export interface ManagementUnitCreate {
+  name: string
+  unit_type: ManagementUnitType
+  valid_start: string
+  valid_end: string
+  parent: { unit_id: string; revision: number } | null
+  geometry: ManagementUnitFeature['geometry']
+  source_title: string
+  source_url: string | null
+  quality_status: 'unverified' | 'verified'
+  quality_statement: string
+  status: 'draft' | 'active'
+  changed_by: string
+}

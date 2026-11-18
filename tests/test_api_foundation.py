@@ -50,3 +50,4 @@ def test_openapi_operation_ids_are_unique_and_stable() -> None:
     assert len(operation_ids) == len(set(operation_ids))
     assert "health-liveness" in operation_ids
     assert "meta-metadata" in operation_ids
+    assert "/api/v1/management-units" in schema["paths"]

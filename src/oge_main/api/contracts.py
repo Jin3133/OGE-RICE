@@ -134,3 +134,69 @@ class AnalysisTaskDraftResponse(ApiModel):
 class AnalysisTaskDraftCollection(ApiModel):
     items: list[AnalysisTaskDraftResponse]
     total: int
+
+
+class ManagementUnitGeometry(ApiModel):
+    type: Literal["Polygon", "MultiPolygon"]
+    coordinates: list[Any]
+
+
+class ManagementUnitParent(ApiModel):
+    unit_id: str = Field(min_length=1, max_length=100)
+    revision: int = Field(ge=1)
+
+
+class ManagementUnitCreate(ApiModel):
+    name: str = Field(min_length=2, max_length=120)
+    unit_type: Literal["irrigation_district", "management_zone", "custom"]
+    valid_start: date
+    valid_end: date
+    parent: ManagementUnitParent | None = None
+    geometry: ManagementUnitGeometry
+    source_title: str = Field(min_length=2, max_length=300)
+    source_url: str | None = Field(default=None, max_length=1000)
+    quality_status: Literal["unverified", "verified"] = "unverified"
+    quality_statement: str = Field(min_length=2, max_length=1000)
+    status: Literal["draft", "active"] = "draft"
+    changed_by: str = Field(min_length=1, max_length=100)
+
+    @model_validator(mode="after")
+    def validate_hierarchy_and_period(self) -> Self:
+        if self.valid_start > self.valid_end:
+            raise ValueError("valid_start must not be after valid_end")
+        if (self.unit_type == "irrigation_district") == (self.parent is not None):
+            raise ValueError("only non-root management units require a parent")
+        return self
+
+
+class ManagementUnitProperties(ApiModel):
+    unit_id: str
+    revision: int
+    name: str
+    unit_type: Literal["irrigation_district", "management_zone", "custom"]
+    valid_start: date
+    valid_end: date
+    root_unit_id: str
+    root_revision: int
+    parent_unit_id: str | None
+    parent_revision: int | None
+    area_square_metres: float
+    source_title: str
+    source_url: str | None
+    quality_status: Literal["illustrative", "unverified", "verified"]
+    quality_statement: str
+    status: Literal["draft", "active", "superseded", "withdrawn"]
+    changed_by: str
+    changed_at: datetime
+
+
+class ManagementUnitFeature(ApiModel):
+    type: Literal["Feature"] = "Feature"
+    id: str
+    geometry: dict[str, Any]
+    properties: ManagementUnitProperties
+
+
+class ManagementUnitFeatureCollection(ApiModel):
+    type: Literal["FeatureCollection"] = "FeatureCollection"
+    features: list[ManagementUnitFeature]

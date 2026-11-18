@@ -5,6 +5,9 @@ import type {
   AnalysisTaskDraftResponse,
   AnalysisTaskDraftRevisionCreate,
   HealthResponse,
+  ManagementUnitCreate,
+  ManagementUnitFeature,
+  ManagementUnitFeatureCollection,
   ReferenceAreaFeatureCollection,
 } from '@/types/api'
 
@@ -56,6 +59,16 @@ export const api = {
       body: JSON.stringify(payload),
     }),
   taskDrafts: () => request<AnalysisTaskDraftCollection>('/api/v1/analysis-task-drafts'),
+  managementUnits: () => request<ManagementUnitFeatureCollection>('/api/v1/management-units'),
+  createManagementUnit: (payload: ManagementUnitCreate, idempotencyKey: string) =>
+    request<ManagementUnitFeature>('/api/v1/management-units', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Idempotency-Key': idempotencyKey,
+      },
+      body: JSON.stringify(payload),
+    }),
   createTaskDraftRevision: (
     draftId: string,
     payload: AnalysisTaskDraftRevisionCreate,
