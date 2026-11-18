@@ -211,7 +211,49 @@
 
 业务后台只依赖遥感Provider的四项能力：提交分析任务、查询状态、获取候选掩膜及有效观测资产、获取稳定模型和数据版本。OGE脚本、本地模型或其他平台都应适配该接口。业务层不得依赖平台私有临时路径、页面会话图层或未经版本化的“最新结果”。
 
-## 12. 契约来源与验证
+## 12. 无地理参考影像配准
+
+### 12.1 拟合仿射变换
+
+`POST /api/v1/georeferencing/fit`
+
+接口接收图像尺寸、至少三个像素—地图控制点及可选的像素边界。控制点的地图坐标采用WGS 84经纬度；服务端在明确的投影坐标系中拟合仿射模型并计算米级残差。海门区首版默认使用`EPSG:32651`。
+
+请求示例：
+
+```json
+{
+  "image_id": "yuelai-irrigation-district",
+  "image_width": 8056,
+  "image_height": 9111,
+  "projected_crs": "EPSG:32651",
+  "control_points": [
+    {
+      "point_id": "gcp-1",
+      "pixel_x": 100,
+      "pixel_y": 100,
+      "longitude": 121.431,
+      "latitude": 31.937
+    }
+  ],
+  "pixel_boundary": {
+    "type": "Polygon",
+    "coordinates": [[[100, 100], [7000, 200], [7200, 8200], [200, 8000], [100, 100]]]
+  }
+}
+```
+
+响应包括：
+
+- 仿射模型的东西和南北方向系数；
+- 每个控制点的预测位置、分方向残差和平面误差；
+- 控制点数量、矩阵秩、RMSE和最大误差；
+- 像素边界转换得到的WGS 84 GeoJSON草稿；
+- 固定的`unverified`质量状态。
+
+接口拒绝少于三个控制点、重复源/目标位置、共线源点、图像范围外控制点、非投影拟合坐标系和未闭合边界环。拟合接口无状态，不直接写入管理单元或覆盖原始影像；配准会话保存和人工确认属于后续独立写入流程。
+
+## 13. 契约来源与验证
 
 - 领域模型：`src/oge_main/domain/models.py`；
 - 空间统计任务：`src/oge_main/application/spatial_statistics.py`；
@@ -220,5 +262,7 @@
 - 正式示例：`examples/domain/v1/`；
 - 空间任务示例：`examples/spatial-statistics/v1/`；
 - 自动测试：`tests/test_domain_models.py`、`tests/test_assessment_service.py`、`tests/test_spatial_statistics.py`。
+- 配准核心与接口：`src/oge_main/application/georeferencing.py`、`src/oge_main/api/routes/georeferencing.py`；
+- 配准测试：`tests/test_georeferencing.py`、`tests/test_georeferencing_api.py`。
 
 字段调整应先修改模型与测试，再重新导出Schema并更新本文。只修改前端或数据库字段、不更新契约视为接口漂移。

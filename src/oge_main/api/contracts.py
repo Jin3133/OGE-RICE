@@ -200,3 +200,72 @@ class ManagementUnitFeature(ApiModel):
 class ManagementUnitFeatureCollection(ApiModel):
     type: Literal["FeatureCollection"] = "FeatureCollection"
     features: list[ManagementUnitFeature]
+
+
+class GeoreferencingControlPoint(ApiModel):
+    point_id: str = Field(min_length=1, max_length=100)
+    pixel_x: float = Field(ge=0)
+    pixel_y: float = Field(ge=0)
+    longitude: float = Field(ge=-180, le=180)
+    latitude: float = Field(ge=-90, le=90)
+
+
+class PixelBoundaryGeometry(ApiModel):
+    type: Literal["Polygon", "MultiPolygon"]
+    coordinates: list[Any]
+
+
+class GeoreferencingFitRequest(ApiModel):
+    image_id: str = Field(min_length=1, max_length=200)
+    image_width: int = Field(gt=0)
+    image_height: int = Field(gt=0)
+    projected_crs: str = Field(default="EPSG:32651", min_length=4, max_length=100)
+    control_points: list[GeoreferencingControlPoint] = Field(min_length=3, max_length=100)
+    pixel_boundary: PixelBoundaryGeometry | None = None
+
+    @model_validator(mode="after")
+    def validate_pixel_extent(self) -> Self:
+        outside = [
+            point.point_id
+            for point in self.control_points
+            if point.pixel_x > self.image_width or point.pixel_y > self.image_height
+        ]
+        if outside:
+            raise ValueError(f"control points outside image extent: {', '.join(outside)}")
+        return self
+
+
+class GeoreferencingResidual(ApiModel):
+    point_id: str
+    predicted_easting: float
+    predicted_northing: float
+    residual_easting: float
+    residual_northing: float
+    error_metres: float
+
+
+class GeoreferencingQualityReport(ApiModel):
+    method: Literal["affine_least_squares"] = "affine_least_squares"
+    projected_crs: str
+    coefficients_easting: list[float]
+    coefficients_northing: list[float]
+    control_point_count: int
+    design_matrix_rank: int
+    rmse_metres: float
+    maximum_error_metres: float
+    residuals: list[GeoreferencingResidual]
+
+
+class Wgs84BoundaryFeature(ApiModel):
+    type: Literal["Feature"] = "Feature"
+    geometry: dict[str, Any]
+    properties: dict[str, Any]
+
+
+class GeoreferencingFitResponse(ApiModel):
+    image_id: str
+    image_width: int
+    image_height: int
+    quality_status: Literal["unverified"] = "unverified"
+    report: GeoreferencingQualityReport
+    boundary: Wgs84BoundaryFeature | None

@@ -46,7 +46,11 @@ def install_exception_handlers(app: FastAPI) -> None:
 
     @app.exception_handler(RequestValidationError)
     async def handle_validation(request: Request, error: RequestValidationError) -> JSONResponse:
-        first = error.errors()[0] if error.errors() else {}
+        validation_errors = [
+            {key: value for key, value in item.items() if key != "ctx"}
+            for item in error.errors()
+        ]
+        first = validation_errors[0] if validation_errors else {}
         location = first.get("loc", ())
         field_name = ".".join(str(part) for part in location) or None
         return _response(
@@ -56,7 +60,7 @@ def install_exception_handlers(app: FastAPI) -> None:
                 code="CONTRACT_VALIDATION_FAILED",
                 message="request does not satisfy the API contract",
                 field_name=field_name,
-                details={"errors": error.errors()},
+                details={"errors": validation_errors},
             ),
         )
 
