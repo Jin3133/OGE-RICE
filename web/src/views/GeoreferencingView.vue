@@ -4,6 +4,7 @@ import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import GeoreferenceSourceMap from '@/components/GeoreferenceSourceMap.vue'
 import GeoreferenceTargetMap from '@/components/GeoreferenceTargetMap.vue'
 import { api } from '@/services/api'
+import { loadGeoreferencingImage, saveGeoreferencingImage } from '@/services/localImageCache'
 import type {
   GeoreferencingControlPoint,
   GeoreferencingFitResponse,
@@ -31,10 +32,7 @@ const statusText = computed(() => {
   return '已满足拟合条件，建议继续补充至 6–10 组'
 })
 
-function readImage(event: Event) {
-  const file = (event.target as HTMLInputElement).files?.[0]
-  if (!file) return
-  error.value = ''
+function displayImage(file: File, preserveResult = false) {
   if (imageUrl.value) URL.revokeObjectURL(imageUrl.value)
   const url = URL.createObjectURL(file)
   const image = new Image()
@@ -44,9 +42,10 @@ function readImage(event: Event) {
     imageWidth.value = image.naturalWidth
     imageHeight.value = image.naturalHeight
     pendingPixel.value = null
-    result.value = null
+    if (!preserveResult) result.value = null
     if (points.value.some((point) => point.pixel_x > image.naturalWidth || point.pixel_y > image.naturalHeight)) {
       points.value = []
+      result.value = null
     }
   }
   image.onerror = () => {
@@ -54,6 +53,18 @@ function readImage(event: Event) {
     error.value = '影像无法读取，请选择 PNG、JPG 或浏览器支持的图像。'
   }
   image.src = url
+}
+
+async function readImage(event: Event) {
+  const file = (event.target as HTMLInputElement).files?.[0]
+  if (!file) return
+  error.value = ''
+  displayImage(file)
+  try {
+    await saveGeoreferencingImage(file)
+  } catch {
+    error.value = '影像已加载，但浏览器本地缓存写入失败；刷新后需要重新选择。'
+  }
 }
 
 function readBoundary(event: Event) {
@@ -204,7 +215,7 @@ watch([imageName, imageWidth, imageHeight, boundaryName, pixelBoundary, points, 
   }))
 }, { deep: true })
 
-onMounted(() => {
+onMounted(async () => {
   try {
     const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null')
     if (!saved) return
@@ -217,6 +228,12 @@ onMounted(() => {
     result.value = saved.result || null
   } catch {
     localStorage.removeItem(STORAGE_KEY)
+  }
+  try {
+    const cachedImage = await loadGeoreferencingImage()
+    if (cachedImage) displayImage(cachedImage, true)
+  } catch {
+    // Metadata and control points remain usable even if IndexedDB is unavailable.
   }
 })
 
