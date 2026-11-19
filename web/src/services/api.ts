@@ -7,6 +7,7 @@ import type {
   HealthResponse,
   GeoreferencingFitRequest,
   GeoreferencingFitResponse,
+  GeoreferencingSuggestionResponse,
   ManagementUnitCreate,
   ManagementUnitFeature,
   ManagementUnitFeatureCollection,
@@ -89,4 +90,17 @@ export const api = {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
     }),
+  suggestGeoreferencing: (image: File, extent: [number, number, number, number]) => {
+    const body = new FormData()
+    body.append('source_image', image)
+    body.append('west', String(extent[0]))
+    body.append('south', String(extent[1]))
+    body.append('east', String(extent[2]))
+    body.append('north', String(extent[3]))
+    body.append('maximum_points', '12')
+    return request<GeoreferencingSuggestionResponse>('/api/v1/georeferencing/suggest', {
+      method: 'POST',
+      body,
+    })
+  },
 }

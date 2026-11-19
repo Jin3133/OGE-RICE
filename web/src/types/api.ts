@@ -146,6 +146,14 @@ export interface GeoreferencingControlPoint {
   latitude: number
 }
 
+export interface GeoreferencingSuggestionResponse {
+  method: 'sift_affine_ransac_v1'
+  status: 'review_required'
+  detected_matches: number
+  ransac_inliers: number
+  points: Array<GeoreferencingControlPoint & { match_distance: number }>
+}
+
 export interface PixelBoundaryGeometry {
   type: 'Polygon' | 'MultiPolygon'
   coordinates: number[][][] | number[][][][]

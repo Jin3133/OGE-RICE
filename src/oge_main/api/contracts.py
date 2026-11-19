@@ -210,6 +210,18 @@ class GeoreferencingControlPoint(ApiModel):
     latitude: float = Field(ge=-90, le=90)
 
 
+class SuggestedGeoreferencingControlPoint(GeoreferencingControlPoint):
+    match_distance: float = Field(ge=0)
+
+
+class GeoreferencingSuggestionResponse(ApiModel):
+    method: Literal["sift_affine_ransac_v1"]
+    status: Literal["review_required"] = "review_required"
+    detected_matches: int = Field(ge=0)
+    ransac_inliers: int = Field(ge=0)
+    points: list[SuggestedGeoreferencingControlPoint]
+
+
 class PixelBoundaryGeometry(ApiModel):
     type: Literal["Polygon", "MultiPolygon"]
     coordinates: list[Any]

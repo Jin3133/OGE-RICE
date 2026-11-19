@@ -23,8 +23,13 @@ const pendingPixel = ref<{ x: number; y: number } | null>(null)
 const result = ref<GeoreferencingFitResponse | null>(null)
 const fitting = ref(false)
 const error = ref('')
+const sourceFile = ref<File | null>(null)
+const targetExtent = ref<[number, number, number, number] | null>(null)
+const candidatePointIds = ref<string[]>([])
+const suggesting = ref(false)
+const suggestionSummary = ref('')
 
-const canFit = computed(() => points.value.length >= 3 && imageWidth.value > 0 && imageHeight.value > 0)
+const canFit = computed(() => points.value.length >= 3 && candidatePointIds.value.length === 0 && imageWidth.value > 0 && imageHeight.value > 0)
 const statusText = computed(() => {
   if (!imageUrl.value) return '请先选择源影像'
   if (pendingPixel.value) return '源点已选，请在右侧地图选择同一位置'
@@ -33,6 +38,7 @@ const statusText = computed(() => {
 })
 
 function displayImage(file: File, preserveResult = false) {
+  sourceFile.value = file
   if (imageUrl.value) URL.revokeObjectURL(imageUrl.value)
   const url = URL.createObjectURL(file)
   const image = new Image()
@@ -128,6 +134,7 @@ function readControlPoints(event: Event) {
         longitude: Number(point.longitude),
         latitude: Number(point.latitude),
       }))
+      candidatePointIds.value = points.value.map((point) => point.point_id)
       pendingPixel.value = null
       result.value = null
     } catch (reason) {
@@ -156,6 +163,7 @@ function selectTarget(value: { longitude: number; latitude: number }) {
 }
 
 function removePoint(index: number) {
+  candidatePointIds.value = candidatePointIds.value.filter((id) => id !== points.value[index]?.point_id)
   points.value.splice(index, 1)
   result.value = null
 }
@@ -164,6 +172,37 @@ function clearPoints() {
   points.value = []
   pendingPixel.value = null
   result.value = null
+  candidatePointIds.value = []
+}
+
+function confirmCandidate(pointId: string) {
+  candidatePointIds.value = candidatePointIds.value.filter((id) => id !== pointId)
+  result.value = null
+}
+
+function confirmAllCandidates() {
+  candidatePointIds.value = []
+  result.value = null
+}
+
+async function suggestPoints() {
+  if (!sourceFile.value || !targetExtent.value) return
+  if (points.value.length && !window.confirm('自动推荐将替换当前控制点，是否继续？')) return
+  suggesting.value = true
+  error.value = ''
+  suggestionSummary.value = ''
+  try {
+    const response = await api.suggestGeoreferencing(sourceFile.value, targetExtent.value)
+    points.value = response.points.map(({ match_distance: _distance, ...point }) => point)
+    candidatePointIds.value = points.value.map((point) => point.point_id)
+    pendingPixel.value = null
+    result.value = null
+    suggestionSummary.value = `检出 ${response.detected_matches} 组初始匹配，RANSAC 保留 ${response.ransac_inliers} 组，推荐 ${response.points.length} 个待确认点。`
+  } catch (reason) {
+    error.value = reason instanceof Error ? reason.message : '自动推荐失败'
+  } finally {
+    suggesting.value = false
+  }
 }
 
 async function fit() {
@@ -203,7 +242,7 @@ function exportSession() {
   URL.revokeObjectURL(anchor.href)
 }
 
-watch([imageName, imageWidth, imageHeight, boundaryName, pixelBoundary, points, result], () => {
+watch([imageName, imageWidth, imageHeight, boundaryName, pixelBoundary, points, candidatePointIds, result], () => {
   localStorage.setItem(STORAGE_KEY, JSON.stringify({
     imageName: imageName.value,
     imageWidth: imageWidth.value,
@@ -211,6 +250,7 @@ watch([imageName, imageWidth, imageHeight, boundaryName, pixelBoundary, points, 
     boundaryName: boundaryName.value,
     pixelBoundary: pixelBoundary.value,
     points: points.value,
+    candidatePointIds: candidatePointIds.value,
     result: result.value,
   }))
 }, { deep: true })
@@ -225,6 +265,7 @@ onMounted(async () => {
     boundaryName.value = saved.boundaryName || ''
     pixelBoundary.value = saved.pixelBoundary || null
     points.value = Array.isArray(saved.points) ? saved.points : []
+    candidatePointIds.value = Array.isArray(saved.candidatePointIds) ? saved.candidatePointIds : []
     result.value = saved.result || null
   } catch {
     localStorage.removeItem(STORAGE_KEY)
@@ -273,22 +314,24 @@ onBeforeUnmount(() => {
         :boundary="result?.boundary?.geometry || null"
         :awaiting-target="Boolean(pendingPixel)"
         @target="selectTarget"
+        @extent="targetExtent = $event"
       />
     </div>
     <div v-else class="georef-empty">选择源影像后将在此显示双视图。影像仅在本机浏览器中读取，不上传至后台。</div>
 
     <div class="georef-bottom-grid">
       <section class="gcp-panel">
-        <div class="panel-heading"><div><span class="section-tag">GROUND CONTROL POINTS</span><h3>控制点对</h3></div><div class="gcp-heading-actions"><label>导入候选<input type="file" accept=".json,application/json" @change="readControlPoints" /></label><button type="button" :disabled="!points.length" @click="clearPoints">清空</button></div></div>
+        <div class="panel-heading"><div><span class="section-tag">GROUND CONTROL POINTS</span><h3>控制点对</h3></div><div class="gcp-heading-actions"><button type="button" :disabled="!sourceFile || !targetExtent || suggesting" @click="suggestPoints">{{ suggesting ? '正在匹配…' : '自动推荐' }}</button><button v-if="candidatePointIds.length" type="button" @click="confirmAllCandidates">全部确认</button><label>导入候选<input type="file" accept=".json,application/json" @change="readControlPoints" /></label><button type="button" :disabled="!points.length" @click="clearPoints">清空</button></div></div>
+        <p v-if="suggestionSummary" class="gcp-suggestion-note">{{ suggestionSummary }} 候选点不会自动进入正式拟合，请逐点核对或点击“全部确认”。</p>
         <div v-if="!points.length" class="history-empty">尚无控制点。请先点击左侧源影像，再点击右侧地图中的同一地物。</div>
         <div v-else class="gcp-table-wrap">
           <table class="gcp-table"><thead><tr><th>#</th><th>像素 X / Y</th><th>经度 / 纬度</th><th>误差</th><th></th></tr></thead><tbody>
             <tr v-for="(point, index) in points" :key="point.point_id">
-              <td><b>{{ index + 1 }}</b></td>
+              <td><b>{{ index + 1 }}</b><small v-if="candidatePointIds.includes(point.point_id)" class="candidate-badge">候选</small></td>
               <td>{{ point.pixel_x.toFixed(1) }} / {{ point.pixel_y.toFixed(1) }}</td>
               <td>{{ point.longitude.toFixed(6) }} / {{ point.latitude.toFixed(6) }}</td>
               <td>{{ result ? `${result.report.residuals[index]?.error_metres.toFixed(2) ?? '—'} m` : '待计算' }}</td>
-              <td><button type="button" @click="removePoint(index)">删除</button></td>
+              <td><button v-if="candidatePointIds.includes(point.point_id)" type="button" @click="confirmCandidate(point.point_id)">确认</button><button type="button" @click="removePoint(index)">删除</button></td>
             </tr>
           </tbody></table>
         </div>
@@ -300,7 +343,7 @@ onBeforeUnmount(() => {
           <div class="report-metrics"><div><span>RMSE</span><strong>{{ result.report.rmse_metres.toFixed(2) }} m</strong></div><div><span>最大误差</span><strong>{{ result.report.maximum_error_metres.toFixed(2) }} m</strong></div><div><span>有效点</span><strong>{{ result.report.control_point_count }}</strong></div><div><span>边界状态</span><strong>未核验</strong></div></div>
           <p>结果已转换为 WGS 84 草稿边界。仍需检查控制点分布和卫星图叠加效果，不能仅凭 RMSE 自动认定为正式灌区边界。</p>
         </template>
-        <p v-else>至少录入 3 组不共线控制点后可以计算；实际建议使用 6–10 组，覆盖图像四角、中心和明显转折区域。</p>
+        <p v-else>至少录入 3 组不共线且已确认的控制点后可以计算；实际建议使用 6–10 组，覆盖图像四角、中心和明显转折区域。</p>
         <button type="button" :disabled="!canFit || fitting" @click="fit">{{ fitting ? '正在计算…' : '计算仿射配准' }}</button>
         <button class="is-secondary" type="button" :disabled="!points.length" @click="exportSession">导出配准会话</button>
         <p v-if="error" class="submit-error">{{ error }}</p>

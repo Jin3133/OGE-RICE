@@ -15,6 +15,23 @@
 | [InteractiveRasterGeoreferencer](https://github.com/drFaustino/InteractiveRasterGeoreferencer) | 控制点启停、预览、撤销、原图不覆盖 | GPL-3.0；只比较产品行为，不复制代码 |
 | [simple-georeferencer](https://github.com/evanapplegate/simple-georeferencer) | 左侧源图、右侧地图、成对选点、透明叠加预览 | 仓库未见许可证；只参考交互思路，不使用其代码 |
 | [MapKnitter](https://github.com/publiclab/mapknitter) | 成熟的多人地图配准工作流 | Rails/PostGIS/GDAL 体系过重，不作为首版依赖 |
+| [Allmaps](https://github.com/allmaps/allmaps) | 浏览器双视图、掩膜与控制点分离存储、轻量 Georeference Annotation | 主要面向 IIIF；借鉴交互和可交换记录，不引入完整体系 |
+| [Magic Georeferencer](https://plugins.qgis.org/plugins/magic_georeferencer/) | 深度特征匹配、自动生成候选控制点、人工复核 | 模型体积和运行成本较高；作为后续增强方向 |
+| QGIS Georeferencer | 多种变换模型、逐点残差、禁用异常点和 GeoTIFF 导出 | 借鉴质量控制流程，不嵌入桌面端组件 |
+
+## 智能辅助配准设计
+
+自动化采用“建议而非裁决”的原则。用户先在目标地图缩放到大致区域，系统获取当前范围的参考卫星影像，以 SIFT 局部特征建立初始匹配，再使用仿射 RANSAC 剔除明显错误匹配。候选点按源图网格分散选取，避免全部集中在单一区域。
+
+候选点必须经过以下流程才能参与拟合：
+
+1. 系统生成候选并标记为`review_required`；
+2. 用户在双视图中逐点核对，可以确认或删除，也可以人工补点；
+3. 未确认候选存在时，正式拟合按钮保持禁用；
+4. 确认后仍需检查空间分布、逐点残差和边界叠加效果；
+5. 自动候选、人工确认和最终配准结果分别记录，自动推荐绝不直接产生`verified`边界。
+
+首版使用传统局部特征，原因是运行轻量、解释清楚且易于本地部署。若跨年份、跨传感器影像导致局部特征不足，再评估 MatchAnything、LoFTR 或 DINO 系列深度匹配模型；增强模型仍只负责候选推荐，不绕过人工确认。
 
 ## 首版方法选择
 

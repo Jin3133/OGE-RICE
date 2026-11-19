@@ -1,9 +1,12 @@
 from __future__ import annotations
 
+import cv2
+import numpy as np
 from fastapi.testclient import TestClient
 from rasterio.warp import transform
 
 from oge_main.api import create_app
+from oge_main.api.routes import georeferencing
 
 
 def target(x: float, y: float) -> tuple[float, float]:
@@ -70,3 +73,44 @@ def test_fit_endpoint_rejects_point_outside_image() -> None:
 
     assert response.status_code == 422
     assert response.json()["error"]["code"] == "CONTRACT_VALIDATION_FAILED"
+
+
+def test_suggestion_endpoint_returns_review_candidates(monkeypatch) -> None:
+    rng = np.random.default_rng(51)
+    source = np.full((600, 800, 3), 235, dtype=np.uint8)
+    for _ in range(140):
+        x, y = rng.integers([20, 20], [780, 580])
+        cv2.circle(source, (int(x), int(y)), 6, (20, 80, 140), -1)
+    cv2.putText(source, "YUELAI", (160, 320), cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 0, 0), 5)
+    matrix = np.float32([[0.95, -0.05, 55], [0.04, 0.95, 38]])
+    reference = cv2.warpAffine(source, matrix, (900, 700), borderValue=(245, 245, 245))
+    source_bytes = cv2.imencode(".png", source)[1].tobytes()
+    reference_bytes = cv2.imencode(".png", reference)[1].tobytes()
+
+    class ReferenceResponse:
+        content = reference_bytes
+
+        @staticmethod
+        def raise_for_status() -> None:
+            return None
+
+    monkeypatch.setattr(georeferencing.requests, "get", lambda *args, **kwargs: ReferenceResponse())
+    response = TestClient(create_app()).post(
+        "/api/v1/georeferencing/suggest",
+        files={"source_image": ("source.png", source_bytes, "image/png")},
+        data={
+            "west": "121.3",
+            "south": "31.8",
+            "east": "121.6",
+            "north": "32.0",
+            "maximum_points": "8",
+        },
+    )
+
+    assert response.status_code == 200
+    body = response.json()
+    assert body["status"] == "review_required"
+    assert body["method"] == "sift_affine_ransac_v1"
+    assert 4 <= len(body["points"]) <= 8
+    assert all(121.3 <= point["longitude"] <= 121.6 for point in body["points"])
+    assert all(31.8 <= point["latitude"] <= 32.0 for point in body["points"])

@@ -7,7 +7,7 @@ import Point from 'ol/geom/Point'
 import TileLayer from 'ol/layer/Tile'
 import VectorLayer from 'ol/layer/Vector'
 import Map from 'ol/Map'
-import { fromLonLat } from 'ol/proj'
+import { fromLonLat, transformExtent } from 'ol/proj'
 import OSM from 'ol/source/OSM'
 import VectorSource from 'ol/source/Vector'
 import XYZ from 'ol/source/XYZ'
@@ -22,7 +22,10 @@ const props = defineProps<{
   boundary: PixelBoundaryGeometry | null
   awaitingTarget: boolean
 }>()
-const emit = defineEmits<{ target: [value: { longitude: number; latitude: number }] }>()
+const emit = defineEmits<{
+  target: [value: { longitude: number; latitude: number }]
+  extent: [value: [number, number, number, number]]
+}>()
 
 const element = ref<HTMLDivElement | null>(null)
 const satelliteVisible = ref(true)
@@ -75,6 +78,14 @@ function toggleBasemap() {
   streetLayer.setVisible(!satelliteVisible.value)
 }
 
+function emitExtent() {
+  if (!map) return
+  const size = map.getSize()
+  if (!size) return
+  const extent = transformExtent(map.getView().calculateExtent(size), 'EPSG:3857', 'EPSG:4326')
+  emit('extent', [extent[0], extent[1], extent[2], extent[3]])
+}
+
 onMounted(() => {
   map = new Map({
     target: element.value!,
@@ -87,8 +98,10 @@ onMounted(() => {
     const coordinate = new Point([longitude, latitude]).transform('EPSG:3857', 'EPSG:4326').getCoordinates()
     emit('target', { longitude: coordinate[0], latitude: coordinate[1] })
   })
+  map.on('moveend', emitExtent)
   renderPoints()
   renderBoundary()
+  emitExtent()
 })
 
 watch(() => props.points, renderPoints, { deep: true })

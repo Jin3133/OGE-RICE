@@ -5,19 +5,99 @@ from __future__ import annotations
 from collections.abc import Iterable
 from typing import Any
 
-from fastapi import APIRouter
+from uuid import uuid4
+
+import cv2
+import numpy as np
+import requests
+from fastapi import APIRouter, File, Form, UploadFile
 
 from oge_main.api.contracts import (
     GeoreferencingFitRequest,
     GeoreferencingFitResponse,
     GeoreferencingQualityReport,
     GeoreferencingResidual,
+    GeoreferencingSuggestionResponse,
+    SuggestedGeoreferencingControlPoint,
     Wgs84BoundaryFeature,
 )
 from oge_main.api.errors import ApiProblem
-from oge_main.application import GroundControlPoint, fit_affine_georeferencing
+from oge_main.application import (
+    GroundControlPoint,
+    fit_affine_georeferencing,
+    suggest_control_points,
+)
 
 router = APIRouter(prefix="/georeferencing", tags=["georeferencing"])
+
+REFERENCE_EXPORT_URL = (
+    "https://server.arcgisonline.com/ArcGIS/rest/services/"
+    "World_Imagery/MapServer/export"
+)
+
+
+@router.post("/suggest", response_model=GeoreferencingSuggestionResponse)
+def suggest_georeferencing_points(
+    source_image: UploadFile = File(...),
+    west: float = Form(..., ge=-180, le=180),
+    south: float = Form(..., ge=-90, le=90),
+    east: float = Form(..., ge=-180, le=180),
+    north: float = Form(..., ge=-90, le=90),
+    maximum_points: int = Form(12, ge=3, le=30),
+) -> GeoreferencingSuggestionResponse:
+    if west >= east or south >= north:
+        raise ApiProblem(422, "INVALID_SEARCH_EXTENT", "search extent is invalid")
+    source_bytes = source_image.file.read()
+    if not source_bytes:
+        raise ApiProblem(422, "EMPTY_SOURCE_IMAGE", "source image is empty")
+    try:
+        response = requests.get(
+            REFERENCE_EXPORT_URL,
+            params={
+                "bbox": f"{west},{south},{east},{north}",
+                "bboxSR": "4326",
+                "imageSR": "4326",
+                "size": "1800,1400",
+                "format": "png32",
+                "f": "image",
+            },
+            timeout=30,
+        )
+        response.raise_for_status()
+        reference_bytes = response.content
+        reference = cv2.imdecode(
+            np.frombuffer(reference_bytes, dtype=np.uint8), cv2.IMREAD_COLOR
+        )
+        if reference is None:
+            raise ValueError("reference imagery could not be decoded")
+        result = suggest_control_points(
+            source_bytes, reference_bytes, maximum_points=maximum_points
+        )
+    except requests.RequestException as error:
+        raise ApiProblem(
+            502, "REFERENCE_IMAGERY_UNAVAILABLE", "reference imagery is temporarily unavailable"
+        ) from error
+    except ValueError as error:
+        raise ApiProblem(422, "CONTROL_POINT_SUGGESTION_REJECTED", str(error)) from error
+
+    reference_height, reference_width = reference.shape[:2]
+    points = [
+        SuggestedGeoreferencingControlPoint(
+            point_id=f"suggested-{uuid4()}",
+            pixel_x=point.pixel_x,
+            pixel_y=point.pixel_y,
+            longitude=west + point.reference_x / reference_width * (east - west),
+            latitude=north - point.reference_y / reference_height * (north - south),
+            match_distance=point.match_distance,
+        )
+        for point in result.points
+    ]
+    return GeoreferencingSuggestionResponse(
+        method=result.method,
+        detected_matches=result.detected_matches,
+        ransac_inliers=result.ransac_inliers,
+        points=points,
+    )
 
 
 def _rings(geometry_type: str, coordinates: list[Any]) -> Iterable[list[list[float]]]:
