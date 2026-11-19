@@ -151,6 +151,17 @@ function selectPixel(value: { x: number; y: number }) {
 
 function selectTarget(value: { longitude: number; latitude: number }) {
   if (!pendingPixel.value) return
+  const duplicate = points.value.some((point) =>
+    (Math.abs(point.pixel_x - pendingPixel.value!.x) < 0.01
+      && Math.abs(point.pixel_y - pendingPixel.value!.y) < 0.01)
+    || (Math.abs(point.longitude - value.longitude) < 1e-8
+      && Math.abs(point.latitude - value.latitude) < 1e-8),
+  )
+  if (duplicate) {
+    error.value = '该源点或目标点已存在，请选择新的控制点位置。'
+    pendingPixel.value = null
+    return
+  }
   points.value.push({
     point_id: crypto.randomUUID(),
     pixel_x: pendingPixel.value.x,
@@ -160,6 +171,7 @@ function selectTarget(value: { longitude: number; latitude: number }) {
   })
   pendingPixel.value = null
   result.value = null
+  error.value = ''
 }
 
 function removePoint(index: number) {

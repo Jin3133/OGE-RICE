@@ -28,6 +28,8 @@ def test_suggests_spatially_distributed_ransac_inliers() -> None:
     assert result.detected_matches >= result.ransac_inliers >= 4
     assert 4 <= len(result.points) <= 10
     assert len({(int(point.pixel_x // 225), int(point.pixel_y // 175)) for point in result.points}) >= 3
+    assert len({(round(point.pixel_x), round(point.pixel_y)) for point in result.points}) == len(result.points)
+    assert len({(round(point.reference_x), round(point.reference_y)) for point in result.points}) == len(result.points)
 
 
 def test_rejects_featureless_images() -> None:

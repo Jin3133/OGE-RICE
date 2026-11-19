@@ -99,9 +99,20 @@ def suggest_control_points(
     # remaining slots.  This avoids returning many impressive-looking points in
     # one small corner, which is unsafe for georeferencing.
     ranked = sorted(inlier_indices, key=lambda index: matches[index].distance)
+    unique_ranked: list[int] = []
+    seen_source: set[tuple[int, int]] = set()
+    seen_reference: set[tuple[int, int]] = set()
+    for index in ranked:
+        source_key = tuple(int(round(value)) for value in source_positions[index])
+        reference_key = tuple(int(round(value)) for value in reference_positions[index])
+        if source_key in seen_source or reference_key in seen_reference:
+            continue
+        seen_source.add(source_key)
+        seen_reference.add(reference_key)
+        unique_ranked.append(index)
     cells: dict[tuple[int, int], int] = {}
     source_height, source_width = source_gray.shape
-    for index in ranked:
+    for index in unique_ranked:
         x, y = source_positions[index]
         cell = (min(3, int(4 * x / source_width)), min(3, int(4 * y / source_height)))
         cells.setdefault(cell, index)
