@@ -244,6 +244,9 @@ button, input { font: inherit; }
 .panel-heading h3, .georef-report h3 { margin: 6px 0 12px; font: 600 20px "Songti SC", STSong, serif; }
 .panel-heading button { padding: 6px 10px; border: 1px solid #c8d4ca; border-radius: 6px; color: #8b534c; background: #fff; font-size: 9px; cursor: pointer; }
 .panel-heading button:disabled { color: #aeb8b1; cursor: not-allowed; }
+.gcp-heading-actions { display: flex; gap: 7px; }
+.gcp-heading-actions label { position: relative; overflow: hidden; padding: 6px 10px; border: 1px solid #a9c2b1; border-radius: 6px; color: var(--green-700); background: #f4f8f4; font-size: 9px; cursor: pointer; }
+.gcp-heading-actions input { position: absolute; width: 1px; height: 1px; opacity: 0; }
 .gcp-table-wrap { max-height: 270px; overflow: auto; }
 .gcp-table { width: 100%; border-collapse: collapse; font-size: 10px; }
 .gcp-table th { position: sticky; top: 0; padding: 8px; color: var(--muted); background: #f6f8f4; text-align: left; font-weight: 650; }

@@ -85,6 +85,47 @@ function readBoundary(event: Event) {
   reader.readAsText(file)
 }
 
+function readControlPoints(event: Event) {
+  const file = (event.target as HTMLInputElement).files?.[0]
+  if (!file) return
+  error.value = ''
+  const reader = new FileReader()
+  reader.onload = () => {
+    try {
+      const document = JSON.parse(String(reader.result)) as {
+        points?: GeoreferencingControlPoint[]
+        control_points?: GeoreferencingControlPoint[]
+      }
+      const imported = document.points ?? document.control_points
+      if (!Array.isArray(imported) || imported.length < 3) throw new Error('至少需要 3 组控制点')
+      const valid = imported.every((point) =>
+        point.point_id
+        && Number.isFinite(point.pixel_x)
+        && Number.isFinite(point.pixel_y)
+        && Number.isFinite(point.longitude)
+        && Number.isFinite(point.latitude)
+        && point.pixel_x >= 0
+        && point.pixel_y >= 0
+        && (!imageWidth.value || point.pixel_x <= imageWidth.value)
+        && (!imageHeight.value || point.pixel_y <= imageHeight.value),
+      )
+      if (!valid) throw new Error('控制点字段不完整或超出当前影像范围')
+      points.value = imported.map((point) => ({
+        point_id: point.point_id,
+        pixel_x: Number(point.pixel_x),
+        pixel_y: Number(point.pixel_y),
+        longitude: Number(point.longitude),
+        latitude: Number(point.latitude),
+      }))
+      pendingPixel.value = null
+      result.value = null
+    } catch (reason) {
+      error.value = reason instanceof Error ? `控制点读取失败：${reason.message}` : '控制点读取失败'
+    }
+  }
+  reader.readAsText(file)
+}
+
 function selectPixel(value: { x: number; y: number }) {
   pendingPixel.value = value
   result.value = null
@@ -221,7 +262,7 @@ onBeforeUnmount(() => {
 
     <div class="georef-bottom-grid">
       <section class="gcp-panel">
-        <div class="panel-heading"><div><span class="section-tag">GROUND CONTROL POINTS</span><h3>控制点对</h3></div><button type="button" :disabled="!points.length" @click="clearPoints">清空</button></div>
+        <div class="panel-heading"><div><span class="section-tag">GROUND CONTROL POINTS</span><h3>控制点对</h3></div><div class="gcp-heading-actions"><label>导入候选<input type="file" accept=".json,application/json" @change="readControlPoints" /></label><button type="button" :disabled="!points.length" @click="clearPoints">清空</button></div></div>
         <div v-if="!points.length" class="history-empty">尚无控制点。请先点击左侧源影像，再点击右侧地图中的同一地物。</div>
         <div v-else class="gcp-table-wrap">
           <table class="gcp-table"><thead><tr><th>#</th><th>像素 X / Y</th><th>经度 / 纬度</th><th>误差</th><th></th></tr></thead><tbody>
