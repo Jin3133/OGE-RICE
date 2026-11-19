@@ -14,7 +14,12 @@ def main() -> None:
     parser.add_argument("task", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
-    task = json.loads(args.task.read_text(encoding="utf-8"))
+    task_path = args.task.resolve()
+    task = json.loads(task_path.read_text(encoding="utf-8"))
+    for unit in task.get("management_units", []):
+        mask_path = Path(unit["candidate_mask_path"])
+        if not mask_path.is_absolute():
+            unit["candidate_mask_path"] = str((task_path.parent / mask_path).resolve())
     result = run_assessment(task)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(
