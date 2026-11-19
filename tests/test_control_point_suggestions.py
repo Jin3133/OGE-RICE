@@ -30,6 +30,9 @@ def test_suggests_spatially_distributed_ransac_inliers() -> None:
     assert len({(int(point.pixel_x // 225), int(point.pixel_y // 175)) for point in result.points}) >= 3
     assert len({(round(point.pixel_x), round(point.pixel_y)) for point in result.points}) == len(result.points)
     assert len({(round(point.reference_x), round(point.reference_y)) for point in result.points}) == len(result.points)
+    for index, point in enumerate(result.points):
+        for other in result.points[index + 1 :]:
+            assert np.hypot(point.pixel_x - other.pixel_x, point.pixel_y - other.pixel_y) > 35
 
 
 def test_rejects_featureless_images() -> None:

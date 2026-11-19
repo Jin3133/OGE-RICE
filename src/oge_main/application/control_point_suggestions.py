@@ -80,16 +80,16 @@ def suggest_control_points(
     reference_positions = np.float32(
         [reference_keypoints[item.trainIdx].pt for item in matches]
     )
-    _, inlier_mask = cv2.estimateAffine2D(
+    affine, inlier_mask = cv2.estimateAffine2D(
         source_positions,
         reference_positions,
         method=cv2.RANSAC,
-        ransacReprojThreshold=5.0,
+        ransacReprojThreshold=2.5,
         maxIters=5000,
         confidence=0.995,
         refineIters=25,
     )
-    if inlier_mask is None:
+    if affine is None or inlier_mask is None:
         raise ValueError("feature matches did not produce a stable affine transform")
     inlier_indices = np.flatnonzero(inlier_mask.ravel() == 1).tolist()
     if len(inlier_indices) < 4:
@@ -98,7 +98,16 @@ def suggest_control_points(
     # Keep the strongest match in each source-image grid cell before filling any
     # remaining slots.  This avoids returning many impressive-looking points in
     # one small corner, which is unsafe for georeferencing.
-    ranked = sorted(inlier_indices, key=lambda index: matches[index].distance)
+    predicted_reference = cv2.transform(
+        source_positions.reshape(-1, 1, 2), affine
+    ).reshape(-1, 2)
+    reprojection_errors = np.linalg.norm(
+        predicted_reference - reference_positions, axis=1
+    )
+    ranked = sorted(
+        inlier_indices,
+        key=lambda index: (float(reprojection_errors[index]), matches[index].distance),
+    )
     unique_ranked: list[int] = []
     seen_source: set[tuple[int, int]] = set()
     seen_reference: set[tuple[int, int]] = set()
@@ -116,10 +125,27 @@ def suggest_control_points(
         x, y = source_positions[index]
         cell = (min(3, int(4 * x / source_width)), min(3, int(4 * y / source_height)))
         cells.setdefault(cell, index)
-    # Do not fill the requested count with clustered leftovers.  Returning eight
-    # well-spread candidates is safer than returning twelve points where four
-    # describe almost the same small neighbourhood.
-    selected = list(cells.values())[:maximum_points]
+    # Enforce a minimum separation in both images. One point per grid cell is not
+    # enough because points on adjacent cell borders can still describe the same
+    # road junction or roof corner.
+    minimum_source_distance = 0.07 * min(source_width, source_height)
+    reference_height, reference_width = reference_gray.shape
+    minimum_reference_distance = 0.07 * min(reference_width, reference_height)
+    selected: list[int] = []
+    for index in cells.values():
+        if any(
+            np.linalg.norm(source_positions[index] - source_positions[other])
+            < minimum_source_distance
+            or np.linalg.norm(reference_positions[index] - reference_positions[other])
+            < minimum_reference_distance
+            for other in selected
+        ):
+            continue
+        selected.append(index)
+        if len(selected) >= maximum_points:
+            break
+    if len(selected) < 4:
+        selected = list(cells.values())[:maximum_points]
 
     suggestions = tuple(
         SuggestedControlPoint(
