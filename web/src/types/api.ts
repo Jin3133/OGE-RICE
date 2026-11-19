@@ -129,10 +129,10 @@ export interface BusinessUnitResult {
   candidate_area_m2: number
   candidate_area_mu: number
   growth_stage: string
-  irrigation_quota_m3_per_mu: number
-  reference_irrigation_demand_m3: number
+  irrigation_quota_m3_per_mu: number | null
+  reference_irrigation_demand_m3: number | null
   area_source: string
-  demand_share: number
+  demand_share: number | null
   attention_level: string
   quality_statement: string
 }
@@ -141,14 +141,25 @@ export interface BusinessResultResponse {
   task_id: string
   result_version: number
   generated_at: string
-  status: 'completed'
+  status: 'completed' | 'parameter_pending'
   business_scope: string
   crop_type: 'rice'
   model_target: 'cultivated_land_candidate'
   growth_stage: string
   calculation_formula: string
   total_candidate_area_mu: number
-  total_reference_irrigation_demand_m3: number
+  total_reference_irrigation_demand_m3: number | null
+  parameter_basis: {
+    region: string
+    irrigation_zone: string
+    seasonal_quota_m3_per_mu: number
+    seasonal_quota_assurance_probability: string
+    seasonal_quota_level: string
+    seasonal_quota_source: string
+    seasonal_reference_demand_m3: number
+    stage_quota_status: string
+    statement: string
+  } | null
   units: BusinessUnitResult[]
   limitations: string[]
 }
@@ -156,6 +167,33 @@ export interface BusinessResultResponse {
 export interface BusinessResultCollection {
   items: BusinessResultResponse[]
   total: number
+}
+
+export interface AgronomyRecommendationResponse {
+  parameter_set_id: string
+  region_name: string
+  administrative_code: string
+  irrigation_zone: string
+  crop: 'rice'
+  season: 'single_season_rice'
+  analysis_date: string
+  recommended_stage: {
+    code: string
+    name: string
+    start: string
+    end: string
+    requires_user_confirmation: boolean
+  } | null
+  stage_evidence_note: string
+  seasonal_quotas: Array<{
+    assurance_probability: 'P50' | 'P90'
+    level: 'general' | 'advanced'
+    value_m3_per_mu: number
+    value_m3_per_hm2: number
+  }>
+  stage_quota_status: 'missing'
+  stage_quota_message: string
+  sources: Array<{ title: string; publisher: string; url: string; applies_to: string }>
 }
 
 export interface ManagementUnitCreate {

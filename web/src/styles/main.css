@@ -288,3 +288,42 @@ button, input { font: inherit; }
   .management-unit-grid { grid-template-columns: 1fr; }
   .georef-bottom-grid { grid-template-columns: 1fr; }
 }
+.parameter-evidence,
+.quota-reference-card {
+  margin: 12px 0 18px;
+  padding: 14px 16px;
+  border: 1px solid #c9ded3;
+  border-radius: 12px;
+  background: #f4faf7;
+  color: #24483a;
+}
+
+.parameter-evidence p,
+.quota-reference-card p {
+  margin: 7px 0 0;
+  line-height: 1.65;
+}
+
+.quota-reference-card > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.quota-reference-card a { color: #17664b; font-weight: 700; }
+.quota-reference-card .parameter-warning { color: #8a5a19; }
+
+.quota-confirmation {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 10px 0 16px;
+  padding: 12px 14px;
+  border: 1px solid #e5d4b8;
+  border-radius: 10px;
+  background: #fffaf1;
+  color: #6e4c1c;
+  line-height: 1.55;
+}
+
+.quota-confirmation input { margin-top: 4px; }

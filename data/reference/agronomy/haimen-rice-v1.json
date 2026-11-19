@@ -1,0 +1,80 @@
+{
+  "parameter_set_id": "agronomy.haimen.rice.single-season.v1",
+  "region": {
+    "name": "江苏省南通市海门区",
+    "administrative_code": "320614",
+    "irrigation_zone": "通南沿江平原区"
+  },
+  "crop": "rice",
+  "season": "single_season_rice",
+  "crop_calendar": {
+    "status": "regional_recommendation",
+    "requires_user_confirmation": true,
+    "year": 2025,
+    "stages": [
+      { "code": "reviving", "name": "返青期", "start": "2025-06-10", "end": "2025-06-25" },
+      { "code": "tillering", "name": "分蘖期", "start": "2025-06-26", "end": "2025-07-20" },
+      { "code": "jointing_booting", "name": "拔节孕穗期", "start": "2025-07-21", "end": "2025-08-20" },
+      { "code": "heading_flowering", "name": "抽穗开花期", "start": "2025-08-21", "end": "2025-09-10" },
+      { "code": "filling_maturity", "name": "灌浆成熟期", "start": "2025-09-11", "end": "2025-10-25" }
+    ],
+    "evidence_note": "日期窗口是供任务配置使用的南通地区区域建议，需由管理人员结合当年播栽期和苗情确认；南通市官方农情记录显示2025年7月上旬处于分蘖期、7月下旬陆续进入拔节孕穗期。"
+  },
+  "seasonal_quotas": [
+    {
+      "assurance_probability": "P50",
+      "level": "general",
+      "value_m3_per_mu": 460.0,
+      "value_m3_per_hm2": 6900.0
+    },
+    {
+      "assurance_probability": "P50",
+      "level": "advanced",
+      "value_m3_per_mu": 400.0,
+      "value_m3_per_hm2": 6000.0
+    },
+    {
+      "assurance_probability": "P90",
+      "level": "general",
+      "value_m3_per_mu": 580.0,
+      "value_m3_per_hm2": 8700.0
+    },
+    {
+      "assurance_probability": "P90",
+      "level": "advanced",
+      "value_m3_per_mu": 510.0,
+      "value_m3_per_hm2": 7650.0
+    }
+  ],
+  "stage_quota": {
+    "status": "missing",
+    "value_m3_per_mu": null,
+    "message": "现行省级标准提供全生育期综合定额，不能直接当作某一生育阶段定额。阶段需水计算须等待悦来灌区管理资料或经业务人员确认的阶段定额。"
+  },
+  "sources": [
+    {
+      "title": "农业用水定额（DB32/T 3817—2025）",
+      "publisher": "江苏省市场监督管理局、江苏省水利厅",
+      "url": "https://jswater.jiangsu.gov.cn/module/download/downfile.jsp?classid=0&filename=5deb443a47ff4aef883660ce94a26b70.pdf",
+      "applies_to": "海门区所属通南沿江平原区水稻全生育期综合灌溉用水定额"
+    },
+    {
+      "title": "2025年水稻分蘖期田间管理技术意见",
+      "publisher": "南通市农业农村局",
+      "url": "https://nyncj.nantong.gov.cn/ntsnwx/nzwsc/content/0b5fff45-f567-4e23-8f13-71be7c10b090.htm",
+      "applies_to": "区域作物历证据"
+    },
+    {
+      "title": "全市水稻拔节孕穗期技术指导意见",
+      "publisher": "南通市农业农村局",
+      "url": "https://nyncj.nantong.gov.cn/ntsnwx/nzwsc/content/96999dca-5d25-41fe-9924-80909c14478e.htm",
+      "applies_to": "区域作物历证据"
+    },
+    {
+      "title": "全国中型灌区名录",
+      "publisher": "中国灌区协会",
+      "url": "https://www.carta.org.cn/uploads/1/file/public/202203/20220322090756_2qajfg4ydg.pdf",
+      "applies_to": "悦来灌区行政归属与设计灌溉面积"
+    }
+  ]
+}

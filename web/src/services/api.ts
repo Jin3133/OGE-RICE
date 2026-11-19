@@ -4,6 +4,7 @@ import type {
   AnalysisTaskDraftCollection,
   AnalysisTaskDraftResponse,
   AnalysisTaskDraftRevisionCreate,
+  AgronomyRecommendationResponse,
   BusinessResultCollection,
   HealthResponse,
   GeoreferencingFitRequest,
@@ -65,6 +66,10 @@ export const api = {
   taskDrafts: () => request<AnalysisTaskDraftCollection>('/api/v1/analysis-task-drafts'),
   managementUnits: () => request<ManagementUnitFeatureCollection>('/api/v1/management-units'),
   businessResults: () => request<BusinessResultCollection>('/api/v1/business-results'),
+  agronomyRecommendation: (analysisDate: string, administrativeCode = '320614') =>
+    request<AgronomyRecommendationResponse>(
+      `/api/v1/agronomy/recommendation?analysis_date=${encodeURIComponent(analysisDate)}&administrative_code=${encodeURIComponent(administrativeCode)}`,
+    ),
   createManagementUnit: (payload: ManagementUnitCreate, idempotencyKey: string) =>
     request<ManagementUnitFeature>('/api/v1/management-units', {
       method: 'POST',

@@ -5,7 +5,7 @@ import ReferenceAreaMap from '@/components/ReferenceAreaMap.vue'
 import { ApiRequestError, api } from '@/services/api'
 import { useTaskDraftStore, type TaskConfiguration } from '@/stores/taskDraft'
 import type { ReferenceAreaFeatureCollection } from '@/types/api'
-import type { AnalysisTaskDraftResponse } from '@/types/api'
+import type { AgronomyRecommendationResponse, AnalysisTaskDraftResponse } from '@/types/api'
 import type { AnalysisAreaSelection } from '@/types/map'
 
 const taskDraft = useTaskDraftStore()
@@ -18,6 +18,9 @@ const submitError = ref('')
 const submitting = ref(false)
 const changeReason = ref('')
 const restoring = ref(false)
+const agronomy = ref<AgronomyRecommendationResponse | null>(null)
+const agronomyError = ref('')
+const loadingAgronomy = ref(false)
 const form = reactive<TaskConfiguration>({ ...taskDraft.configuration })
 
 const stages = [
@@ -35,6 +38,7 @@ const validation = computed(() => ({
   period: Boolean(form.periodStart && form.periodEnd && form.periodStart <= form.periodEnd),
   quota: form.quotaM3PerMu !== null && form.quotaM3PerMu > 0,
   source: form.quotaSource.trim().length >= 2,
+  quotaConfirmed: form.quotaConfirmed,
 }))
 const valid = computed(() => Object.values(validation.value).every(Boolean))
 const validForRegistration = computed(() => valid.value && (!taskDraft.base || changeReason.value.trim().length >= 2))
@@ -51,9 +55,30 @@ const areaLabel = computed(() => {
 })
 const demandLabel = computed(() => {
   if (calculationAreaM2.value === null || form.quotaM3PerMu === null || form.quotaM3PerMu <= 0) return '待填写定额'
+  if (!form.quotaConfirmed) return '待核验定额来源'
   const areaMu = calculationAreaM2.value * 0.0015
   return `${Math.round(areaMu * form.quotaM3PerMu).toLocaleString()} m³`
 })
+const p50SeasonalQuota = computed(() => agronomy.value?.seasonal_quotas.find((item) => item.assurance_probability === 'P50' && item.level === 'general') ?? null)
+const seasonalDemandLabel = computed(() => {
+  if (calculationAreaM2.value === null || !p50SeasonalQuota.value) return '选择悦来灌区后计算'
+  return `${Math.round(calculationAreaM2.value * 0.0015 * p50SeasonalQuota.value.value_m3_per_mu).toLocaleString()} m³`
+})
+
+async function loadAgronomyRecommendation() {
+  if (!form.periodStart) return
+  loadingAgronomy.value = true
+  agronomyError.value = ''
+  try {
+    const response = await api.agronomyRecommendation(form.periodStart)
+    agronomy.value = response
+    if (response.recommended_stage) form.growthStage = response.recommended_stage.code
+  } catch (reason) {
+    agronomyError.value = reason instanceof Error ? reason.message : '农艺参数读取失败'
+  } finally {
+    loadingAgronomy.value = false
+  }
+}
 
 function updateArea(value: AnalysisAreaSelection | null) {
   taskDraft.setArea(value, true)
@@ -124,12 +149,14 @@ async function registerDraft() {
 watch(form, () => {
   if (!restoring.value) taskDraft.invalidateRegistration()
 }, { deep: true })
+watch(() => form.periodStart, () => { void loadAgronomyRecommendation() })
 
 onMounted(async () => {
   try {
     const [areas, drafts] = await Promise.all([api.referenceAreas(), api.taskDrafts()])
     collection.value = areas
     backendDrafts.value = drafts.items
+    await loadAgronomyRecommendation()
   } catch (reason) {
     const message = reason instanceof ApiRequestError ? reason.message : '任务数据加载失败'
     loadError.value = message
@@ -189,15 +216,31 @@ onMounted(async () => {
           <label><span>开始日期</span><input v-model="form.periodStart" type="date" /></label>
           <label><span>结束日期</span><input v-model="form.periodEnd" type="date" /></label>
         </div>
+        <div v-if="loadingAgronomy" class="parameter-evidence">正在匹配海门区作物历…</div>
+        <div v-else-if="agronomy?.recommended_stage" class="parameter-evidence">
+          <strong>区域作物历建议：{{ agronomy.recommended_stage.name }}</strong>
+          <p>{{ agronomy.recommended_stage.start }} 至 {{ agronomy.recommended_stage.end }}；该结果用于自动推荐，仍需管理人员结合当年播栽期确认。</p>
+        </div>
+        <p v-else-if="agronomyError" class="submit-error">{{ agronomyError }}</p>
 
         <div class="form-section-title"><span>03</span><div><strong>阶段灌溉定额</strong><small>必须注明来源，不自动填入建议值</small></div></div>
         <label class="field-row"><span>定额（m³/亩）</span><input v-model.number="form.quotaM3PerMu" type="number" min="0.01" step="0.01" placeholder="请输入经确认的阶段定额" /></label>
         <label class="field-row"><span>定额来源</span><input v-model.trim="form.quotaSource" placeholder="地方标准、已有项目成果或用户确认依据" /></label>
+        <label class="quota-confirmation">
+          <input v-model="form.quotaConfirmed" type="checkbox" />
+          <span>我已核验该数值确为当前区域、当前生育阶段适用的灌溉定额，并同意将其用于阶段需水计算。</span>
+        </label>
+        <div v-if="agronomy" class="quota-reference-card">
+          <div><strong>已核实的官方全季基准</strong><span>{{ agronomy.region_name }} · {{ agronomy.irrigation_zone }}</span></div>
+          <p v-if="p50SeasonalQuota">P=50% 通用值：{{ p50SeasonalQuota.value_m3_per_mu }} m³/亩；按当前候选面积对应的全季参考量为 {{ seasonalDemandLabel }}。</p>
+          <p class="parameter-warning">{{ agronomy.stage_quota_message }}</p>
+          <a :href="agronomy.sources[0]?.url" target="_blank" rel="noreferrer">查看 DB32/T 3817—2025 来源</a>
+        </div>
 
         <div class="task-calculation">
           <div><span>分析范围</span><strong>{{ areaLabel }}</strong></div>
           <div><span>参考需水</span><strong>{{ demandLabel }}</strong></div>
-          <p>计算采用 W = A × M；面积按 1亩 = 2000/3平方米换算。保存草稿不会创建正式任务或触发遥感计算。</p>
+          <p>计算采用 W = A × M；面积按 1亩 = 2000/3平方米换算。未核验阶段定额时不生成阶段需水量。</p>
         </div>
         <label v-if="taskDraft.base && !taskDraft.registered" class="field-row revision-reason">
           <span>版本变更原因</span>

@@ -208,10 +208,10 @@ class BusinessUnitResult(ApiModel):
     candidate_area_m2: float = Field(ge=0)
     candidate_area_mu: float = Field(ge=0)
     growth_stage: str
-    irrigation_quota_m3_per_mu: float = Field(gt=0)
-    reference_irrigation_demand_m3: float = Field(ge=0)
+    irrigation_quota_m3_per_mu: float | None = Field(default=None, gt=0)
+    reference_irrigation_demand_m3: float | None = Field(default=None, ge=0)
     area_source: str
-    demand_share: float = Field(ge=0, le=1)
+    demand_share: float | None = Field(default=None, ge=0, le=1)
     attention_level: str
     quality_statement: str
     remote_sensing_evidence: dict[str, Any]
@@ -223,14 +223,15 @@ class BusinessResultResponse(ApiModel):
     parent_result_version: int | None = None
     feedback: Any | None = None
     generated_at: datetime
-    status: Literal["completed"]
+    status: Literal["completed", "parameter_pending"]
     business_scope: str
     crop_type: Literal["rice"]
     model_target: Literal["cultivated_land_candidate"]
     growth_stage: str
     calculation_formula: str
     total_candidate_area_mu: float = Field(ge=0)
-    total_reference_irrigation_demand_m3: float = Field(ge=0)
+    total_reference_irrigation_demand_m3: float | None = Field(default=None, ge=0)
+    parameter_basis: dict[str, Any] | None = None
     units: list[BusinessUnitResult]
     limitations: list[str]
 
@@ -238,6 +239,37 @@ class BusinessResultResponse(ApiModel):
 class BusinessResultCollection(ApiModel):
     items: list[BusinessResultResponse]
     total: int
+
+
+class GrowthStageRecommendation(ApiModel):
+    code: str
+    name: str
+    start: date
+    end: date
+    requires_user_confirmation: bool
+
+
+class SeasonalQuotaReference(ApiModel):
+    assurance_probability: Literal["P50", "P90"]
+    level: Literal["general", "advanced"]
+    value_m3_per_mu: float = Field(gt=0)
+    value_m3_per_hm2: float = Field(gt=0)
+
+
+class AgronomyRecommendationResponse(ApiModel):
+    parameter_set_id: str
+    region_name: str
+    administrative_code: str
+    irrigation_zone: str
+    crop: Literal["rice"]
+    season: Literal["single_season_rice"]
+    analysis_date: date
+    recommended_stage: GrowthStageRecommendation | None
+    stage_evidence_note: str
+    seasonal_quotas: list[SeasonalQuotaReference]
+    stage_quota_status: Literal["missing"]
+    stage_quota_message: str
+    sources: list[dict[str, str]]
 
 
 class GeoreferencingControlPoint(ApiModel):

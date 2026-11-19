@@ -17,6 +17,9 @@ data/*
 !data/splits/*.json
 !data/statistics/
 !data/statistics/*.json
+!data/reference/
+!data/reference/agronomy/
+!data/reference/agronomy/*.json
 outputs/
 checkpoints/
 *.pt

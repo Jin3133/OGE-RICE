@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 
 from oge_main.api.routes import (
+    agronomy,
     business_results,
     georeferencing,
     health,
@@ -11,6 +12,7 @@ from oge_main.api.routes import (
 )
 
 api_router = APIRouter()
+api_router.include_router(agronomy.router)
 api_router.include_router(business_results.router)
 api_router.include_router(health.router)
 api_router.include_router(meta.router)

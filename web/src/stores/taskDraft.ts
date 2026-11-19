@@ -13,6 +13,7 @@ export interface TaskConfiguration {
   periodEnd: string
   quotaM3PerMu: number | null
   quotaSource: string
+  quotaConfirmed: boolean
 }
 
 interface StoredTaskDraft {
@@ -23,7 +24,8 @@ interface StoredTaskDraft {
   base: { draftId: string; revision: number } | null
 }
 
-const storageKey = 'oge-rice.analysis-task-draft.v1'
+const storageKey = 'oge-rice.analysis-task-draft.v2'
+const legacyStorageKey = 'oge-rice.analysis-task-draft.v1'
 
 function defaultConfiguration(): TaskConfiguration {
   return {
@@ -35,15 +37,30 @@ function defaultConfiguration(): TaskConfiguration {
     periodEnd: '',
     quotaM3PerMu: null,
     quotaSource: '',
+    quotaConfirmed: false,
   }
 }
 
 function loadDraft(): StoredTaskDraft {
   try {
     const value = localStorage.getItem(storageKey) ?? sessionStorage.getItem(storageKey)
-    return value
-      ? (JSON.parse(value) as StoredTaskDraft)
-      : { area: null, configuration: defaultConfiguration(), submissionKey: crypto.randomUUID(), registered: null, base: null }
+    if (value) return JSON.parse(value) as StoredTaskDraft
+    const legacyValue = localStorage.getItem(legacyStorageKey) ?? sessionStorage.getItem(legacyStorageKey)
+    if (legacyValue) {
+      const legacy = JSON.parse(legacyValue) as StoredTaskDraft
+      return {
+        ...legacy,
+        configuration: {
+          ...legacy.configuration,
+          quotaM3PerMu: null,
+          quotaSource: '',
+          quotaConfirmed: false,
+        },
+        registered: null,
+        submissionKey: crypto.randomUUID(),
+      }
+    }
+    return { area: null, configuration: defaultConfiguration(), submissionKey: crypto.randomUUID(), registered: null, base: null }
   } catch {
     return { area: null, configuration: defaultConfiguration(), submissionKey: crypto.randomUUID(), registered: null, base: null }
   }
@@ -122,6 +139,7 @@ export const useTaskDraftStore = defineStore('taskDraft', () => {
       periodEnd: value.analysis_end,
       quotaM3PerMu: value.quota_value_m3_per_mu,
       quotaSource: value.quota_source,
+      quotaConfirmed: false,
     }
     registered.value = { draftId: value.draft_id, revision: value.revision }
     base.value = { draftId: value.draft_id, revision: value.revision }
