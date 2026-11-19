@@ -202,6 +202,44 @@ class ManagementUnitFeatureCollection(ApiModel):
     features: list[ManagementUnitFeature]
 
 
+class BusinessUnitResult(ApiModel):
+    unit_id: str
+    unit_name: str
+    candidate_area_m2: float = Field(ge=0)
+    candidate_area_mu: float = Field(ge=0)
+    growth_stage: str
+    irrigation_quota_m3_per_mu: float = Field(gt=0)
+    reference_irrigation_demand_m3: float = Field(ge=0)
+    area_source: str
+    demand_share: float = Field(ge=0, le=1)
+    attention_level: str
+    quality_statement: str
+    remote_sensing_evidence: dict[str, Any]
+
+
+class BusinessResultResponse(ApiModel):
+    task_id: str
+    result_version: int = Field(ge=1)
+    parent_result_version: int | None = None
+    feedback: Any | None = None
+    generated_at: datetime
+    status: Literal["completed"]
+    business_scope: str
+    crop_type: Literal["rice"]
+    model_target: Literal["cultivated_land_candidate"]
+    growth_stage: str
+    calculation_formula: str
+    total_candidate_area_mu: float = Field(ge=0)
+    total_reference_irrigation_demand_m3: float = Field(ge=0)
+    units: list[BusinessUnitResult]
+    limitations: list[str]
+
+
+class BusinessResultCollection(ApiModel):
+    items: list[BusinessResultResponse]
+    total: int
+
+
 class GeoreferencingControlPoint(ApiModel):
     point_id: str = Field(min_length=1, max_length=100)
     pixel_x: float = Field(ge=0)

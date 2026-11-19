@@ -8,4 +8,7 @@ export interface AnalysisAreaSelection {
   }
   area_square_metres: number
   source_area_id: string | null
+  management_unit_id?: string | null
+  management_unit_revision?: number | null
+  candidate_area_square_metres?: number | null
 }

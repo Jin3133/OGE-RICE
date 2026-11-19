@@ -1,10 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import OverviewView from '@/views/OverviewView.vue'
-import PlaceholderView from '@/views/PlaceholderView.vue'
 import ReferenceAreasView from '@/views/ReferenceAreasView.vue'
 import GeoreferencingView from '@/views/GeoreferencingView.vue'
 import TasksView from '@/views/TasksView.vue'
+import ResultsView from '@/views/ResultsView.vue'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -36,8 +36,8 @@ const router = createRouter({
     {
       path: '/results',
       name: 'results',
-      component: PlaceholderView,
-      meta: { title: '成果研判', section: '成果页面建立中' },
+      component: ResultsView,
+      meta: { title: '成果研判' },
     },
   ],
 })

@@ -58,7 +58,10 @@ export const useTaskDraftStore = defineStore('taskDraft', () => {
   const registered = ref(stored.registered ?? null)
   const base = ref(stored.base ?? stored.registered ?? null)
 
-  const areaMu = computed(() => (area.value ? area.value.area_square_metres * 0.0015 : null))
+  const areaMu = computed(() => {
+    if (!area.value) return null
+    return (area.value.candidate_area_square_metres ?? area.value.area_square_metres) * 0.0015
+  })
   const estimatedDemandM3 = computed(() => {
     if (areaMu.value === null || configuration.value.quotaM3PerMu === null) return null
     return areaMu.value * configuration.value.quotaM3PerMu

@@ -5,7 +5,7 @@ import { useRouter } from 'vue-router'
 import ReferenceAreaMap from '@/components/ReferenceAreaMap.vue'
 import { ApiRequestError, api } from '@/services/api'
 import { useTaskDraftStore } from '@/stores/taskDraft'
-import type { ManagementUnitFeature, ManagementUnitType, ReferenceAreaFeatureCollection } from '@/types/api'
+import type { BusinessResultResponse, ManagementUnitFeature, ManagementUnitType, ReferenceAreaFeatureCollection } from '@/types/api'
 import type { AnalysisAreaSelection } from '@/types/map'
 
 const collection = ref<ReferenceAreaFeatureCollection | null>(null)
@@ -15,6 +15,7 @@ const loading = ref(true)
 const error = ref('')
 const selection = ref<AnalysisAreaSelection | null>(null)
 const units = ref<ManagementUnitFeature[]>([])
+const businessResults = ref<BusinessResultResponse[]>([])
 const importing = ref(false)
 const importError = ref('')
 const importMessage = ref('')
@@ -128,11 +129,28 @@ function configureTask() {
   router.push('/tasks')
 }
 
+function configureUnitTask(unit: ManagementUnitFeature) {
+  const unitResult = businessResults.value
+    .flatMap((result) => result.units)
+    .find((item) => item.unit_id === unit.properties.unit_id)
+  taskDraft.setArea({
+    method: 'polygon',
+    geometry: unit.geometry,
+    area_square_metres: unit.properties.area_square_metres,
+    source_area_id: null,
+    management_unit_id: unit.properties.unit_id,
+    management_unit_revision: unit.properties.revision,
+    candidate_area_square_metres: unitResult?.candidate_area_m2 ?? null,
+  })
+  router.push('/tasks')
+}
+
 onMounted(async () => {
   try {
-    const [areas, managementUnits] = await Promise.all([api.referenceAreas(), api.managementUnits()])
+    const [areas, managementUnits, results] = await Promise.all([api.referenceAreas(), api.managementUnits(), api.businessResults()])
     collection.value = areas
     units.value = managementUnits.features
+    businessResults.value = results.items
   } catch (reason) {
     error.value = reason instanceof ApiRequestError ? reason.message : '地图数据加载失败'
   } finally {
@@ -212,6 +230,7 @@ onMounted(async () => {
         <article v-for="unit in units" :key="unit.id" class="unit-list-item">
           <div><strong>{{ unit.properties.name }}</strong><span>{{ unitTypeLabel(unit.properties.unit_type) }} · 第 {{ unit.properties.revision }} 版</span></div>
           <div><em>{{ unit.properties.status === 'active' ? '已启用' : '草稿' }}</em><span>{{ (unit.properties.area_square_metres / 1_000_000).toFixed(2) }} km²</span></div>
+          <button type="button" @click="configureUnitTask(unit)">用于分析</button>
         </article>
       </div>
 

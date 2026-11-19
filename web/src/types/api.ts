@@ -123,6 +123,41 @@ export interface ManagementUnitFeatureCollection {
   features: ManagementUnitFeature[]
 }
 
+export interface BusinessUnitResult {
+  unit_id: string
+  unit_name: string
+  candidate_area_m2: number
+  candidate_area_mu: number
+  growth_stage: string
+  irrigation_quota_m3_per_mu: number
+  reference_irrigation_demand_m3: number
+  area_source: string
+  demand_share: number
+  attention_level: string
+  quality_statement: string
+}
+
+export interface BusinessResultResponse {
+  task_id: string
+  result_version: number
+  generated_at: string
+  status: 'completed'
+  business_scope: string
+  crop_type: 'rice'
+  model_target: 'cultivated_land_candidate'
+  growth_stage: string
+  calculation_formula: string
+  total_candidate_area_mu: number
+  total_reference_irrigation_demand_m3: number
+  units: BusinessUnitResult[]
+  limitations: string[]
+}
+
+export interface BusinessResultCollection {
+  items: BusinessResultResponse[]
+  total: number
+}
+
 export interface ManagementUnitCreate {
   name: string
   unit_type: ManagementUnitType

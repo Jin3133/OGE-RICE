@@ -140,6 +140,23 @@ button, input { font: inherit; }
 .map-state { min-height: 480px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 18px; color: var(--muted); background: #fff; }
 .map-state.is-error { color: #a24c46; }
 
+.result-page { padding: 28px 0 48px; }
+.result-metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 18px 0 14px; }
+.result-metrics article { padding: 18px; border: 1px solid var(--line); border-radius: 13px; background: rgba(255,255,255,.82); }
+.result-metrics article span, .result-metrics article small { display: block; color: var(--muted); font-size: 9px; }
+.result-metrics article strong { display: block; margin: 10px 0 6px; color: var(--green-950); font: 600 25px "Songti SC", STSong, serif; }
+.result-metrics article.is-primary { color: #fff; border-color: var(--green-800); background: var(--green-800); }
+.result-metrics article.is-primary span, .result-metrics article.is-primary small, .result-metrics article.is-primary strong { color: #fff; }
+.result-layout { display: grid; grid-template-columns: minmax(0,1.7fr) minmax(300px,.75fr); overflow: hidden; border: 1px solid var(--line); border-radius: 16px; background: #fff; }
+.business-result-map { position: relative; min-height: 540px; }
+.result-detail { padding: 28px; border-left: 1px solid var(--line); background: #fbfcf8; }
+.result-detail h3 { margin: 8px 0 20px; font: 600 23px "Songti SC", STSong, serif; }
+.result-detail dl { margin: 0; }
+.result-detail dl div { display: flex; justify-content: space-between; gap: 14px; padding: 11px 0; border-bottom: 1px solid #e6ebe5; font-size: 10px; }
+.result-detail dd { margin: 0; max-width: 62%; text-align: right; overflow-wrap: anywhere; }
+.result-links { display: flex; gap: 9px; margin-top: 18px; }
+.result-links a { flex: 1; padding: 9px; border: 1px solid #b8c8bc; border-radius: 7px; color: var(--green-800); text-align: center; text-decoration: none; font-size: 10px; }
+
 .task-page { padding-top: 28px; }
 .task-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 30px; margin-bottom: 18px; }
 .task-heading h2 { margin: 8px 0 7px; font: 600 28px "Songti SC", STSong, serif; }

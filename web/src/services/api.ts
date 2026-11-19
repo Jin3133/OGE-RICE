@@ -4,6 +4,7 @@ import type {
   AnalysisTaskDraftCollection,
   AnalysisTaskDraftResponse,
   AnalysisTaskDraftRevisionCreate,
+  BusinessResultCollection,
   HealthResponse,
   GeoreferencingFitRequest,
   GeoreferencingFitResponse,
@@ -63,6 +64,7 @@ export const api = {
     }),
   taskDrafts: () => request<AnalysisTaskDraftCollection>('/api/v1/analysis-task-drafts'),
   managementUnits: () => request<ManagementUnitFeatureCollection>('/api/v1/management-units'),
+  businessResults: () => request<BusinessResultCollection>('/api/v1/business-results'),
   createManagementUnit: (payload: ManagementUnitCreate, idempotencyKey: string) =>
     request<ManagementUnitFeature>('/api/v1/management-units', {
       method: 'POST',

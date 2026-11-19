@@ -43,10 +43,15 @@ const newerBackendRevision = computed(() => {
   const latest = backendDrafts.value.find((draft) => draft.draft_id === taskDraft.registered?.draftId)
   return latest && latest.revision > taskDraft.registered.revision ? latest.revision : null
 })
-const areaLabel = computed(() => taskDraft.area ? `${(taskDraft.area.area_square_metres / 1_000_000).toFixed(2)} km²` : '未选择')
+const calculationAreaM2 = computed(() => taskDraft.area?.candidate_area_square_metres ?? taskDraft.area?.area_square_metres ?? null)
+const areaLabel = computed(() => {
+  if (!taskDraft.area || calculationAreaM2.value === null) return '未选择'
+  if (taskDraft.area.candidate_area_square_metres) return `${(calculationAreaM2.value * 0.0015).toLocaleString(undefined, { maximumFractionDigits: 2 })} 亩候选区`
+  return `${(taskDraft.area.area_square_metres / 1_000_000).toFixed(2)} km²分析范围`
+})
 const demandLabel = computed(() => {
-  if (!taskDraft.area || form.quotaM3PerMu === null || form.quotaM3PerMu <= 0) return '待填写定额'
-  const areaMu = taskDraft.area.area_square_metres * 0.0015
+  if (calculationAreaM2.value === null || form.quotaM3PerMu === null || form.quotaM3PerMu <= 0) return '待填写定额'
+  const areaMu = calculationAreaM2.value * 0.0015
   return `${Math.round(areaMu * form.quotaM3PerMu).toLocaleString()} m³`
 })
 
