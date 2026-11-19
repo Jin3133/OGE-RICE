@@ -5,6 +5,8 @@ import type {
   AnalysisTaskDraftResponse,
   AnalysisTaskDraftRevisionCreate,
   HealthResponse,
+  GeoreferencingFitRequest,
+  GeoreferencingFitResponse,
   ManagementUnitCreate,
   ManagementUnitFeature,
   ManagementUnitFeatureCollection,
@@ -81,4 +83,10 @@ export const api = {
     },
     body: JSON.stringify(payload),
   }),
+  fitGeoreferencing: (payload: GeoreferencingFitRequest) =>
+    request<GeoreferencingFitResponse>('/api/v1/georeferencing/fit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    }),
 }

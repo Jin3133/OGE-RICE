@@ -13,6 +13,8 @@ declare module 'vue' {
   export interface GlobalComponents {
     AppSidebar: typeof import('./components/AppSidebar.vue')['default']
     ElIcon: typeof import('element-plus/es')['ElIcon']
+    GeoreferenceSourceMap: typeof import('./components/GeoreferenceSourceMap.vue')['default']
+    GeoreferenceTargetMap: typeof import('./components/GeoreferenceTargetMap.vue')['default']
     ReferenceAreaMap: typeof import('./components/ReferenceAreaMap.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

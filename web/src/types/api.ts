@@ -137,3 +137,57 @@ export interface ManagementUnitCreate {
   status: 'draft' | 'active'
   changed_by: string
 }
+
+export interface GeoreferencingControlPoint {
+  point_id: string
+  pixel_x: number
+  pixel_y: number
+  longitude: number
+  latitude: number
+}
+
+export interface PixelBoundaryGeometry {
+  type: 'Polygon' | 'MultiPolygon'
+  coordinates: number[][][] | number[][][][]
+}
+
+export interface GeoreferencingFitRequest {
+  image_id: string
+  image_width: number
+  image_height: number
+  projected_crs: string
+  control_points: GeoreferencingControlPoint[]
+  pixel_boundary: PixelBoundaryGeometry | null
+}
+
+export interface GeoreferencingResidual {
+  point_id: string
+  predicted_easting: number
+  predicted_northing: number
+  residual_easting: number
+  residual_northing: number
+  error_metres: number
+}
+
+export interface GeoreferencingFitResponse {
+  image_id: string
+  image_width: number
+  image_height: number
+  quality_status: 'unverified'
+  report: {
+    method: 'affine_least_squares'
+    projected_crs: string
+    coefficients_easting: number[]
+    coefficients_northing: number[]
+    control_point_count: number
+    design_matrix_rank: number
+    rmse_metres: number
+    maximum_error_metres: number
+    residuals: GeoreferencingResidual[]
+  }
+  boundary: {
+    type: 'Feature'
+    geometry: PixelBoundaryGeometry
+    properties: Record<string, unknown>
+  } | null
+}

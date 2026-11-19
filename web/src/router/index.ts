@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import OverviewView from '@/views/OverviewView.vue'
 import PlaceholderView from '@/views/PlaceholderView.vue'
 import ReferenceAreasView from '@/views/ReferenceAreasView.vue'
+import GeoreferencingView from '@/views/GeoreferencingView.vue'
 import TasksView from '@/views/TasksView.vue'
 
 const router = createRouter({
@@ -25,6 +26,12 @@ const router = createRouter({
       name: 'resources',
       component: ReferenceAreasView,
       meta: { title: '空间数据' },
+    },
+    {
+      path: '/georeferencing',
+      name: 'georeferencing',
+      component: GeoreferencingView,
+      meta: { title: '影像配准' },
     },
     {
       path: '/results',

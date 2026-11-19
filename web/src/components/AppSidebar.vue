@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { DataAnalysis, Files, MapLocation, Promotion } from '@element-plus/icons-vue'
+import { Aim, DataAnalysis, Files, MapLocation, Promotion } from '@element-plus/icons-vue'
 
 const navigation = [
   { to: '/', label: '系统总览', icon: DataAnalysis },
   { to: '/tasks', label: '分析任务', icon: Promotion },
   { to: '/resources', label: '业务数据', icon: Files },
+  { to: '/georeferencing', label: '影像配准', icon: Aim },
   { to: '/results', label: '成果研判', icon: MapLocation },
 ]
 </script>
