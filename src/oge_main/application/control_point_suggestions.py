@@ -67,10 +67,26 @@ def suggest_control_points(
     if source_descriptors is None or reference_descriptors is None:
         raise ValueError("not enough visual features were detected")
 
-    pairs = cv2.BFMatcher(cv2.NORM_L2).knnMatch(
-        source_descriptors, reference_descriptors, k=2
-    )
-    matches = [first for first, second in pairs if first.distance < 0.72 * second.distance]
+    matcher = cv2.BFMatcher(cv2.NORM_L2)
+    forward_pairs = matcher.knnMatch(source_descriptors, reference_descriptors, k=2)
+    reverse_pairs = matcher.knnMatch(reference_descriptors, source_descriptors, k=2)
+    reverse_best: dict[int, int] = {}
+    for reference_index, pair in enumerate(reverse_pairs):
+        if len(pair) < 2:
+            continue
+        first, second = pair
+        if first.distance < 0.70 * second.distance:
+            reverse_best[reference_index] = first.trainIdx
+    matches = []
+    for source_index, pair in enumerate(forward_pairs):
+        if len(pair) < 2:
+            continue
+        first, second = pair
+        if (
+            first.distance < 0.70 * second.distance
+            and reverse_best.get(first.trainIdx) == source_index
+        ):
+            matches.append(first)
     if len(matches) < 6:
         raise ValueError("not enough distinctive feature matches were found")
 
