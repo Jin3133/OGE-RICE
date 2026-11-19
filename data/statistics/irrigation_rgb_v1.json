@@ -1,0 +1,14 @@
+{
+  "mean": [
+    99.33114398542244,
+    100.74809520297964,
+    73.68950584865634
+  ],
+  "std": [
+    53.967422673332806,
+    49.89369557293836,
+    49.699773698924176
+  ],
+  "valid_pixel_count": 46784250,
+  "calculation_scope": "irrigation RGB training split valid pixels"
+}

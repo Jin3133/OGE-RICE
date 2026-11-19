@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -25,6 +26,15 @@ def paired_samples(root: Path) -> list[SamplePair]:
         )
     return [
         SamplePair(sample_id=key, image=images[key], mask=masks[key])
-        for key in sorted(images, key=lambda value: int(value.removeprefix("img")))
+        for key in sorted(images, key=natural_sample_key)
     ]
+
+
+def natural_sample_key(value: str) -> tuple[object, ...]:
+    """Sort legacy ``img123`` and descriptive business sample IDs."""
+    return tuple(
+        int(part) if part.isdigit() else part.casefold()
+        for part in re.split(r"(\d+)", value)
+        if part
+    )
 

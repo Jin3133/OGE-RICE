@@ -388,7 +388,10 @@ class RemoteSensingResultVersionRow(Base):
             ondelete="RESTRICT",
         ),
         CheckConstraint("revision >= 1", name="revision_positive"),
-        CheckConstraint("target = 'cultivated_land_candidate'", name="target_supported"),
+        CheckConstraint(
+            "target IN ('cultivated_land_candidate', 'rice_field_candidate')",
+            name="target_supported",
+        ),
         CheckConstraint("NOT isempty(observation_period)", name="observation_period_not_empty"),
         CheckConstraint(
             "status IN ('draft', 'active', 'superseded', 'withdrawn')",

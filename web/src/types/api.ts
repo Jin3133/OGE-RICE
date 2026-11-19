@@ -144,7 +144,7 @@ export interface BusinessResultResponse {
   status: 'completed' | 'parameter_pending'
   business_scope: string
   crop_type: 'rice'
-  model_target: 'cultivated_land_candidate'
+  model_target: 'cultivated_land_candidate' | 'rice_field_candidate'
   growth_stage: string
   calculation_formula: string
   total_candidate_area_mu: number

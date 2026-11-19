@@ -226,7 +226,7 @@ class BusinessResultResponse(ApiModel):
     status: Literal["completed", "parameter_pending"]
     business_scope: str
     crop_type: Literal["rice"]
-    model_target: Literal["cultivated_land_candidate"]
+    model_target: Literal["cultivated_land_candidate", "rice_field_candidate"]
     growth_stage: str
     calculation_formula: str
     total_candidate_area_mu: float = Field(ge=0)

@@ -67,3 +67,23 @@ def test_missing_business_result_returns_stable_error(tmp_path: Path, monkeypatc
 
     assert response.status_code == 404
     assert response.json()["error"]["code"] == "BUSINESS_RESULT_NOT_FOUND"
+
+
+def test_accepts_review_required_rice_field_candidate(tmp_path: Path, monkeypatch) -> None:
+    payload = result_payload()
+    payload["model_target"] = "rice_field_candidate"
+    payload["status"] = "parameter_pending"
+    payload["total_reference_irrigation_demand_m3"] = None
+    payload["units"][0]["irrigation_quota_m3_per_mu"] = None
+    payload["units"][0]["reference_irrigation_demand_m3"] = None
+    result_directory = tmp_path / "yuelai-model-v1"
+    result_directory.mkdir()
+    (result_directory / "demand-result.json").write_text(
+        json.dumps(payload), encoding="utf-8"
+    )
+    monkeypatch.setenv("OGE_BUSINESS_RESULTS_DIR", str(tmp_path))
+
+    response = TestClient(create_app()).get("/api/v1/business-results/yuelai-test-v1")
+
+    assert response.status_code == 200
+    assert response.json()["model_target"] == "rice_field_candidate"

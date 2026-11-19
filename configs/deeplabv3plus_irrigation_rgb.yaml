@@ -1,0 +1,29 @@
+experiment:
+  name: deeplabv3plus_irrigation_rgb
+  seed: 42
+data:
+  dataset_root: data/derived/irrigation-rgb-v1
+  split_file: data/splits/irrigation_rgb_v1.json
+  statistics_file: data/statistics/irrigation_rgb_v1.json
+  image_size: 512
+  num_classes: 1
+  invalid_pixel_rule: all_bands_zero
+model:
+  architecture: deeplabv3plus
+  encoder: resnet50
+  encoder_weights: null
+  classes: 1
+training:
+  epochs: 10
+  batch_size: 2
+  learning_rate: 0.00002
+  weight_decay: 0.0001
+  eta_min: 0.000001
+  threshold: 0.5
+  bce_weight: 0.5
+  gradient_clip_norm: 1.0
+  visualization_interval: 1
+  num_workers: 0
+  early_stopping_patience: 4
+output:
+  directory: outputs/deeplabv3plus_irrigation_rgb_v1

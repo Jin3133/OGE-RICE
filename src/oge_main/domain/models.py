@@ -240,7 +240,7 @@ class IrrigationQuotaAssignment(StrictModel):
 
 class RemoteSensingResult(StrictModel):
     result_id: Identifier
-    target: Literal["cultivated_land_candidate"]
+    target: Literal["cultivated_land_candidate", "rice_field_candidate"]
     management_unit_ids: list[Identifier] = Field(min_length=1)
     observation_period: DateRange
     mask_asset: SpatialAsset
