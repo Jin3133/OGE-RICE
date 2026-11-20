@@ -37,3 +37,7 @@ HTTP路由不得直接实现面积或需水公式；路由通过依赖注入取�
 - 暂不使用FastAPI `BackgroundTasks`运行需要恢复、重试和审计的遥感任务；
 - 暂不开放宽泛CORS、鉴权占位逻辑或没有真实需求的CRUD；
 - PostgreSQL、Alembic和任务队列在持久化契约实现阶段引入。
+
+## 模型处理任务实现状态
+
+模型运行、成果登记和面积统计现采用数据库operation与独立Worker。FastAPI的`POST /api/v1/model-pipeline-operations`只完成幂等入队，`tools/run_model_pipeline_worker.py`使用行锁跳过已认领任务并执行计算。请求载荷和结果摘要持久化到PostgreSQL，服务重启后仍可查询和继续处理；未使用进程内`BackgroundTasks`承担可靠计算。

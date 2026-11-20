@@ -13,6 +13,8 @@ import type {
   ManagementUnitCreate,
   ManagementUnitFeature,
   ManagementUnitFeatureCollection,
+  ModelPipelineCreate,
+  ModelPipelineOperationResponse,
   ReferenceAreaFeatureCollection,
 } from '@/types/api'
 
@@ -66,6 +68,19 @@ export const api = {
   taskDrafts: () => request<AnalysisTaskDraftCollection>('/api/v1/analysis-task-drafts'),
   managementUnits: () => request<ManagementUnitFeatureCollection>('/api/v1/management-units'),
   businessResults: () => request<BusinessResultCollection>('/api/v1/business-results'),
+  createModelPipelineOperation: (payload: ModelPipelineCreate, idempotencyKey: string) =>
+    request<ModelPipelineOperationResponse>('/api/v1/model-pipeline-operations', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Idempotency-Key': idempotencyKey,
+      },
+      body: JSON.stringify(payload),
+    }),
+  modelPipelineOperation: (operationId: string) =>
+    request<ModelPipelineOperationResponse>(
+      `/api/v1/model-pipeline-operations/${encodeURIComponent(operationId)}`,
+    ),
   agronomyRecommendation: (analysisDate: string, administrativeCode = '320614') =>
     request<AgronomyRecommendationResponse>(
       `/api/v1/agronomy/recommendation?analysis_date=${encodeURIComponent(analysisDate)}&administrative_code=${encodeURIComponent(administrativeCode)}`,

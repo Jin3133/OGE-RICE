@@ -135,6 +135,7 @@ export interface BusinessUnitResult {
   demand_share: number | null
   attention_level: string
   quality_statement: string
+  remote_sensing_evidence: Record<string, unknown>
 }
 
 export interface BusinessResultResponse {
@@ -150,13 +151,13 @@ export interface BusinessResultResponse {
   total_candidate_area_mu: number
   total_reference_irrigation_demand_m3: number | null
   parameter_basis: {
-    region: string
-    irrigation_zone: string
-    seasonal_quota_m3_per_mu: number
-    seasonal_quota_assurance_probability: string
-    seasonal_quota_level: string
-    seasonal_quota_source: string
-    seasonal_reference_demand_m3: number
+    region?: string
+    irrigation_zone?: string
+    seasonal_quota_m3_per_mu?: number
+    seasonal_quota_assurance_probability?: string
+    seasonal_quota_level?: string
+    seasonal_quota_source?: string
+    seasonal_reference_demand_m3?: number
     stage_quota_status: string
     statement: string
   } | null
@@ -167,6 +168,45 @@ export interface BusinessResultResponse {
 export interface BusinessResultCollection {
   items: BusinessResultResponse[]
   total: number
+}
+
+export interface ModelPipelineUnitInput {
+  unit_id: string
+  unit_revision: number
+  valid_observation_mask_path: string
+}
+
+export interface ModelPipelineCreate {
+  scene_id: string
+  result_id: string
+  source_image_path: string
+  fit_response_path: string
+  checkpoint_path: string
+  inference_valid_mask_path: string
+  reference_mask_path: string | null
+  target: 'cultivated_land_candidate' | 'rice_field_candidate'
+  threshold: number
+  observation_start: string
+  observation_end: string
+  growth_stage: string
+  units: ModelPipelineUnitInput[]
+  changed_by: string
+  change_reason: string
+}
+
+export interface ModelPipelineOperationResponse {
+  operation_id: string
+  status: 'queued' | 'running' | 'succeeded' | 'failed'
+  submitted_by: string
+  submitted_at: string
+  started_at: string | null
+  finished_at: string | null
+  result_id: string | null
+  result_revision: number | null
+  area_statistics: Array<Record<string, unknown>>
+  business_result_task_id: string | null
+  error_code: string | null
+  error_message: string | null
 }
 
 export interface AgronomyRecommendationResponse {

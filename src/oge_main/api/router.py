@@ -7,6 +7,7 @@ from oge_main.api.routes import (
     health,
     management_units,
     meta,
+    model_pipeline,
     reference_areas,
     task_drafts,
 )
@@ -20,3 +21,4 @@ api_router.include_router(reference_areas.router)
 api_router.include_router(task_drafts.router)
 api_router.include_router(management_units.router)
 api_router.include_router(georeferencing.router)
+api_router.include_router(model_pipeline.router)

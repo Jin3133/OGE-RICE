@@ -149,6 +149,32 @@ class SpatialStatisticsService:
                 raise FileNotFoundError(f"{label} does not exist: {path}")
 
         geometries, boundary_crs = _load_boundary(boundary_path)
+        return self.calculate_with_geometries(
+            command,
+            geometries=geometries,
+            boundary_crs=boundary_crs,
+        )
+
+    def calculate_with_geometries(
+        self,
+        command: SpatialStatisticsCommand,
+        *,
+        geometries: list[dict[str, Any]],
+        boundary_crs: CRS | str,
+    ) -> AreaStatistic:
+        """Calculate one statistic using boundary geometries already loaded by the caller."""
+
+        candidate_path = Path(command.candidate_mask_path)
+        valid_path = Path(command.valid_observation_mask_path)
+        for path, label in (
+            (candidate_path, "candidate mask"),
+            (valid_path, "valid-observation mask"),
+        ):
+            if not path.is_file():
+                raise FileNotFoundError(f"{label} does not exist: {path}")
+        if not geometries:
+            raise ValueError("boundary must contain at least one geometry")
+        boundary_crs = CRS.from_user_input(boundary_crs)
         with rasterio.open(candidate_path) as candidate, rasterio.open(valid_path) as valid:
             if candidate.count != 1 or valid.count != 1:
                 raise ValueError("candidate and valid-observation masks must be single-band")

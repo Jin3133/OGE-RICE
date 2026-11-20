@@ -106,6 +106,29 @@ def test_calculates_only_valid_candidate_pixels_inside_boundary(tmp_path: Path) 
     assert result.management_unit.record_id == "unit.example"
 
 
+def test_calculates_from_database_geometry_without_boundary_file(tmp_path: Path) -> None:
+    candidate = np.array(
+        [[1, 1, 0, 1], [1, 0, 1, 1], [1, 1, 1, 1], [0, 0, 0, 0]], dtype=np.uint8
+    )
+    valid = np.ones((4, 4), dtype=np.uint8)
+    write_raster(tmp_path / "candidate.tif", candidate)
+    write_raster(tmp_path / "valid.tif", valid)
+
+    result = SpatialStatisticsService().calculate_with_geometries(
+        command(tmp_path),
+        geometries=[
+            {
+                "type": "Polygon",
+                "coordinates": [[[0, 20], [30, 20], [30, 40], [0, 40], [0, 20]]],
+            }
+        ],
+        boundary_crs="EPSG:32650",
+    )
+
+    assert result.valid_observation_area_m2 == 600
+    assert result.candidate_area_m2 == 400
+
+
 def test_rejects_unaligned_masks(tmp_path: Path) -> None:
     values = np.ones((4, 4), dtype=np.uint8)
     write_raster(tmp_path / "candidate.tif", values)

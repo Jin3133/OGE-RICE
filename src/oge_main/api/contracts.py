@@ -241,6 +241,54 @@ class BusinessResultCollection(ApiModel):
     total: int
 
 
+class ModelPipelineUnitInput(ApiModel):
+    unit_id: str = Field(min_length=1, max_length=100)
+    unit_revision: int = Field(ge=1)
+    valid_observation_mask_path: str = Field(min_length=1)
+
+
+class ModelPipelineCreate(ApiModel):
+    scene_id: str = Field(pattern=r"^[A-Za-z0-9][A-Za-z0-9._-]*$")
+    result_id: str = Field(pattern=r"^[A-Za-z0-9][A-Za-z0-9._:-]*$")
+    source_image_path: str = Field(min_length=1)
+    fit_response_path: str = Field(min_length=1)
+    checkpoint_path: str = Field(min_length=1)
+    inference_valid_mask_path: str = Field(min_length=1)
+    reference_mask_path: str | None = None
+    target: Literal["cultivated_land_candidate", "rice_field_candidate"]
+    threshold: float = Field(gt=0, lt=1)
+    observation_start: date
+    observation_end: date
+    growth_stage: str = Field(min_length=1, max_length=100)
+    units: list[ModelPipelineUnitInput] = Field(min_length=1)
+    changed_by: str = Field(min_length=1, max_length=100)
+    change_reason: str = Field(min_length=1)
+
+    @model_validator(mode="after")
+    def validate_period_and_units(self) -> Self:
+        if self.observation_start > self.observation_end:
+            raise ValueError("observation_start must be on or before observation_end")
+        keys = {(item.unit_id, item.unit_revision) for item in self.units}
+        if len(keys) != len(self.units):
+            raise ValueError("pipeline units must not contain duplicate versions")
+        return self
+
+
+class ModelPipelineOperationResponse(ApiModel):
+    operation_id: str
+    status: Literal["queued", "running", "succeeded", "failed"]
+    submitted_by: str
+    submitted_at: datetime
+    started_at: datetime | None = None
+    finished_at: datetime | None = None
+    result_id: str | None = None
+    result_revision: int | None = None
+    area_statistics: list[dict[str, Any]] = Field(default_factory=list)
+    business_result_task_id: str | None = None
+    error_code: str | None = None
+    error_message: str | None = None
+
+
 class GrowthStageRecommendation(ApiModel):
     code: str
     name: str

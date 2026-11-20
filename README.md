@@ -103,3 +103,17 @@ python tools/infer_deeplabv3plus.py \
 推理目录会保存二值掩码、概率图、逐样本指标、代表性案例图，以及包含模型哈希、
 Git版本、阈值来源和全局指标的 `inference_summary.json`。
 
+## 模型成果自动处理
+
+数据库迁移完成后，API接收模型处理任务并持久化为`queued` operation。耗时模型任务由独立Worker执行：
+
+```bash
+export OGE_DATABASE_URL='postgresql+psycopg://oge:oge_dev_password@127.0.0.1:55432/oge_rice'
+export OGE_PIPELINE_ALLOWED_ROOTS='/absolute/path/to/oge-main:/absolute/path/to/project-data'
+
+oge-api
+python tools/run_model_pipeline_worker.py --poll-seconds 2
+```
+
+提交接口为`POST /api/v1/model-pipeline-operations`，必须携带`Idempotency-Key`；查询接口为`GET /api/v1/model-pipeline-operations/{operation_id}`。Worker成功后会自动登记遥感成果新版本、按管理单元生成面积统计新版本，并刷新版本化业务结果。模型候选成果始终保持待复核状态，不会因流程自动化而提升为核定面积。
+

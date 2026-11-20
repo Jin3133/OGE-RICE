@@ -5,16 +5,16 @@
 | 项目 | 内容 |
 |---|---|
 | 状态 | v1冻结候选版 |
-| 更新日期 | 2026-11-15 |
+| 更新日期 | 2026-11-20 |
 | API前缀 | `/api/v1` |
 | JSON Schema | `schemas/domain/v1/`、`schemas/application/v1/` |
 | 当前结果模式 | 仅`illustrative` |
 
-本文定义业务后台、OGE/遥感Provider和Web端之间的稳定边界。HTTP服务尚未实现，但实现时必须遵守本文、领域Schema和示例JSON；不得重新使用早期`examples/business-cycle`中的临时字段。
+本文定义业务后台、OGE/遥感Provider和Web端之间的稳定边界。当前已经实现的HTTP接口、领域Schema和示例JSON必须保持一致；不得重新使用早期`examples/business-cycle`中的临时字段。
 
 ## 2. 业务边界
 
-当前遥感目标固定为`cultivated_land_candidate`，即耕地候选区。当前没有可靠水稻归属依据，因此v1只允许`result_mode=illustrative`，其含义为“假定已配置范围内候选耕地用于种植水稻的演示性情景测算”。
+当前遥感目标允许`cultivated_land_candidate`和`rice_field_candidate`。后者表示经过灌区样本适配、但仍需业务复核的水稻地块候选成果，不等于最终核定水稻面积。当前只允许`result_mode=illustrative`。
 
 参考灌溉需水采用`W_m3 = A_mu × M_m3_per_mu`。候选面积以平方米存储，按`1亩=2000/3平方米`换算为亩。结果不是实际取水量、供水量或实际灌溉用水量。
 
@@ -253,7 +253,31 @@
 
 接口拒绝少于三个控制点、重复源/目标位置、共线源点、图像范围外控制点、非投影拟合坐标系和未闭合边界环。拟合接口无状态，不直接写入管理单元或覆盖原始影像；配准会话保存和人工确认属于后续独立写入流程。
 
-## 13. 契约来源与验证
+## 13. 模型成果自动处理任务
+
+### 13.1 提交任务
+
+`POST /api/v1/model-pipeline-operations`
+
+请求必须携带`Idempotency-Key`，并明确提供影像、配准报告、模型权重、有效观测掩膜、阈值、观测期及管理单元版本。接口仅创建持久化`queued`任务并返回`202 Accepted`，不会在FastAPI请求进程中执行模型。
+
+### 13.2 Worker执行顺序
+
+独立Worker依次认领任务、运行分块推理、登记候选掩膜资产和遥感成果revision、按管理单元计算面积统计revision，并更新当前业务结果。每次运行均保存operation、attempt、模型清单和历史业务结果。
+
+Worker通过`SELECT ... FOR UPDATE SKIP LOCKED`认领任务。资源revision由`resource_heads`唯一键和原子`INSERT ... ON CONFLICT`分配，已有资源再使用行锁递增，避免并发重复revision。
+
+### 13.3 查询任务
+
+`GET /api/v1/model-pipeline-operations/{operation_id}`
+
+成功响应包含遥感成果revision、每个管理单元的面积统计revision和业务结果任务编号。页面只读取成功任务产生的业务结果；失败任务不得覆盖当前成果。
+
+### 13.4 事务边界
+
+模型推理和栅格面积计算在数据库事务之外执行。遥感成果登记使用一个短事务；每个管理单元的面积统计分别计算、分别使用短事务提交。单元失败不会回滚已经完成的其他单元，但整项operation保持失败并保留attempt信息，供后续恢复和重试。
+
+## 14. 契约来源与验证
 
 - 领域模型：`src/oge_main/domain/models.py`；
 - 空间统计任务：`src/oge_main/application/spatial_statistics.py`；

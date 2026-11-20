@@ -50,6 +50,8 @@ class OperationRow(Base):
     finished_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     error_code: Mapped[str | None] = mapped_column(String(100))
     error_message: Mapped[str | None] = mapped_column(Text)
+    request_payload: Mapped[dict] = mapped_column(JSONB, nullable=False, default=dict)
+    result_summary: Mapped[dict | None] = mapped_column(JSONB)
 
     __table_args__ = (
         CheckConstraint(
